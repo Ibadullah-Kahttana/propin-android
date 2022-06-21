@@ -8,11 +8,10 @@ import {
   Dimensions,
 } from 'react-native';
 
-import ListDrawerIcon from '../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
+import ListDrawerIconWhite from '../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
 import ImageGrayVector from '../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
 
 import CameraIconProfileYellwo from '../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
-import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,7 +25,7 @@ const ProfileScreen = () => {
 
       <View style={styles.LoginHeader}>
         <TouchableOpacity underlayColor={'transparent'}>
-          <ListDrawerIcon width={20} height={20} />
+          <ListDrawerIconWhite width={20} height={20} />
         </TouchableOpacity>
 
         <View style={styles.ProfileCard}>
@@ -40,8 +39,10 @@ const ProfileScreen = () => {
           </View>
 
           <View style={styles.ProfileInfo}>
-            <Text style={styles.h2Black}>John Doe</Text>
-            <Text style={styles.h4Grey}>john@example.com</Text>
+            <Text style={[styles.h2Black, styles.PersonName]}>John Doe</Text>
+            <Text style={[styles.h4Grey, styles.PersonEmail]}>
+              john@example.com
+            </Text>
           </View>
         </View>
       </View>
@@ -114,6 +115,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Roboto-Regular',
     color: 'black',
+  },
+
+  PersonName: {
+    alignItems: 'center',
   },
 
   h4Grey: {
