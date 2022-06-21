@@ -8,9 +8,19 @@ import {
   Dimensions,
 } from 'react-native';
 
+// Icons SVG
+
 import ListDrawerIconWhite from '../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
 import ImageGrayVector from '../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
-
+import RightArrowBlack from '../../assets/Svgs/ProfileScreenSvgs/VectorRightBlack';
+import RightArrowWhite from '../../assets/Svgs/ProfileScreenSvgs/VectorRightWhite';
+import EstimateIcon from '../../assets/Svgs/ProfileScreenSvgs/Estimate';
+import CreditCardIcon from '../../assets/Svgs/ProfileScreenSvgs/Credit_card';
+import PrivacyIcon from '../../assets/Svgs/ProfileScreenSvgs/Privacy';
+import TermsIcon from '../../assets/Svgs/ProfileScreenSvgs/Terms_and_conditions';
+import SheildIcon from '../../assets/Svgs/ProfileScreenSvgs/Shield';
+import ContactusIcon from '../../assets/Svgs/ProfileScreenSvgs/Contact_us';
+import LogoutIcon from '../../assets/Svgs/ProfileScreenSvgs/LogoutWhite';
 import CameraIconProfileYellwo from '../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,7 +31,7 @@ const ProfileScreen = () => {
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
 
-      {/**                    Header                    */}
+      {/** --------------------      Header       ----------------------*/}
 
       <View style={styles.LoginHeader}>
         <TouchableOpacity underlayColor={'transparent'}>
@@ -47,9 +57,85 @@ const ProfileScreen = () => {
         </View>
       </View>
 
-      {/**                    Profile List View MID SECTION                   */}
+      {/**----------------------    Profile List View MID SECTION    ------------------------*/}
 
-      <View style={styles.MidSection}></View>
+      <View style={styles.MidSection}>
+        {/**   ---   ESTIMAET  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <EstimateIcon width={24} height={24} />
+              <Text style={styles.h4Black}>Balance</Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}>
+                <Text style={styles.h4Black}>RS. 400,0000</Text>
+              </View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/**   ---   SAVE CARD  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <CreditCardIcon width={24} height={24} />
+              <Text style={styles.h4Black}>Save Card</Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}>
+                <Text style={styles.h4Yellow}> Saved Card </Text>
+              </View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/**   ---   CHNAGE PASSWORD  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <PrivacyIcon width={24} height={24} />
+              <Text style={styles.h4Black}>Change Password</Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}></View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
       <View style={styles.AppSettingSection}></View>
     </View>
   );
@@ -128,12 +214,59 @@ const styles = StyleSheet.create({
     color: '#949494',
   },
 
+  h4Black: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Roboto-Regular',
+    color: '#000000',
+    paddingLeft: 15,
+  },
+
+  h4Yellow: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Roboto-Regular',
+    color: '#F6C000',
+  },
+
   // MID Section -------------------------------------------------------------------
   MidSection: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 27,
-    backgroundColor: 'yellow',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    // backgroundColor: 'yellow',
     marginTop: (windowHeight / 100) * 6,
+  },
+
+  MidSectionView: {
+    width: (windowWidth / 100) * 90,
+    height: (windowHeight / 100) * 7,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    borderColor: '#DFE2E4',
+    borderWidth: 1,
+  },
+
+  InnerView1: {
+    width: (windowWidth / 100) * 45,
+    height: (windowHeight / 100) * 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 15,
+    //backgroundColor: 'yellow',
+  },
+
+  InnerView2: {
+    width: (windowWidth / 100) * 40,
+    height: (windowHeight / 100) * 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    // backgroundColor: 'yellow',
   },
 
   AppSettingSection: {
