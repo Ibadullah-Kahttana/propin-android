@@ -14,12 +14,9 @@ import {Icon} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
-import userIcon from '../assets/Svgs/LogInScreenSVG/User.svg';
 import LoginScreenFacebookWhiteLogo from '../assets/Svgs/LogInScreenSVG/facebookwhite.svg';
 import LoginScreenGoogleCircleLogo from '../assets/Svgs/LogInScreenSVG/GoogleCircle.svg';
 import PakistanFlagIconLoginPhoneNumber from '../assets/Svgs/LogInScreenSVG/Pakistanflag2.svg';
-
-import CountryScreen from './CountryScreen';
 
 import {AuthContext} from '../component/context';
 
