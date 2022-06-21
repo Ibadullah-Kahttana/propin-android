@@ -145,18 +145,18 @@ function BottomNavigation() {
             key={index}
             name={item.route}
             component={item.component}
-            // listeners={({navigation, route}) => ({
-            //   // tabPress: e => {
-            //   //   if (route.name === 'Projects') {
-            //   //     e.preventDefault();
-            //   //     navigation.navigate('Projects', {screen: 'ProjectsList'});
-            //   //   }
-            //   //   if (route.name === 'Properties') {
-            //   //     e.preventDefault();
-            //   //     navigation.navigate('Properties', {screen: 'PropertiesList'});
-            //   //   }
-            //   // },
-            // })}
+            listeners={({navigation, route}) => ({
+              tabPress: e => {
+                if (route.name === 'Projects') {
+                  e.preventDefault();
+                  navigation.navigate('Projects', {screen: 'ProjectsList'});
+                }
+                if (route.name === 'Properties') {
+                  e.preventDefault();
+                  navigation.navigate('Properties', {screen: 'PropertiesList'});
+                }
+              },
+            })}
             options={{
               unmountOnBlur: true,
               tabBarShowLabel: false,
