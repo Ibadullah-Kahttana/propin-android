@@ -65,19 +65,38 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <EstimateIcon width={24} height={24} />
-              <Text style={styles.h4Black}>Balance</Text>
+              <Text style={[styles.h4Black, styles.cardText]}>Balance</Text>
             </View>
             <View style={styles.InnerView2}>
               <View
                 style={{
                   width: (windowWidth / 100) * 33,
                   height: (windowHeight / 100) * 6,
-                  //backgroundColor: 'orange',
+                  // backgroundColor: 'orange',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-evenly',
                 }}>
-                <Text style={styles.h4Black}>RS. 400,0000</Text>
+                <View
+                  style={{
+                    width: (windowWidth / 100) * 10,
+                    height: (windowHeight / 100) * 6,
+                    //backgroundColor: 'red',
+                    alignItems: 'flex-end',
+                    justifyContent: 'space-evenly',
+                  }}>
+                  <Text style={styles.h4Black}>RS.</Text>
+                </View>
+                <View
+                  style={{
+                    width: (windowWidth / 100) * 23,
+                    height: (windowHeight / 100) * 6,
+                    //backgroundColor: 'yellow',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                  }}>
+                  <Text style={styles.h4Black}>400,0000</Text>
+                </View>
               </View>
               <TouchableOpacity>
                 <RightArrowBlack width={12} height={12} />
@@ -91,7 +110,7 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <CreditCardIcon width={24} height={24} />
-              <Text style={styles.h4Black}>Save Card</Text>
+              <Text style={[styles.h4Black, styles.cardText]}>Save Card</Text>
             </View>
             <View style={styles.InnerView2}>
               <View
@@ -101,7 +120,6 @@ const ProfileScreen = () => {
                   //backgroundColor: 'orange',
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-evenly',
                 }}>
                 <Text style={styles.h4Yellow}> Saved Card </Text>
               </View>
@@ -117,7 +135,9 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <PrivacyIcon width={24} height={24} />
-              <Text style={styles.h4Black}>Change Password</Text>
+              <Text style={[styles.h4Black, styles.cardText]}>
+                Change Password
+              </Text>
             </View>
             <View style={styles.InnerView2}>
               <View
@@ -136,7 +156,112 @@ const ProfileScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.AppSettingSection}></View>
+
+      <Text style={[styles.h2Black, styles.AppSettingText]}>App Setting</Text>
+
+      {/**----------------------    Profile App Setting Section   ------------------------*/}
+
+      <View style={styles.AppSettingSection}>
+        {/**   ---   Terms and Conditions  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <TermsIcon width={24} height={24} />
+              <Text style={[styles.h4Black, styles.cardText]}>
+                Terms & Conditions
+              </Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}></View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/**   ---   Privacy Policy  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <SheildIcon width={24} height={24} />
+              <Text style={[styles.h4Black, styles.cardText]}>
+                Privacy Policy
+              </Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}></View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/**   ---   Contact  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionView}>
+            <View style={styles.InnerView1}>
+              <ContactusIcon width={24} height={24} />
+              <Text style={[styles.h4Black, styles.cardText]}>Contact</Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}></View>
+              <TouchableOpacity>
+                <RightArrowBlack width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+
+        {/**   ---   Log Out  --- */}
+        <TouchableOpacity>
+          <View style={styles.MidSectionViewYellow}>
+            <View style={styles.InnerView1}>
+              <LogoutIcon width={24} height={24} />
+              <Text style={[styles.h4White, styles.cardText]}>Log Out</Text>
+            </View>
+            <View style={styles.InnerView2}>
+              <View
+                style={{
+                  width: (windowWidth / 100) * 33,
+                  height: (windowHeight / 100) * 6,
+                  //backgroundColor: 'orange',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}></View>
+              <TouchableOpacity>
+                <RightArrowWhite width={12} height={12} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -185,6 +310,10 @@ const styles = StyleSheet.create({
     bottom: 1,
   },
 
+  cardText: {
+    paddingLeft: 20,
+  },
+
   ProfileInfo: {
     width: (windowWidth / 100) * 62,
     height: (windowHeight / 100) * 7,
@@ -219,7 +348,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'Roboto-Regular',
     color: '#000000',
-    paddingLeft: 15,
+    //paddingLeft: 15,
+  },
+
+  h4White: {
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Roboto-Regular',
+    color: '#FFFFFF',
+    //paddingLeft: 15,
   },
 
   h4Yellow: {
@@ -227,6 +364,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'Roboto-Regular',
     color: '#F6C000',
+    paddingLeft: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  AppSettingText: {
+    paddingLeft: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
 
   // MID Section -------------------------------------------------------------------
@@ -237,7 +383,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     // backgroundColor: 'yellow',
-    marginTop: (windowHeight / 100) * 6,
+    marginTop: (windowHeight / 100) * 7,
   },
 
   MidSectionView: {
@@ -247,6 +393,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    borderColor: '#DFE2E4',
+    borderWidth: 1,
+  },
+
+  MidSectionViewYellow: {
+    width: (windowWidth / 100) * 90,
+    height: (windowHeight / 100) * 7,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#F6C000',
     borderRadius: 10,
     borderColor: '#DFE2E4',
     borderWidth: 1,
@@ -271,8 +429,10 @@ const styles = StyleSheet.create({
 
   AppSettingSection: {
     width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 43,
-    //backgroundColor: 'red',
+    height: (windowHeight / 100) * 35,
+    // backgroundColor: 'yellow',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
 });
 
