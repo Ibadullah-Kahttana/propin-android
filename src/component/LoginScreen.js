@@ -25,6 +25,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const LoginScreen = ({navigation}) => {
   const [activeButton, setActiveButton] = useState('Email');
+
   const RegisteryScreenGoBack = () => {
     navigation.navigate('RegisterScreen');
   };
