@@ -8,25 +8,30 @@ import {
   Dimensions,
 } from 'react-native';
 
+import {createStackNavigator} from '@react-navigation/stack';
+
 // Icons SVG
 
-import ListDrawerIconWhite from '../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
-import ImageGrayVector from '../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
-import RightArrowBlack from '../../assets/Svgs/ProfileScreenSvgs/VectorRightBlack';
-import RightArrowWhite from '../../assets/Svgs/ProfileScreenSvgs/VectorRightWhite';
-import EstimateIcon from '../../assets/Svgs/ProfileScreenSvgs/Estimate';
-import CreditCardIcon from '../../assets/Svgs/ProfileScreenSvgs/Credit_card';
-import PrivacyIcon from '../../assets/Svgs/ProfileScreenSvgs/Privacy';
-import TermsIcon from '../../assets/Svgs/ProfileScreenSvgs/Terms_and_conditions';
-import SheildIcon from '../../assets/Svgs/ProfileScreenSvgs/Shield';
-import ContactusIcon from '../../assets/Svgs/ProfileScreenSvgs/Contact_us';
-import LogoutIcon from '../../assets/Svgs/ProfileScreenSvgs/LogoutWhite';
-import CameraIconProfileYellwo from '../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
+import ListDrawerIconWhite from '../../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
+import SettingsIcon from '../../../assets/Svgs/ProfileScreenSvgs/Settings';
+import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
+import RightArrowBlack from '../../../assets/Svgs/ProfileScreenSvgs/VectorRightBlack';
+import RightArrowWhite from '../../../assets/Svgs/ProfileScreenSvgs/VectorRightWhite';
+import EstimateIcon from '../../../assets/Svgs/ProfileScreenSvgs/Estimate';
+import CreditCardIcon from '../../../assets/Svgs/ProfileScreenSvgs/Credit_card';
+import PrivacyIcon from '../../../assets/Svgs/ProfileScreenSvgs/Privacy';
+import TermsIcon from '../../../assets/Svgs/ProfileScreenSvgs/Terms_and_conditions';
+import SheildIcon from '../../../assets/Svgs/ProfileScreenSvgs/Shield';
+import ContactusIcon from '../../../assets/Svgs/ProfileScreenSvgs/Contact_us';
+import LogoutIcon from '../../../assets/Svgs/ProfileScreenSvgs/LogoutWhite';
+import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
+
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
@@ -49,11 +54,25 @@ const ProfileScreen = () => {
           </View>
 
           <View style={styles.ProfileInfo}>
-            <Text style={[styles.h2Black, styles.PersonName]}>John Doe</Text>
-            <Text style={[styles.h4Grey, styles.PersonEmail]}>
+            <Text
+              style={[styles.h2Black, styles.PersonName]}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}>
+              John Doe
+            </Text>
+            <Text
+              style={[styles.h4Grey, styles.PersonEmail]}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}>
               john@example.com
             </Text>
           </View>
+
+          <TouchableOpacity
+            style={{paddingLeft: 5}}
+            onPress={() => navigation.navigate('ProfileSettings')}>
+            <SettingsIcon height={30} width={30} />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -65,7 +84,12 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <EstimateIcon width={24} height={24} />
-              <Text style={[styles.h4Black, styles.cardText]}>Balance</Text>
+              <Text
+                style={[styles.h4Black, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                Balance
+              </Text>
             </View>
             <View style={styles.InnerView2}>
               <View
@@ -84,7 +108,12 @@ const ProfileScreen = () => {
                     alignItems: 'flex-end',
                     justifyContent: 'space-evenly',
                   }}>
-                  <Text style={styles.h4Black}>RS.</Text>
+                  <Text
+                    style={styles.h4Black}
+                    adjustsFontSizeToFit={true}
+                    numberOfLines={1}>
+                    RS.
+                  </Text>
                 </View>
                 <View
                   style={{
@@ -95,7 +124,12 @@ const ProfileScreen = () => {
                     alignItems: 'center',
                     justifyContent: 'space-around',
                   }}>
-                  <Text style={styles.h4Black}>400,0000</Text>
+                  <Text
+                    style={styles.h4Black}
+                    adjustsFontSizeToFit={true}
+                    numberOfLines={1}>
+                    400,0000
+                  </Text>
                 </View>
               </View>
               <TouchableOpacity>
@@ -135,7 +169,10 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <PrivacyIcon width={24} height={24} />
-              <Text style={[styles.h4Black, styles.cardText]}>
+              <Text
+                style={[styles.h4Black, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
                 Change Password
               </Text>
             </View>
@@ -157,7 +194,12 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <Text style={[styles.h2Black, styles.AppSettingText]}>App Setting</Text>
+      <Text
+        style={[styles.h2Black, styles.AppSettingText]}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}>
+        App Setting
+      </Text>
 
       {/**----------------------    Profile App Setting Section   ------------------------*/}
 
@@ -167,7 +209,10 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <TermsIcon width={24} height={24} />
-              <Text style={[styles.h4Black, styles.cardText]}>
+              <Text
+                style={[styles.h4Black, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
                 Terms & Conditions
               </Text>
             </View>
@@ -193,7 +238,10 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <SheildIcon width={24} height={24} />
-              <Text style={[styles.h4Black, styles.cardText]}>
+              <Text
+                style={[styles.h4Black, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
                 Privacy Policy
               </Text>
             </View>
@@ -219,7 +267,12 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <ContactusIcon width={24} height={24} />
-              <Text style={[styles.h4Black, styles.cardText]}>Contact</Text>
+              <Text
+                style={[styles.h4Black, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                Contact
+              </Text>
             </View>
             <View style={styles.InnerView2}>
               <View
@@ -243,7 +296,12 @@ const ProfileScreen = () => {
           <View style={styles.MidSectionViewYellow}>
             <View style={styles.InnerView1}>
               <LogoutIcon width={24} height={24} />
-              <Text style={[styles.h4White, styles.cardText]}>Log Out</Text>
+              <Text
+                style={[styles.h4White, styles.cardText]}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                Log Out
+              </Text>
             </View>
             <View style={styles.InnerView2}>
               <View
@@ -271,7 +329,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#f8f9fa',
   },
 
   LoginHeader: {
@@ -288,6 +346,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    // backgroundColor: 'yellow',
     borderRadius: 10,
     position: 'absolute',
     bottom: -45,
@@ -315,7 +374,7 @@ const styles = StyleSheet.create({
   },
 
   ProfileInfo: {
-    width: (windowWidth / 100) * 62,
+    width: (windowWidth / 100) * 50,
     height: (windowHeight / 100) * 7,
     flexDirection: 'column',
     justifyContent: 'space-around',

@@ -25,7 +25,8 @@ import WalletSvgBlue from '../assets/Svgs/BottomTabSvgs/WalletBlue.svg';
 import HomeScreen from '../component/NavScreens/DashBoardHome';
 import WalletScreen from '../component/NavScreens/WalletScreen';
 import TradingScreen from '../component/NavScreens/TradingScreen';
-import ProfileScreen from '../component/NavScreens/ProfileScreen';
+import ProfileScreen from '../component/NavScreens/ProfileScreens/ProfileScreen';
+import ProfileSettings from '../component/NavScreens/ProfileScreens/ProfileSettings';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,10 +66,12 @@ const TradingScreenStack = ({navigation}) => (
 
 const ProfileScreenStack = ({navigation}) => (
   <ProfileStack.Navigator
+    initialRouteName="ProfileScreen"
     screenOptions={{
       headerShown: false,
     }}>
     <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <ProfileStack.Screen name="ProfileSettings" component={ProfileSettings} />
   </ProfileStack.Navigator>
 );
 
@@ -135,6 +138,7 @@ function BottomNavigation() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {height: (windowHeight / 100) * 7},
+        tabBarHideOnKeyboard: true,
       }}
       tabBarOptions={{
         style: styles.bottomTab,
