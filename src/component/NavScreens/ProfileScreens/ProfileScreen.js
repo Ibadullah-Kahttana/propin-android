@@ -201,7 +201,7 @@ const ProfileScreen = ({navigation}) => {
 
       <View style={styles.AppSettingSection}>
         {/**   ---   Terms and Conditions  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('AddProduct')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <TermsIcon width={24} height={24} />
