@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -7,52 +7,24 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 
 // Icons SVG
 
-import LeftArrowWhiteIcon from '../../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
-import PakistanFlagIconLoginPhoneNumber from '../../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
-import DateTimeIcon from '../../../../assets/Svgs/EmployScreensSVG/Date';
+import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
+import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
+
+import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
+import PakistanFlagIconLoginPhoneNumber from '../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-
-//import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const AddEmployeeScreen = ({navigation}) => {
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
-
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
-  };
-
+const AddAgencyScreen = ({navigation}) => {
   const textInputChange = val => {
     if (val.trim().length >= 4) {
       setData({
@@ -71,41 +43,6 @@ const AddEmployeeScreen = ({navigation}) => {
     }
   };
 
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
-  };
-
-  //-------------- DATE PICKER -----------------------------------------------------------------
-
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [text, setText] = useState('Empty');
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'android');
-    setDate(currentDate);
-
-    let tempDate = new Date(currentDate);
-    let fDate =
-      tempDate.getDate() +
-      '/' +
-      (tempDate.getMonth() + 1) +
-      '/' +
-      tempDate.getFullYear();
-
-    setText(fDate);
-  };
-
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
@@ -121,8 +58,21 @@ const AddEmployeeScreen = ({navigation}) => {
 
         <Text style={styles.h2White}>
           {'       '}
-          Add Employee
+          Add Agency
         </Text>
+      </View>
+
+      {/** --------------------      Profile Image        --------------*/}
+
+      <View style={styles.ProfielImageView}>
+        <View style={styles.ProfileImage}>
+          <ImageGrayVector width={45} height={45} />
+          <View style={styles.YellowCameraIcon}>
+            <TouchableOpacity underlayColor={'transparent'}>
+              <CameraIconProfileYellwo width={30} height={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
 
       {/** --------------------      Scrol List      --------------------*/}
@@ -144,70 +94,20 @@ const AddEmployeeScreen = ({navigation}) => {
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Enter Employee name"
+              placeholder="Enter employee name"
               onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
 
-        {/** ----------  Phone Number  ----------*/}
+        {/** ---------- Agency Email  ----------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            Phone Number
+            Agency Email
           </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.PhoneNoBox}>
-          <View
-            style={{
-              height: (windowHeight / 100) * 7,
-              width: (windowWidth / 100) * 30,
-              paddingLeft: 5,
-              //backgroundColor: 'yellow',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}>
-            <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
-            <Text
-              style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {' '}
-              +92
-            </Text>
-            <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.PhoneNumbertextInput}
-              autoCapitalize="none"
-              placeholder="xxx xxxxxx"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
-
-        {/** ----------  Email  ----------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Email
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
         </View>
 
         <View style={styles.ListBox}>
@@ -221,101 +121,35 @@ const AddEmployeeScreen = ({navigation}) => {
           </View>
         </View>
 
-        {/** --------------------      Password       ----------------------*/}
+        {/** ---------- Address  ----------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            Password
+            Address
           </Text>
           <Text style={styles.Asteric}> *</Text>
         </View>
 
         <View style={styles.ListBox}>
           <View style={styles.action}>
-            <Feather
-              name="lock"
-              color="#171717"
-              size={17}
-              style={{paddingLeft: 10, paddingRight: 10}}
-            />
-
             <TextInput
-              secureTextEntry={data.secureTextEntry ? true : false}
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Enter your password"
-              onChangeText={val => handlePasswordChange(val)}
+              placeholder="Enter your address"
+              onChangeText={val => textInputChange(val)}
             />
-
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-                paddingRight: 10,
-              }}>
-              {data.secureTextEntry ? (
-                <Feather name="eye" color="#C6C6C7" size={17} />
-              ) : (
-                <Feather name="eye-off" color="#C6C6C7" size={17} />
-              )}
-            </TouchableOpacity>
           </View>
         </View>
 
-        {/** --------------------      Confirm Password       ----------------------*/}
+        {/** ----------  City ----------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            Confirm Password
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <Feather
-              name="lock"
-              color="#171717"
-              size={17}
-              style={{paddingLeft: 10, paddingRight: 10}}
-            />
-
-            <TextInput
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Confirm your password"
-              onChangeText={val => handlePasswordChange(val)}
-            />
-
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-                paddingRight: 10,
-              }}>
-              {data.secureTextEntry ? (
-                <Feather name="eye" color="#C6C6C7" size={17} />
-              ) : (
-                <Feather name="eye-off" color="#C6C6C7" size={17} />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/** ----------  Designation ----------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Designation
+            City
           </Text>
           <Text style={styles.Asteric}> *</Text>
         </View>
@@ -325,7 +159,7 @@ const AddEmployeeScreen = ({navigation}) => {
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Select designation"
+              placeholder="Select City"
               onChangeText={val => textInputChange(val)}
             />
             <TouchableOpacity>
@@ -339,37 +173,55 @@ const AddEmployeeScreen = ({navigation}) => {
           </View>
         </View>
 
-        {/** ----------  Date ----------*/}
+        {/** ----------  Area ----------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            Date of joining
+            Area
           </Text>
           <Text style={styles.Asteric}> *</Text>
         </View>
 
         <View style={styles.ListBox}>
           <View style={styles.action}>
-            <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
-            <TouchableOpacity
-              style={{paddingRight: 15}}
-              onPress={() => showMode('date')}>
-              <DateTimeIcon height={17} width={17} />
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholder="Select area"
+              onChangeText={val => textInputChange(val)}
+            />
+            <TouchableOpacity>
+              <FontAwesome
+                name="caret-down"
+                color="#828282"
+                size={17}
+                style={{paddingLeft: 10, paddingRight: 20}}
+              />
             </TouchableOpacity>
           </View>
+        </View>
 
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
+        {/** ----------  website ----------*/}
+        <View style={styles.headingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Website
+          </Text>
+        </View>
+
+        <View style={styles.ListBox}>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholder="Enter Website URL"
+              onChangeText={val => textInputChange(val)}
             />
-          )}
+          </View>
         </View>
 
         {/* -------------------------------------- */}
@@ -514,6 +366,7 @@ const styles = StyleSheet.create({
 
     // backgroundColor: 'yellow',
   },
+
   textfontsize1: {
     fontSize: 16,
     fontWeight: '400',
@@ -545,21 +398,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 
-  PhoneNoBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    // backgroundColor: 'red',
-  },
-
   action: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -576,23 +414,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  DateInput: {
-    //backgroundColor: 'yellow',
-    width: (windowWidth / 100) * 80,
-    height: (windowHeight / 100) * 6,
-    paddingTop: 14,
-    fontSize: 16,
-    paddingLeft: 20,
-  },
-
-  PhoneNumbertextInput: {
-    //backgroundColor: 'blue',
-    alignItems: 'center',
-    width: (windowWidth / 100) * 63,
-    height: (windowHeight / 100) * 5,
-    fontSize: 18,
-  },
-
   UpdateButton: {
     width: (windowWidth / 100) * 85,
     height: (windowHeight / 100) * 7,
@@ -607,4 +428,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddEmployeeScreen;
+export default AddAgencyScreen;

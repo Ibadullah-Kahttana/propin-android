@@ -43,7 +43,7 @@ const LoginScreen = ({navigation}) => {
     isValidPassword: true,
   });
 
-  //const {signIn} = React.useContext(AuthContext);
+  // const {signIn} = React.useContext(AuthContext);
 
   const textInputChange = val => {
     if (val.trim().length >= 4) {

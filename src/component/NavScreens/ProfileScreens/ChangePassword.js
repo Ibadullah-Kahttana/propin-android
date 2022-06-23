@@ -30,6 +30,24 @@ const ChangePassword = ({navigation}) => {
     isValidPassword: true,
   });
 
+  const textInputChange = val => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: true,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: false,
+        isValidUser: false,
+      });
+    }
+  };
+
   const handlePasswordChange = val => {
     if (val.trim().length >= 8) {
       setData({

@@ -230,7 +230,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   Privacy Policy  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('AddAgency')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <SheildIcon width={24} height={24} />
