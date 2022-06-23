@@ -9,6 +9,7 @@ import {
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 // ---------------- SVGS --------------------------------------------------------
 
@@ -24,7 +25,7 @@ import TradingSvgBlue from '../assets/Svgs/BottomTabSvgs/TradingBlue.svg';
 import WalletSvgGray from '../assets/Svgs/BottomTabSvgs/WalletGray.svg';
 import WalletSvgBlue from '../assets/Svgs/BottomTabSvgs/WalletBlue.svg';
 
-// --------------------- COMPONENTS -----------------------------------------------------------
+// --------------------- COMPONENTS --------------------------------------------
 
 import HomeScreen from '../component/NavScreens/DashBoardHome';
 import WalletScreen from '../component/NavScreens/WalletScreen';
@@ -40,13 +41,14 @@ import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
 
 //------------------------------------------------------------------------------------------------
 const Tab = createBottomTabNavigator();
-
 const Stack = createStackNavigator();
 
 const DashBoardStack = createStackNavigator();
 const WalletStack = createStackNavigator();
 const TradingStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+
+const Drawer = createDrawerNavigator();
 
 const HomeScreenStack = ({navigation}) => (
   <DashBoardStack.Navigator
@@ -149,7 +151,7 @@ const TabButton = props => {
 
 function BottomNavigation() {
   return (
-    <Tab.Navigator
+    <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
@@ -165,18 +167,6 @@ function BottomNavigation() {
             key={index}
             name={item.route}
             component={item.component}
-            // listeners={({navigation, route}) => ({
-            //   tabPress: e => {
-            //     if (route.name === 'Projects') {
-            //       e.preventDefault();
-            //       navigation.navigate('Projects', {screen: 'ProjectsList'});
-            //     }
-            //     if (route.name === 'Properties') {
-            //       e.preventDefault();
-            //       navigation.navigate('Properties', {screen: 'PropertiesList'});
-            //     }
-            //   },
-            // })}
             options={{
               unmountOnBlur: true,
               tabBarShowLabel: false,
@@ -186,7 +176,7 @@ function BottomNavigation() {
           />
         );
       })}
-    </Tab.Navigator>
+    </Drawer.Navigator>
   );
 }
 
@@ -213,3 +203,16 @@ const styles = StyleSheet.create({
 });
 
 export default BottomNavigation;
+
+// listeners={({navigation, route}) => ({
+//   tabPress: e => {
+//     if (route.name === 'Projects') {
+//       e.preventDefault();
+//       navigation.navigate('Projects', {screen: 'ProjectsList'});
+//     }
+//     if (route.name === 'Properties') {
+//       e.preventDefault();
+//       navigation.navigate('Properties', {screen: 'PropertiesList'});
+//     }
+//   },
+// })}

@@ -31,7 +31,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   const NavigationScreen = () => {
-    navigation.navigate('BottomNavigation');
+    navigation.navigate('BottomNavigator');
   };
 
   const [data, setData] = React.useState({
