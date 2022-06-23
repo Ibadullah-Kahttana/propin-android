@@ -21,6 +21,24 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const AddProductScreen = ({navigation}) => {
+  const textInputChange = val => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: true,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: false,
+        isValidUser: false,
+      });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />

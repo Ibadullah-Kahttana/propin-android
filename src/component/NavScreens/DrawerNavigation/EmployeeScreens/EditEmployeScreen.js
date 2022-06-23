@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,8 @@ import DateTimeIcon from '../../../../assets/Svgs/EmployScreensSVG/Date';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -49,11 +51,57 @@ const EditEmployeeScreen = ({navigation}) => {
     }
   };
 
+  const textInputChange = val => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: true,
+        isValidUser: true,
+      });
+    } else {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: false,
+        isValidUser: false,
+      });
+    }
+  };
+
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
+  };
+
+  //-------------- DATE PICKER -----------------------------------------------------------------
+
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState('Empty');
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'android');
+    setDate(currentDate);
+
+    let tempDate = new Date(currentDate);
+    let fDate =
+      tempDate.getDate() +
+      '/' +
+      (tempDate.getMonth() + 1) +
+      '/' +
+      tempDate.getFullYear();
+
+    setText(fDate);
+  };
+
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
   };
 
   return (
@@ -302,16 +350,24 @@ const EditEmployeeScreen = ({navigation}) => {
 
         <View style={styles.ListBox}>
           <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="mm/dd/yyy"
-              onChangeText={val => textInputChange(val)}
-            />
-            <TouchableOpacity style={{paddingRight: 15}}>
+            <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
+            <TouchableOpacity
+              style={{paddingRight: 15}}
+              onPress={() => showMode('date')}>
               <DateTimeIcon height={17} width={17} />
             </TouchableOpacity>
           </View>
+
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
         </View>
 
         {/* -------------------------------------- */}
@@ -500,6 +556,15 @@ const styles = StyleSheet.create({
     borderColor: '#DFE2E4',
     borderWidth: 1,
     // backgroundColor: 'red',
+  },
+
+  DateInput: {
+    //backgroundColor: 'yellow',
+    width: (windowWidth / 100) * 80,
+    height: (windowHeight / 100) * 6,
+    paddingTop: 14,
+    fontSize: 16,
+    paddingLeft: 20,
   },
 
   action: {

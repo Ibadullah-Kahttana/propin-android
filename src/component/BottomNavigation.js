@@ -33,6 +33,7 @@ import ChangePassword from '../component/NavScreens/ProfileScreens/ChangePasswor
 import AddEmployeeScreen from './NavScreens/DrawerNavigation/EmployeeScreens/AddEmployeScreen';
 import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmployeScreen';
 import AddProduct from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
+import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -82,6 +83,7 @@ const ProfileScreenStack = ({navigation}) => (
     <ProfileStack.Screen name="AddEmployee" component={AddEmployeeScreen} />
     <ProfileStack.Screen name="EditEmployee" component={EditEmployee} />
     <ProfileStack.Screen name="AddProduct" component={AddProduct} />
+    <ProfileStack.Screen name="AddAgency" component={AddAgencyScreen} />
   </ProfileStack.Navigator>
 );
 
