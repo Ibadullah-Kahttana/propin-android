@@ -11,20 +11,19 @@ import {
 
 // Icons SVG
 
-import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite.svg';
-import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
-
-import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
-import PakistanFlagIconLoginPhoneNumber from '../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
+import LeftArrowWhiteIcon from '../../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
+import PakistanFlagIconLoginPhoneNumber from '../../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
+import DateTimeIcon from '../../../../assets/Svgs/EmployScreensSVG/Date';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const ProfileSettings = ({navigation}) => {
+const EditEmployeeScreen = ({navigation}) => {
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -34,24 +33,27 @@ const ProfileSettings = ({navigation}) => {
     isValidPassword: true,
   });
 
-  //const {signIn} = React.useContext(AuthContext);
-
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
+  const handlePasswordChange = val => {
+    if (val.trim().length >= 8) {
       setData({
         ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
+        password: val,
+        isValidPassword: true,
       });
     } else {
       setData({
         ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
+        password: val,
+        isValidPassword: false,
       });
     }
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
   };
 
   return (
@@ -69,21 +71,8 @@ const ProfileSettings = ({navigation}) => {
 
         <Text style={styles.h2White}>
           {'       '}
-          Profile Setting
+          Edit Employee
         </Text>
-      </View>
-
-      {/** --------------------      Profile Image        --------------*/}
-
-      <View style={styles.ProfielImageView}>
-        <View style={styles.ProfileImage}>
-          <ImageGrayVector width={45} height={45} />
-          <View style={styles.YellowCameraIcon}>
-            <TouchableOpacity underlayColor={'transparent'}>
-              <CameraIconProfileYellwo width={30} height={30} />
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
 
       {/** --------------------      Scrol List      --------------------*/}
@@ -105,60 +94,7 @@ const ProfileSettings = ({navigation}) => {
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Enter your name"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
-
-        <View>
-          <Text
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}
-            style={styles.h4Pink}>
-            This is a required field
-          </Text>
-        </View>
-
-        {/** ----------  Email  ----------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Email
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter your email"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
-
-        {/** ----------  CNIC  ----------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            CNIC
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter your CNIC"
+              placeholder="Enter Employee name"
               onChangeText={val => textInputChange(val)}
             />
           </View>
@@ -207,39 +143,19 @@ const ProfileSettings = ({navigation}) => {
             <TextInput
               style={styles.PhoneNumbertextInput}
               autoCapitalize="none"
+              placeholder="xxx xxxxxx"
               onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
 
-        {/** ----------  Address  ----------*/}
+        {/** ----------  Email  ----------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            Address
-          </Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter your address"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
-
-        {/** ----------  Postal Code ----------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Postal Code
+            Email
           </Text>
           <Text style={styles.Asteric}> *</Text>
         </View>
@@ -249,19 +165,107 @@ const ProfileSettings = ({navigation}) => {
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Enter your postal code"
+              placeholder="Enter employee email"
               onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
 
-        {/** ----------  City ----------*/}
+        {/** --------------------      Password       ----------------------*/}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
-            City
+            Password
+          </Text>
+          <Text style={styles.Asteric}> *</Text>
+        </View>
+
+        <View style={styles.ListBox}>
+          <View style={styles.action}>
+            <Feather
+              name="lock"
+              color="#171717"
+              size={17}
+              style={{paddingLeft: 10, paddingRight: 10}}
+            />
+
+            <TextInput
+              secureTextEntry={data.secureTextEntry ? true : false}
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholder="Enter your password"
+              onChangeText={val => handlePasswordChange(val)}
+            />
+
+            <TouchableOpacity
+              onPress={updateSecureTextEntry}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                paddingRight: 10,
+              }}>
+              {data.secureTextEntry ? (
+                <Feather name="eye" color="#C6C6C7" size={17} />
+              ) : (
+                <Feather name="eye-off" color="#C6C6C7" size={17} />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/** --------------------      Confirm Password       ----------------------*/}
+        <View style={styles.headingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Confirm Password
+          </Text>
+          <Text style={styles.Asteric}> *</Text>
+        </View>
+
+        <View style={styles.ListBox}>
+          <View style={styles.action}>
+            <Feather
+              name="lock"
+              color="#171717"
+              size={17}
+              style={{paddingLeft: 10, paddingRight: 10}}
+            />
+
+            <TextInput
+              secureTextEntry={data.secureTextEntry ? true : false}
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholder="Confirm your password"
+              onChangeText={val => handlePasswordChange(val)}
+            />
+
+            <TouchableOpacity
+              onPress={updateSecureTextEntry}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                paddingRight: 10,
+              }}>
+              {data.secureTextEntry ? (
+                <Feather name="eye" color="#C6C6C7" size={17} />
+              ) : (
+                <Feather name="eye-off" color="#C6C6C7" size={17} />
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/** ----------  Designation ----------*/}
+        <View style={styles.headingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Designation
           </Text>
           <Text style={styles.Asteric}> *</Text>
         </View>
@@ -271,7 +275,7 @@ const ProfileSettings = ({navigation}) => {
             <TextInput
               style={styles.textInput}
               autoCapitalize="none"
-              placeholder="Select City"
+              placeholder="Select designation"
               onChangeText={val => textInputChange(val)}
             />
             <TouchableOpacity>
@@ -281,6 +285,31 @@ const ProfileSettings = ({navigation}) => {
                 size={17}
                 style={{paddingLeft: 10, paddingRight: 20}}
               />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/** ----------  Date ----------*/}
+        <View style={styles.headingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Date of joining
+          </Text>
+          <Text style={styles.Asteric}> *</Text>
+        </View>
+
+        <View style={styles.ListBox}>
+          <View style={styles.action}>
+            <TextInput
+              style={styles.textInput}
+              autoCapitalize="none"
+              placeholder="mm/dd/yyy"
+              onChangeText={val => textInputChange(val)}
+            />
+            <TouchableOpacity style={{paddingRight: 15}}>
+              <DateTimeIcon height={17} width={17} />
             </TouchableOpacity>
           </View>
         </View>
@@ -511,4 +540,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileSettings;
+export default EditEmployeeScreen;
