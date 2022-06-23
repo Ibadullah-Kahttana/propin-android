@@ -104,6 +104,7 @@ const EditEmployeeScreen = ({navigation}) => {
     setMode(currentMode);
   };
 
+  //----------------------------------------------------------------------------------------------
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
@@ -351,11 +352,12 @@ const EditEmployeeScreen = ({navigation}) => {
         <View style={styles.ListBox}>
           <View style={styles.action}>
             <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
-            <TouchableOpacity
-              style={{paddingRight: 15}}
-              onPress={() => showMode('date')}>
-              <DateTimeIcon height={17} width={17} />
-            </TouchableOpacity>
+
+            <DateTimeIcon
+              height={17}
+              width={17}
+              onPress={() => showMode('date')}
+            />
           </View>
 
           {show && (
