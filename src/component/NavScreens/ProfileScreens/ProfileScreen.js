@@ -8,8 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-
 // Icons SVG
 
 import ListDrawerIconWhite from '../../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
@@ -25,8 +23,6 @@ import SheildIcon from '../../../assets/Svgs/ProfileScreenSvgs/Shield';
 import ContactusIcon from '../../../assets/Svgs/ProfileScreenSvgs/Contact_us';
 import LogoutIcon from '../../../assets/Svgs/ProfileScreenSvgs/LogoutWhite';
 import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -80,7 +76,7 @@ const ProfileScreen = ({navigation}) => {
 
       <View style={styles.MidSection}>
         {/**   ---   ESTIMAET  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('AddEmployee')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <EstimateIcon width={24} height={24} />
@@ -140,7 +136,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   SAVE CARD  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('EditEmployee')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <CreditCardIcon width={24} height={24} />
@@ -165,7 +161,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   CHNAGE PASSWORD  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <PrivacyIcon width={24} height={24} />

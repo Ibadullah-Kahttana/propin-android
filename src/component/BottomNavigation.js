@@ -9,6 +9,7 @@ import {
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 import HomeSvgBlue from '../assets/Svgs/BottomTabSvgs/HomeBlue.svg';
 import HomeSvgGray from '../assets/Svgs/BottomTabSvgs/HomeGray.svg';
@@ -27,6 +28,10 @@ import WalletScreen from '../component/NavScreens/WalletScreen';
 import TradingScreen from '../component/NavScreens/TradingScreen';
 import ProfileScreen from '../component/NavScreens/ProfileScreens/ProfileScreen';
 import ProfileSettings from '../component/NavScreens/ProfileScreens/ProfileSettings';
+import ChangePassword from '../component/NavScreens/ProfileScreens/ChangePassword';
+
+import AddEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/AddEmployeScreen';
+import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmployeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,7 +76,10 @@ const ProfileScreenStack = ({navigation}) => (
       headerShown: false,
     }}>
     <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <ProfileStack.Screen name="ChangePassword" component={ChangePassword} />
     <ProfileStack.Screen name="ProfileSettings" component={ProfileSettings} />
+    <ProfileStack.Screen name="AddEmployee" component={AddEmployee} />
+    <ProfileStack.Screen name="EditEmployee" component={EditEmployee} />
   </ProfileStack.Navigator>
 );
 
