@@ -9,7 +9,8 @@ import {
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+
+// ---------------- SVGS --------------------------------------------------------
 
 import HomeSvgBlue from '../assets/Svgs/BottomTabSvgs/HomeBlue.svg';
 import HomeSvgGray from '../assets/Svgs/BottomTabSvgs/HomeGray.svg';
@@ -23,6 +24,8 @@ import TradingSvgBlue from '../assets/Svgs/BottomTabSvgs/TradingBlue.svg';
 import WalletSvgGray from '../assets/Svgs/BottomTabSvgs/WalletGray.svg';
 import WalletSvgBlue from '../assets/Svgs/BottomTabSvgs/WalletBlue.svg';
 
+// --------------------- COMPONENTS -----------------------------------------------------------
+
 import HomeScreen from '../component/NavScreens/DashBoardHome';
 import WalletScreen from '../component/NavScreens/WalletScreen';
 import TradingScreen from '../component/NavScreens/TradingScreen';
@@ -35,6 +38,7 @@ import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmpl
 import AddProduct from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
 import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
 
+//------------------------------------------------------------------------------------------------
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
