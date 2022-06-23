@@ -25,6 +25,10 @@ target 'propinandroid' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'propinandroidTests' do
     inherit! :complete
     # Pods for testing
