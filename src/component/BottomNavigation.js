@@ -9,9 +9,8 @@ import {
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 
-// ---------------- SVGS --------------------------------------------------------
+// -------- SVGS
 
 import HomeSvgBlue from '../assets/Svgs/BottomTabSvgs/HomeBlue.svg';
 import HomeSvgGray from '../assets/Svgs/BottomTabSvgs/HomeGray.svg';
@@ -25,7 +24,7 @@ import TradingSvgBlue from '../assets/Svgs/BottomTabSvgs/TradingBlue.svg';
 import WalletSvgGray from '../assets/Svgs/BottomTabSvgs/WalletGray.svg';
 import WalletSvgBlue from '../assets/Svgs/BottomTabSvgs/WalletBlue.svg';
 
-// --------------------- COMPONENTS --------------------------------------------
+// -----  COMPONENTS
 
 import HomeScreen from '../component/NavScreens/DashBoardHome';
 import WalletScreen from '../component/NavScreens/WalletScreen';
@@ -39,7 +38,8 @@ import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmpl
 import AddProduct from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
 import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
 
-//------------------------------------------------------------------------------------------------
+//-------
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -47,8 +47,6 @@ const DashBoardStack = createStackNavigator();
 const WalletStack = createStackNavigator();
 const TradingStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-
-const Drawer = createDrawerNavigator();
 
 const HomeScreenStack = ({navigation}) => (
   <DashBoardStack.Navigator
@@ -151,12 +149,11 @@ const TabButton = props => {
 
 function BottomNavigation() {
   return (
-    <Drawer.Navigator
+    <Tab.Navigator
+      backBehavior="firstRoute"
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {height: (windowHeight / 100) * 7},
-        tabBarHideOnKeyboard: true,
       }}
       tabBarOptions={{
         style: styles.bottomTab,
@@ -176,7 +173,7 @@ function BottomNavigation() {
           />
         );
       })}
-    </Drawer.Navigator>
+    </Tab.Navigator>
   );
 }
 
@@ -216,3 +213,30 @@ export default BottomNavigation;
 //     }
 //   },
 // })}
+
+// <Drawer.Navigator
+//       initialRouteName="Home"
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarStyle: {height: (windowHeight / 100) * 7},
+//         tabBarHideOnKeyboard: true,
+//       }}
+//       tabBarOptions={{
+//         style: styles.bottomTab,
+//       }}>
+//       {TabArr.map((item, index) => {
+//         return (
+//           <Tab.Screen
+//             key={index}
+//             name={item.route}
+//             component={item.component}
+//             options={{
+//               unmountOnBlur: true,
+//               tabBarShowLabel: false,
+//               tabBarButton: props => <TabButton {...props} item={item} />,
+//               tabBarVisible: item.route === 'Home' ? true : false,
+//             }}
+//           />
+//         );
+//       })}
+//     </Drawer.Navigator>

@@ -10,9 +10,13 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+// ------- ICONS
+
 import {Icon} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+
+// ------- Components
 
 import LoginScreenFacebookWhiteLogo from '../assets/Svgs/LogInScreenSVG/facebookwhite.svg';
 import LoginScreenGoogleCircleLogo from '../assets/Svgs/LogInScreenSVG/GoogleCircle.svg';
@@ -31,7 +35,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   const NavigationScreen = () => {
-    navigation.navigate('BottomNavigator');
+    navigation.navigate('DrawerNavigator');
   };
 
   const [data, setData] = React.useState({
@@ -101,15 +105,14 @@ const LoginScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        {/* -------------------------------------- */}
-
+        {/* Login Screen Text */}
         <View style={styles.LoginScreenLoginText}>
           <Text style={styles.h1} adjustsFontSizeToFit={true} numberOfLines={1}>
             Login
           </Text>
         </View>
 
-        {/* -------------------------------------- */}
+        {/* Email phone Number Switch */}
         <View style={styles.EmailPhoneNumberSwitch}>
           <TouchableHighlight
             underlayColor={'transparent'}
@@ -155,9 +158,6 @@ const LoginScreen = ({navigation}) => {
           </TouchableHighlight>
         </View>
       </View>
-      {/* ------
-      
-      -------------------------------- */}
 
       {/* ---------------------------------------- */}
 
@@ -335,8 +335,6 @@ const LoginScreen = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-
-          {/* -------------------------------------- */}
         </View>
       )}
       {/* -------------------------------------- */}
