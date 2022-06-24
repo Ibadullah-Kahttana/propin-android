@@ -19,7 +19,7 @@ import LoginScreen from './src/component/LoginScreen';
 import CountryScreen from './src/component/CountryScreen';
 import RegisterScreen from './src/component/RegisterScreen';
 import SelectCityScreen from './src/component/SelectCityScreen';
-import BottomNavigation from './src/component/BottomNavigation';
+import DrawerNavigator from './src/component/DrawerNavigator';
 import SignUpScreen from './src/component/RegisterScreens/SignUpScreen';
 
 // ---------------------------------------------------------------------------------------
@@ -42,23 +42,8 @@ const StackNavigator = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-      <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>
-  );
-};
-
-const BottomNavigator = () => {
-  return (
-    <BottomStack.Navigator
-      initialRouteName="DashBoardHome"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <BottomStack.Screen
-        name="BottomNavigation"
-        component={BottomNavigation}
-      />
-    </BottomStack.Navigator>
   );
 };
 
