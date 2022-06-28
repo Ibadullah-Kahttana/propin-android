@@ -7,7 +7,7 @@ import {Drawer, Text} from 'react-native-paper';
 
 import Logo from '../../../assets/Svgs/DrawableSVG/PropInLogo';
 //Home
-import HomeIcon from '../../../assets/Svgs/DrawableSVG/HomeIcon';
+import HomeIcon from '../../../assets/Svgs/DrawableSVG/HomeIcon.svg';
 //Profile
 import ProfileIcon from '../../../assets/Svgs/DrawableSVG/ProfileIcon';
 //Employee
