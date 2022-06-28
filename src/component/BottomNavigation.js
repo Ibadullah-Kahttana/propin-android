@@ -1,28 +1,15 @@
 import React, {useRef, useEffect} from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // -------- SVGS
 
-import HomeSvgBlue from '../assets/Svgs/BottomTabSvgs/HomeBlue.svg';
-import HomeSvgGray from '../assets/Svgs/BottomTabSvgs/HomeGray.svg';
-
-import ProfileSvgGray from '../assets/Svgs/BottomTabSvgs/ProfileGray.svg';
-import ProfileSvgBlue from '../assets/Svgs/BottomTabSvgs/ProfileBlue.svg';
-
-import TradingSvgGray from '../assets/Svgs/BottomTabSvgs/TradingGray.svg';
-import TradingSvgBlue from '../assets/Svgs/BottomTabSvgs/TradingBlue.svg';
-
-import WalletSvgGray from '../assets/Svgs/BottomTabSvgs/WalletGray.svg';
-import WalletSvgBlue from '../assets/Svgs/BottomTabSvgs/WalletBlue.svg';
+import HomeSvg from '../assets/Svgs/BottomTabSvgs/Home';
+import ProfileSvg from '../assets/Svgs/BottomTabSvgs/Profile';
+import TradingSvg from '../assets/Svgs/BottomTabSvgs/Trading';
+import WalletSvg from '../assets/Svgs/BottomTabSvgs/Wallet';
 
 // -----  COMPONENTS
 
@@ -98,29 +85,32 @@ const TabArr = [
   {
     route: 'Home',
     name: 'Home',
-    inactiveIcon: <HomeSvgGray />,
-    activeIcon: <HomeSvgBlue />,
+    inactiveIcon: <HomeSvg fill={'#C5C5C5'} />,
+    activeIcon: <HomeSvg fill={'#4681F4'} />,
     component: HomeScreenStack,
   },
   {
     route: 'Wallet',
     name: 'Wallet',
-    inactiveIcon: <WalletSvgGray />,
-    activeIcon: <WalletSvgBlue />,
+
+    inactiveIcon: <WalletSvg fill={'#C5C5C5'} />,
+    activeIcon: <WalletSvg fill={'#4681F4'} />,
     component: WalletScreenStack,
   },
   {
     route: 'Trading',
     name: 'Trading',
-    inactiveIcon: <TradingSvgGray />,
-    activeIcon: <TradingSvgBlue />,
+
+    inactiveIcon: <TradingSvg fill={'#C5C5C5'} />,
+    activeIcon: <TradingSvg fill={'#4681F4'} />,
     component: TradingScreenStack,
   },
   {
     route: 'Profile',
     name: 'Profile',
-    inactiveIcon: <ProfileSvgGray />,
-    activeIcon: <ProfileSvgBlue />,
+
+    inactiveIcon: <ProfileSvg fill={'#C5C5C5'} />,
+    activeIcon: <ProfileSvg fill={'#4681F4'} />,
     component: ProfileScreenStack,
   },
 ];
@@ -200,43 +190,3 @@ const styles = StyleSheet.create({
 });
 
 export default BottomNavigation;
-
-// listeners={({navigation, route}) => ({
-//   tabPress: e => {
-//     if (route.name === 'Projects') {
-//       e.preventDefault();
-//       navigation.navigate('Projects', {screen: 'ProjectsList'});
-//     }
-//     if (route.name === 'Properties') {
-//       e.preventDefault();
-//       navigation.navigate('Properties', {screen: 'PropertiesList'});
-//     }
-//   },
-// })}
-
-// <Drawer.Navigator
-//       initialRouteName="Home"
-//       screenOptions={{
-//         headerShown: false,
-//         tabBarStyle: {height: (windowHeight / 100) * 7},
-//         tabBarHideOnKeyboard: true,
-//       }}
-//       tabBarOptions={{
-//         style: styles.bottomTab,
-//       }}>
-//       {TabArr.map((item, index) => {
-//         return (
-//           <Tab.Screen
-//             key={index}
-//             name={item.route}
-//             component={item.component}
-//             options={{
-//               unmountOnBlur: true,
-//               tabBarShowLabel: false,
-//               tabBarButton: props => <TabButton {...props} item={item} />,
-//               tabBarVisible: item.route === 'Home' ? true : false,
-//             }}
-//           />
-//         );
-//       })}
-//     </Drawer.Navigator>
