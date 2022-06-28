@@ -1,3 +1,29 @@
+/**
+ * 
+import LogoBlue from '../../../assets/Svgs/DrawableSVG/LogoBlue';
+import HomeBlueIcon from '../../../assets/Svgs/DrawableSVG/homeBlue';
+import ProfileWhiteIcon from '../../../assets/Svgs/DrawableSVG/ProfileWhite';
+import EmployeWhiteIcon from '../../../assets/Svgs/DrawableSVG/EmployeWhite';
+import HelpWhiteIcon from '../../../assets/Svgs/DrawableSVG/Help';
+import LogoutWhiteIcon from '../../../assets/Svgs/DrawableSVG/LogoutWhite';
+import ProductWhiteIcon from '../../../assets/Svgs/DrawableSVG/ProductWhite';
+import SettingsWhiteIcon from '../../../assets/Svgs/DrawableSVG/SettingsWhite';
+import TradingWhiteIcon from '../../../assets/Svgs/DrawableSVG/tradingwhite';
+import WalletWhiteIcon from '../../../assets/Svgs/DrawableSVG/walletWhite';
+
+// Components Details
+import HomeScreen from '../DashBoardHome';
+
+//ProfileScreens
+import ProfileScreen from '../ProfileScreens/ProfileScreen';
+//WalletScreen
+import WalletScreen from '../WalletScreen';
+//Product Screen
+import ProductScreen from './ProductScreens/ProductHomeScreen';
+//EmplyScreen
+import EmployeScreen from './EmployeeScreens/AddEmployeScreen';
+
+ */
 import React, {useState} from 'react';
 import {
   StyleSheet,

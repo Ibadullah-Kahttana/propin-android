@@ -11,7 +11,7 @@ import {
 
 // Icons SVG
 
-import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite.svg';
+import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
 import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
 
 import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
