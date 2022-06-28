@@ -92,7 +92,6 @@ const TabArr = [
   {
     route: 'Wallet',
     name: 'Wallet',
-
     inactiveIcon: <WalletSvg fill={'#C5C5C5'} />,
     activeIcon: <WalletSvg fill={'#4681F4'} />,
     component: WalletScreenStack,
@@ -100,7 +99,6 @@ const TabArr = [
   {
     route: 'Trading',
     name: 'Trading',
-
     inactiveIcon: <TradingSvg fill={'#C5C5C5'} />,
     activeIcon: <TradingSvg fill={'#4681F4'} />,
     component: TradingScreenStack,
@@ -108,7 +106,6 @@ const TabArr = [
   {
     route: 'Profile',
     name: 'Profile',
-
     inactiveIcon: <ProfileSvg fill={'#C5C5C5'} />,
     activeIcon: <ProfileSvg fill={'#4681F4'} />,
     component: ProfileScreenStack,
