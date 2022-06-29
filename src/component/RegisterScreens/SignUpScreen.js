@@ -10,13 +10,12 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+//Svgs Constant
+import svg from '../../constants/svgs';
+
 import {Icon} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
-import LoginScreenFacebookWhiteLogo from '../../assets/Svgs/SignUpScreen/facebookwhite.svg';
-import LoginScreenGoogleCircleLogo from '../../assets/Svgs/SignUpScreen/GoogleCircle.svg';
-import PakistanFlagIconLoginPhoneNumber from '../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -97,7 +96,7 @@ const SignUpScreen = ({navigation}) => {
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>
           <TouchableOpacity onPress={RegisteryScreenGoBack}>
-            <Icon type="ant-design" name="left" size={20} color="#FFFFFF" />
+            <svg.LeftArrowSvgWhite width={17} height={17} />
           </TouchableOpacity>
         </View>
 
@@ -240,7 +239,7 @@ const SignUpScreen = ({navigation}) => {
                 alignItems: 'center',
                 justifyContent: 'space-around',
               }}>
-              <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
+              <svg.PakistanHalfFlagSvg width={25} height={25} />
               <Text
                 style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
                 adjustsFontSizeToFit={true}
@@ -414,10 +413,10 @@ const SignUpScreen = ({navigation}) => {
           <TouchableHighlight underlayColor="#DDDDDD">
             <View style={styles.SocialLinksGoogleFacebook}>
               <TouchableOpacity>
-                <LoginScreenGoogleCircleLogo width={50} height={50} />
+                <svg.GoogleCircleSvg width={50} height={50} />
               </TouchableOpacity>
               <TouchableOpacity>
-                <LoginScreenFacebookWhiteLogo width={50} height={50} />
+                <svg.FacebookCircleSvg width={50} height={50} />
               </TouchableOpacity>
             </View>
           </TouchableHighlight>
@@ -529,7 +528,7 @@ const SignUpScreen = ({navigation}) => {
                 alignItems: 'center',
                 justifyContent: 'space-around',
               }}>
-              <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
+              <svg.PakistanHalfFlagSvg width={25} height={25} />
               <Text
                 style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
                 adjustsFontSizeToFit={true}

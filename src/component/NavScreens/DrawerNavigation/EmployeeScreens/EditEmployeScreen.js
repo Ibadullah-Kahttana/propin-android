@@ -356,6 +356,7 @@ const EditEmployeeScreen = ({navigation}) => {
             <DateTimeIcon
               height={17}
               width={17}
+              fill={'#C6C6C7'}
               onPress={() => showMode('date')}
             />
           </View>

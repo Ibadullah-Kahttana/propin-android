@@ -9,13 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// Icons SVG
-
-import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
-import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
-
-import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
-import PakistanFlagIconLoginPhoneNumber from '../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
+// svg constants
+import svg from '../../../constants/svgs';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -64,7 +59,7 @@ const ProfileSettings = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <LeftArrowWhiteIcon width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>
@@ -77,10 +72,10 @@ const ProfileSettings = ({navigation}) => {
 
       <View style={styles.ProfielImageView}>
         <View style={styles.ProfileImage}>
-          <ImageGrayVector width={45} height={45} />
+          <svg.ProfileSvg width={45} height={45} />
           <View style={styles.YellowCameraIcon}>
             <TouchableOpacity underlayColor={'transparent'}>
-              <CameraIconProfileYellwo width={30} height={30} />
+              <svg.cameraSvgProfile width={30} height={30} />
             </TouchableOpacity>
           </View>
         </View>
@@ -186,7 +181,7 @@ const ProfileSettings = ({navigation}) => {
               alignItems: 'center',
               justifyContent: 'space-around',
             }}>
-            <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
+            <svg.PakistanHalfFlagSvg width={25} height={25} />
             <Text
               style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
               adjustsFontSizeToFit={true}

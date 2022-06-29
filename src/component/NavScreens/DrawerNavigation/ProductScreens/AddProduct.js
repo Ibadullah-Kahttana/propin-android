@@ -9,11 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// Icons SVG
-
-import LeftArrowWhiteIcon from '../../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+// Svg Constants
+import svg from '../../../../constants/svgs';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -49,7 +46,7 @@ const AddProductScreen = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <LeftArrowWhiteIcon width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>
@@ -123,12 +120,7 @@ const AddProductScreen = ({navigation}) => {
               onChangeText={val => textInputChange(val)}
             />
             <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
+              <svg.downArrowSvgGray width={17} height={17} />
             </TouchableOpacity>
           </View>
         </View>
@@ -147,12 +139,7 @@ const AddProductScreen = ({navigation}) => {
           <View style={styles.DropDown}>
             <Text style={styles.h4Grey}> Marla </Text>
             <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
+              <svg.downArrowSvgGray width={17} height={17} />
             </TouchableOpacity>
           </View>
           <View style={styles.action}>
@@ -179,12 +166,7 @@ const AddProductScreen = ({navigation}) => {
           <View style={styles.DropDown}>
             <Text style={styles.h4Grey}> PKR </Text>
             <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
+              <svg.downArrowSvgGray width={17} height={17} />
             </TouchableOpacity>
           </View>
           <View style={styles.action}>
@@ -237,12 +219,7 @@ const AddProductScreen = ({navigation}) => {
               onChangeText={val => textInputChange(val)}
             />
             <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
+              <svg.downArrowSvgGray width={17} height={17} />
             </TouchableOpacity>
           </View>
         </View>
@@ -266,12 +243,7 @@ const AddProductScreen = ({navigation}) => {
               onChangeText={val => textInputChange(val)}
             />
             <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
+              <svg.downArrowSvgGray width={17} height={17} />
             </TouchableOpacity>
           </View>
         </View>

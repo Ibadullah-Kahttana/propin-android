@@ -8,21 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 
-// Icons SVG
-
-import ListDrawerIconWhite from '../../../assets/Svgs/ProfileScreenSvgs/ListDrawerIcon';
-import SettingsIcon from '../../../assets/Svgs/ProfileScreenSvgs/Settings';
-import ImageGrayVector from '../../../assets/Svgs/ProfileScreenSvgs/UserVectorGray';
-import RightArrowBlack from '../../../assets/Svgs/ProfileScreenSvgs/VectorRightBlack';
-import RightArrowWhite from '../../../assets/Svgs/ProfileScreenSvgs/VectorRightWhite';
-import EstimateIcon from '../../../assets/Svgs/ProfileScreenSvgs/Estimate';
-import CreditCardIcon from '../../../assets/Svgs/ProfileScreenSvgs/Credit_card';
-import PrivacyIcon from '../../../assets/Svgs/ProfileScreenSvgs/Privacy';
-import TermsIcon from '../../../assets/Svgs/ProfileScreenSvgs/Terms_and_conditions';
-import SheildIcon from '../../../assets/Svgs/ProfileScreenSvgs/Shield';
-import ContactusIcon from '../../../assets/Svgs/ProfileScreenSvgs/Contact_us';
-import LogoutIcon from '../../../assets/Svgs/ProfileScreenSvgs/LogoutWhite';
-import CameraIconProfileYellwo from '../../../assets/Svgs/ProfileScreenSvgs/CameraIconProfile';
+// Svg Constants
+import svg from '../../../constants/svgs';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -36,15 +23,15 @@ const ProfileScreen = ({navigation}) => {
 
       <View style={styles.LoginHeader}>
         <TouchableOpacity underlayColor={'transparent'}>
-          <ListDrawerIconWhite width={20} height={20} />
+          <svg.listDrawerSvgWhite width={20} height={20} />
         </TouchableOpacity>
 
         <View style={styles.ProfileCard}>
           <View style={styles.ProfileImage}>
-            <ImageGrayVector width={28.35} height={28.35} />
+            <svg.ProfileSvg width={28.35} height={28.35} />
             <View style={styles.YellowCameraIcon}>
               <TouchableOpacity>
-                <CameraIconProfileYellwo width={21} height={21} />
+                <svg.cameraSvgProfile width={21} height={21} />
               </TouchableOpacity>
             </View>
           </View>
@@ -67,7 +54,7 @@ const ProfileScreen = ({navigation}) => {
           <TouchableOpacity
             style={{paddingLeft: 5}}
             onPress={() => navigation.navigate('ProfileSettings')}>
-            <SettingsIcon height={30} width={30} />
+            <svg.settingsSvg height={30} width={30} />
           </TouchableOpacity>
         </View>
       </View>
@@ -79,7 +66,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('AddEmployee')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <EstimateIcon width={24} height={24} />
+              <svg.estimateSvgProfile width={24} height={24} />
               <Text
                 style={[styles.h4Black, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -129,7 +116,7 @@ const ProfileScreen = ({navigation}) => {
                 </View>
               </View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>
@@ -139,7 +126,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('EditEmployee')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <CreditCardIcon width={24} height={24} />
+              <svg.creditCardSvgProfile width={24} height={24} />
               <Text style={[styles.h4Black, styles.cardText]}>Save Card</Text>
             </View>
             <View style={styles.InnerView2}>
@@ -154,7 +141,7 @@ const ProfileScreen = ({navigation}) => {
                 <Text style={styles.h4Yellow}> Saved Card </Text>
               </View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>
@@ -164,7 +151,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <PrivacyIcon width={24} height={24} />
+              <svg.privacySvgProfile width={24} height={24} />
               <Text
                 style={[styles.h4Black, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -183,7 +170,7 @@ const ProfileScreen = ({navigation}) => {
                   justifyContent: 'space-evenly',
                 }}></View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>
@@ -204,7 +191,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('AddProduct')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <TermsIcon width={24} height={24} />
+              <svg.termsSvgProfile width={24} height={24} />
               <Text
                 style={[styles.h4Black, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -223,7 +210,7 @@ const ProfileScreen = ({navigation}) => {
                   justifyContent: 'space-evenly',
                 }}></View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>
@@ -233,7 +220,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('AddAgency')}>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <SheildIcon width={24} height={24} />
+              <svg.sheildSvgProfile width={24} height={24} />
               <Text
                 style={[styles.h4Black, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -262,7 +249,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
-              <ContactusIcon width={24} height={24} />
+              <svg.contactUsSvgProfile width={24} height={24} />
               <Text
                 style={[styles.h4Black, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -281,7 +268,7 @@ const ProfileScreen = ({navigation}) => {
                   justifyContent: 'space-evenly',
                 }}></View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>
@@ -291,7 +278,7 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity>
           <View style={styles.MidSectionViewYellow}>
             <View style={styles.InnerView1}>
-              <LogoutIcon width={24} height={24} />
+              <svg.LogoutSvg width={24} height={24} />
               <Text
                 style={[styles.h4White, styles.cardText]}
                 adjustsFontSizeToFit={true}
@@ -310,7 +297,7 @@ const ProfileScreen = ({navigation}) => {
                   justifyContent: 'space-evenly',
                 }}></View>
               <TouchableOpacity>
-                <RightArrowWhite width={12} height={12} />
+                <svg.RightArrowWhite width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>

@@ -9,9 +9,10 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+// Svg constant
+import svg from '../constants/svgs';
+
 import {Icon} from 'react-native-elements';
-import RegionPakLogo from '../assets/Svgs/CountryScreenSVGs/pakistanflag.svg';
-import CountryHeaderImage from '../assets/Svgs/CountryScreenSVGs/grow.svg';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -45,7 +46,7 @@ const CountryScreen = ({navigation}) => {
       {/* -------------------------------------- */}
 
       <View style={styles.CountryScreenimageView}>
-        <CountryHeaderImage width={200} height={200} />
+        <svg.PosterSvgCountryScreen width={200} height={200} />
       </View>
 
       {/* -------------------------------------- */}
@@ -91,7 +92,7 @@ const CountryScreen = ({navigation}) => {
                   alignItems: 'center',
                   paddingLeft: 10,
                 }}>
-                <RegionPakLogo width={25} height={25} />
+                <svg.pakFlagSvgCountryScreen width={25} height={25} />
 
                 <TouchableOpacity></TouchableOpacity>
                 <Text

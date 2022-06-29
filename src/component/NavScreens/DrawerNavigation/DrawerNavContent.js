@@ -3,29 +3,8 @@ import React, {useState} from 'react';
 
 import {Drawer, Text} from 'react-native-paper';
 
-//------------------ SVGs -----------------
-
-import Logo from '../../../assets/Svgs/DrawableSVG/PropInLogo';
-//Home
-import HomeIcon from '../../../assets/Svgs/DrawableSVG/HomeIcon.svg';
-//Profile
-import ProfileIcon from '../../../assets/Svgs/DrawableSVG/ProfileIcon';
-//Employee
-import EmployeeIconBlue from '../../../assets/Svgs/DrawableSVG/EmployeeIconBlue';
-import EmployeeIconWhite from '../../../assets/Svgs/DrawableSVG/EmployeeIconWhite';
-//Help
-import HelpIconWhite from '../../../assets/Svgs/DrawableSVG/HelpIconwhite';
-import HelpIconBlue from '../../../assets/Svgs/DrawableSVG/HelpIconblue';
-//Logout
-import LogoutIcon from '../../../assets/Svgs/DrawableSVG/LogoutIcon';
-//Product
-import ProductIcon from '../../../assets/Svgs/DrawableSVG/ProductIcon';
-//Settings
-import SettingsIcon from '../../../assets/Svgs/DrawableSVG/SettingsIcon';
-//Trading
-import TradingIcon from '../../../assets/Svgs/DrawableSVG/tradingIcon';
-//Wallet
-import WalletIcon from '../../../assets/Svgs/DrawableSVG/WalletIcon';
+// Svg conatnts
+import svg from '../../../constants/svgs';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -39,7 +18,7 @@ const DrawerNavContent = () => {
     <View style={styles.drawerContent}>
       {/** LOG */}
       <Drawer.Section style={styles.drawerIconSection}>
-        <Logo height={130} width={130} />
+        <svg.logInLogoSVGRegister height={130} width={130} />
       </Drawer.Section>
 
       {/** Sections */}
@@ -60,9 +39,9 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Home' ? (
-                <HomeIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.HomeSvgDrawable width={25} height={25} fill={'#4681F4'} />
               ) : (
-                <HomeIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.HomeSvgDrawable width={25} height={25} fill={'#FFFFFF'} />
               )}
             </View>
             <Text
@@ -95,9 +74,17 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Profile' ? (
-                <ProfileIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.ProductSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#4681F4'}
+                />
               ) : (
-                <ProfileIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.ProductSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#FFFFFF'}
+                />
               )}
             </View>
             <Text
@@ -130,9 +117,17 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Wallet' ? (
-                <WalletIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.WalletSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#4681F4'}
+                />
               ) : (
-                <WalletIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.WalletSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#FFFFFF'}
+                />
               )}
             </View>
             <Text
@@ -167,9 +162,17 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Trading' ? (
-                <TradingIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.TradingSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#4681F4'}
+                />
               ) : (
-                <TradingIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.TradingSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#FFFFFF'}
+                />
               )}
             </View>
             <Text
@@ -202,9 +205,17 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Products' ? (
-                <ProductIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.ProductSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#4681F4'}
+                />
               ) : (
-                <ProductIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.ProductSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#FFFFFF'}
+                />
               )}
             </View>
             <Text
@@ -237,9 +248,9 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Employee' ? (
-                <EmployeeIconBlue width={25} height={25} />
+                <svg.EmployeeSvgBlueDrawable width={25} height={25} />
               ) : (
-                <EmployeeIconWhite width={25} height={25} />
+                <svg.EmployeeSvgWhiteDrawable width={25} height={25} />
               )}
             </View>
             <Text
@@ -274,9 +285,17 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Setting' ? (
-                <SettingsIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.SettingsSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#4681F4'}
+                />
               ) : (
-                <SettingsIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.SettingsSvgDrawable
+                  width={25}
+                  height={25}
+                  fill={'#FFFFFF'}
+                />
               )}
             </View>
             <Text
@@ -308,9 +327,9 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Help' ? (
-                <HelpIconBlue width={25} height={25} />
+                <svg.HelpSvgBlueDrawable width={25} height={25} />
               ) : (
-                <HelpIconWhite width={25} height={25} />
+                <svg.HelpSvgWhiteDrawable width={25} height={25} />
               )}
             </View>
             <Text
@@ -343,9 +362,9 @@ const DrawerNavContent = () => {
             }}>
             <View style={styles.ButtonIconConatiner}>
               {activeButton === 'Logout' ? (
-                <LogoutIcon width={25} height={25} fill={'#4681F4'} />
+                <svg.LogoutSvg width={25} height={25} fill={'#4681F4'} />
               ) : (
-                <LogoutIcon width={25} height={25} fill={'#FFFFFF'} />
+                <svg.LogoutSvg width={25} height={25} fill={'#FFFFFF'} />
               )}
             </View>
             <Text

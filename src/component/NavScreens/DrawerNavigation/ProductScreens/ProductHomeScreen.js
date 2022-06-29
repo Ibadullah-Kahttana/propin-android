@@ -12,21 +12,11 @@ import {
 
 import ToggleSwitch from 'toggle-switch-react-native';
 
-// Icons SVG
+// Svg constants
+import svg from '../../../../constants/svgs';
 
-import LeftArrowWhiteIcon from '../../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite.svg';
-import PlusIcon from '../../../../assets/Svgs/ProductScreenSVG/Plus';
-import FilterIcon from '../../../../assets/Svgs/ProductScreenSVG/Filter';
-import SortIcon from '../../../../assets/Svgs/ProductScreenSVG/sort';
-import ArrowDownIcon from '../../../../assets/Svgs/ProductScreenSVG/ArrowDown';
-import NoteIcon from '../../../../assets/Svgs/ProductScreenSVG/Note';
-import LocationIcon from '../../../../assets/Svgs/ProductScreenSVG/Location';
-import SearchIcon from '../../../../assets/Svgs/ProductScreenSVG/Searchgray';
-import HouseIcon from '../../../../assets/Svgs/ProductScreenSVG/houseMarla';
-import PenIconWhite from '../../../../assets/Svgs/ProductScreenSVG/penWhite';
-import DeleteboxIocn from '../../../../assets/Svgs/ProductScreenSVG/DeleteWhite';
-
-import constants from '../../../../constants';
+// Color constants
+import color from '../../../../constants/colors';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -118,7 +108,7 @@ const ProductHomeScreen = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <LeftArrowWhiteIcon width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>
@@ -133,7 +123,7 @@ const ProductHomeScreen = ({navigation}) => {
             justifyContent: 'center',
             paddingLeft: (windowWidth / 100) * 40,
           }}>
-          <PlusIcon width={15} height={15} />
+          <svg.plusSvg width={15} height={15} />
           <Text style={styles.h1White}> Add</Text>
         </TouchableOpacity>
       </View>
@@ -148,7 +138,7 @@ const ProductHomeScreen = ({navigation}) => {
           {/*  Filters BOX */}
           <TouchableOpacity>
             <View style={styles.GrayBoxFilter}>
-              <FilterIcon
+              <svg.filterSvgPd
                 height={15}
                 width={15}
                 alignItems={'center'}
@@ -161,7 +151,7 @@ const ProductHomeScreen = ({navigation}) => {
           {/*  Sort BOX */}
           <TouchableOpacity>
             <View style={styles.GrayBoxSort}>
-              <SortIcon
+              <svg.sortSvgPd
                 height={20}
                 width={20}
                 alignItems={'center'}
@@ -175,7 +165,7 @@ const ProductHomeScreen = ({navigation}) => {
           <TouchableOpacity>
             <View style={styles.GrayBoxLocation}>
               <Text style={styles.h4Black}> Location {'  '}</Text>
-              <ArrowDownIcon
+              <svg.downArrowSvgDarkGray
                 height={9}
                 width={9}
                 alignItems={'center'}
@@ -188,7 +178,7 @@ const ProductHomeScreen = ({navigation}) => {
           <TouchableOpacity style={{marginRight: 30}}>
             <View style={styles.GrayBoxPrice}>
               <Text style={styles.h4Black}> Price Range{'  '} </Text>
-              <ArrowDownIcon
+              <svg.downArrowSvgDarkGray
                 height={10}
                 width={10}
                 alignItems={'center'}
@@ -221,7 +211,7 @@ const ProductHomeScreen = ({navigation}) => {
               <View style={styles.CurrencyStarBox}>
                 <View style={styles.currencyStarText}>
                   <View style={styles.currencyLogo}>
-                    <NoteIcon width={13} height={13} />
+                    <svg.noteSvgPd width={13} height={13} />
                     <Text style={styles.h1GrayBold}>{item.Currency}</Text>
                   </View>
 
@@ -238,7 +228,7 @@ const ProductHomeScreen = ({navigation}) => {
               {/** Locations */}
               <View style={styles.locationIDMarla}>
                 <View style={styles.locationDetails}>
-                  <LocationIcon width={17} height={17} />
+                  <svg.locationSvgPd width={17} height={17} />
                   <Text style={styles.h5Grey}>
                     {'  '}
                     {item.LocationArea}
@@ -250,12 +240,12 @@ const ProductHomeScreen = ({navigation}) => {
                   </Text>
                 </View>
                 <View style={styles.searchId}>
-                  <SearchIcon width={17} height={17} />
+                  <svg.searchSvgPd width={17} height={17} />
                   <Text style={styles.h5Grey}> ID:</Text>
                   <Text style={styles.h5Grey}> {item.id}</Text>
                 </View>
                 <View style={styles.MarlasDetails}>
-                  <HouseIcon width={17} height={17} />
+                  <svg.houseSvgPd width={17} height={17} />
                   <Text style={styles.h5Grey}>
                     {'  '}
                     {item.Marlas}
@@ -270,13 +260,13 @@ const ProductHomeScreen = ({navigation}) => {
                 <View style={styles.buttons}>
                   <TouchableOpacity>
                     <View style={styles.EditButton}>
-                      <PenIconWhite width={15} height={15} />
+                      <svg.penIconSvgPd width={15} height={15} />
                       <Text style={styles.h5White}>Edit</Text>
                     </View>
                   </TouchableOpacity>
                   <TouchableOpacity>
                     <View style={styles.DeleteButton}>
-                      <DeleteboxIocn width={15} height={15} />
+                      <svg.deleteboxSvgPd width={15} height={15} />
                       <Text style={styles.h5White}>Delete</Text>
                     </View>
                   </TouchableOpacity>
@@ -318,7 +308,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: constants.colors.white,
+    backgroundColor: color.white,
   },
 
   Header: {
@@ -326,7 +316,7 @@ const styles = StyleSheet.create({
     height: (windowHeight / 100) * 10,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: constants.colors.blue,
+    backgroundColor: color.blue,
     paddingTop: 20,
     paddingLeft: 20,
     marginBottom: 15,
@@ -350,7 +340,7 @@ const styles = StyleSheet.create({
   GrayBoxFilter: {
     width: (windowWidth / 100) * 24,
     height: (windowHeight / 100) * 5,
-    backgroundColor: constants.colors.lightGray,
+    backgroundColor: color.lightGray,
     borderRadius: 10,
     marginLeft: 15,
     flexDirection: 'row',

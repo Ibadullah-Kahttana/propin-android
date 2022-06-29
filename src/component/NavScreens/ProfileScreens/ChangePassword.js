@@ -9,9 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// Icons SVG
-
-import LeftArrowWhiteIcon from '../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite.svg';
+// Svg constants
+import svg from '../../../constants/svgs';
 
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -81,7 +80,7 @@ const ChangePassword = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <LeftArrowWhiteIcon width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>

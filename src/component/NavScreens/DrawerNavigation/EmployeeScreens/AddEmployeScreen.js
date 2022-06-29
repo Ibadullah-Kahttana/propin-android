@@ -356,7 +356,7 @@ const AddEmployeeScreen = ({navigation}) => {
             <TouchableOpacity
               style={{paddingRight: 15}}
               onPress={() => showMode('date')}>
-              <DateTimeIcon height={17} width={17} />
+              <DateTimeIcon height={17} width={17} fill={'#C6C6C7'} />
             </TouchableOpacity>
           </View>
 

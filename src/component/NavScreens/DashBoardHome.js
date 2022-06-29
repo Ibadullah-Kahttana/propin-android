@@ -2,12 +2,8 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import QRIcon from '../../assets/Svgs/DashBoardHome/QRIcons.svg';
-import SearchHomes from '../../assets/Svgs/DashBoardHome/SearchHome.svg';
-import ProfileIconHome from '../../assets/Svgs/DashBoardHome/ProfileIconHome.svg';
-import UpArrow from '../../assets/Svgs/DashBoardHome/UpArrow.svg';
-import DownArrow from '../../assets/Svgs/DashBoardHome/DownArrow.svg';
-import Bar from '../../assets/Svgs/DashBoardHome/Bar.svg';
+// svgs Constants
+import svg from '../../constants/svgs';
 
 import PropertySVGOrange from '../../assets/Svgs/DashBoardHome/PropertySVGOrange.svg';
 
@@ -165,13 +161,13 @@ const DashBoardHome = ({navigation}) => {
         </View>
         <View style={styles.HeaderNavIcons}>
           <TouchableOpacity>
-            <SearchHomes width={15} height={15} color="#70747D" />
+            <svg.searchSvgHome width={15} height={15} fill={'#70747D'} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <QRIcon width={16} height={16} color="#70747D" />
+            <svg.QRSvgHome width={16} height={16} fill={'#70747D'} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <ProfileIconHome width={28} height={34} />
+            <svg.profileSvgHome width={28} height={34} />
           </TouchableOpacity>
         </View>
       </View>
@@ -326,10 +322,10 @@ const DashBoardHome = ({navigation}) => {
                   justifyContent: 'center',
                 }}>
                 <TouchableOpacity>
-                  <UpArrow width={8} height={8} />
+                  <svg.upArrowSvgGray width={8} height={8} fill={'#70747D'} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <DownArrow width={8} height={8} />
+                  <svg.downArrowSvgGray width={8} height={8} fill={'#70747D'} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -361,7 +357,7 @@ const DashBoardHome = ({navigation}) => {
                   </Text>
                 </View>
 
-                <Bar width={90} height={90} />
+                <svg.barSvgHome width={90} height={90} />
 
                 <View style={styles.CurrencyRateView}>
                   <View style={{flexDirection: 'row'}}>

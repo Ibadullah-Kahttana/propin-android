@@ -10,10 +10,8 @@ import {
   Pressable,
 } from 'react-native';
 
-import LogInScreenLogo from '../assets/Svgs/RegisterScreenSvg/logo.svg';
-
-import LoginScreenFacebookWhiteLogo from '../assets/Svgs/LogInScreenSVG/facebookwhite.svg';
-import LoginScreenGoogleCircleLogo from '../assets/Svgs/LogInScreenSVG/GoogleCircle.svg';
+//Svgs Constant
+import svg from '../constants/svgs';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -32,7 +30,7 @@ const RegisterScreen = ({navigation}) => {
       <StatusBar backgroundColor={'#f8f9fa'} barStyle="dark-content" />
 
       <View style={styles.RegisterScreenimageView}>
-        <LogInScreenLogo width={170} height={161} />
+        <svg.logInLogoSVGRegister width={170} height={161} />
       </View>
       {/* -------------------------------------- */}
       <View style={styles.welcomeView}>
@@ -58,10 +56,10 @@ const RegisterScreen = ({navigation}) => {
       <TouchableHighlight underlayColor="#DDDDDD">
         <View style={styles.SocialLinksGoogleFacebook}>
           <TouchableOpacity>
-            <LoginScreenGoogleCircleLogo width={60} height={60} />
+            <svg.GoogleSvgRegister width={60} height={60} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <LoginScreenFacebookWhiteLogo width={60} height={60} />
+            <svg.FacebookWhiteSvgRegister width={60} height={60} />
           </TouchableOpacity>
         </View>
       </TouchableHighlight>

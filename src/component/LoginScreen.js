@@ -1,29 +1,3 @@
-/**
- * 
-import LogoBlue from '../../../assets/Svgs/DrawableSVG/LogoBlue';
-import HomeBlueIcon from '../../../assets/Svgs/DrawableSVG/homeBlue';
-import ProfileWhiteIcon from '../../../assets/Svgs/DrawableSVG/ProfileWhite';
-import EmployeWhiteIcon from '../../../assets/Svgs/DrawableSVG/EmployeWhite';
-import HelpWhiteIcon from '../../../assets/Svgs/DrawableSVG/Help';
-import LogoutWhiteIcon from '../../../assets/Svgs/DrawableSVG/LogoutWhite';
-import ProductWhiteIcon from '../../../assets/Svgs/DrawableSVG/ProductWhite';
-import SettingsWhiteIcon from '../../../assets/Svgs/DrawableSVG/SettingsWhite';
-import TradingWhiteIcon from '../../../assets/Svgs/DrawableSVG/tradingwhite';
-import WalletWhiteIcon from '../../../assets/Svgs/DrawableSVG/walletWhite';
-
-// Components Details
-import HomeScreen from '../DashBoardHome';
-
-//ProfileScreens
-import ProfileScreen from '../ProfileScreens/ProfileScreen';
-//WalletScreen
-import WalletScreen from '../WalletScreen';
-//Product Screen
-import ProductScreen from './ProductScreens/ProductHomeScreen';
-//EmplyScreen
-import EmployeScreen from './EmployeeScreens/AddEmployeScreen';
-
- */
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -36,19 +10,13 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-// ------- ICONS
+// Svgs Constant
+import svg from '../constants/svgs';
 
+// ------- ICONS
 import {Icon} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
-// ------- Components
-
-import LoginScreenFacebookWhiteLogo from '../assets/Svgs/LogInScreenSVG/facebookwhite.svg';
-import LoginScreenGoogleCircleLogo from '../assets/Svgs/LogInScreenSVG/GoogleCircle.svg';
-import PakistanFlagIconLoginPhoneNumber from '../assets/Svgs/LogInScreenSVG/Pakistanflag2.svg';
-
-import {AuthContext} from '../component/context';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -127,7 +95,7 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>
           <TouchableOpacity onPress={RegisteryScreenGoBack}>
-            <Icon type="ant-design" name="left" size={20} color="#FFFFFF" />
+            <svg.LeftArrowSvgWhite width={17} height={17} />
           </TouchableOpacity>
         </View>
 
@@ -292,7 +260,7 @@ const LoginScreen = ({navigation}) => {
                 alignItems: 'center',
                 justifyContent: 'space-around',
               }}>
-              <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
+              <svg.PakistanHalfFlagSvg width={25} height={25} />
               <Text
                 style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
                 adjustsFontSizeToFit={true}
@@ -416,10 +384,10 @@ const LoginScreen = ({navigation}) => {
       <TouchableHighlight underlayColor="#DDDDDD">
         <View style={styles.SocialLinksGoogleFacebook}>
           <TouchableOpacity>
-            <LoginScreenGoogleCircleLogo width={50} height={50} />
+            <svg.GoogleCircleSvg width={50} height={50} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <LoginScreenFacebookWhiteLogo width={50} height={50} />
+            <svg.FacebookCircleSvg width={50} height={50} />
           </TouchableOpacity>
         </View>
       </TouchableHighlight>

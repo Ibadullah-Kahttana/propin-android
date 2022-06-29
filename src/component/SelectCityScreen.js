@@ -12,7 +12,8 @@ import {
 
 import {Icon} from 'react-native-elements';
 
-import LocationCircleIcon from '../assets/Svgs/SelectCitySVGS/LocationCircleIcon.svg';
+// Svgs Constant
+import svg from '../constants/svgs';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -98,7 +99,7 @@ const SelectCityScreen = ({navigation}) => {
         <TouchableOpacity
           onPress={CountryScreenGoBack}
           style={{paddingLeft: 15}}>
-          <Icon type="ant-design" name="left" size={20} color="#212529" />
+          <svg.LeftArrowSvgWhite width={17} height={17} />
         </TouchableOpacity>
         <Text
           style={styles.h3Bold}
@@ -125,7 +126,7 @@ const SelectCityScreen = ({navigation}) => {
           <View style={styles.CitiesList}>
             <TouchableOpacity>
               <View style={styles.LogAndTextView}>
-                <LocationCircleIcon width={40} height={40} />
+                <svg.LocationCircleSvgSelectCity width={40} height={40} />
 
                 <Text
                   style={styles.text1}

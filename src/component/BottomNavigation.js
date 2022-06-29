@@ -4,12 +4,8 @@ import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-// -------- SVGS
-
-import HomeSvg from '../assets/Svgs/BottomTabSvgs/Home';
-import ProfileSvg from '../assets/Svgs/BottomTabSvgs/Profile';
-import TradingSvg from '../assets/Svgs/BottomTabSvgs/Trading';
-import WalletSvg from '../assets/Svgs/BottomTabSvgs/Wallet';
+// Svg Constants
+import svg from '../constants/svgs';
 
 // -----  COMPONENTS
 
@@ -85,29 +81,29 @@ const TabArr = [
   {
     route: 'Home',
     name: 'Home',
-    inactiveIcon: <HomeSvg fill={'#C5C5C5'} />,
-    activeIcon: <HomeSvg fill={'#4681F4'} />,
+    inactiveIcon: <svg.homeSvgBottomNav fill={'#C5C5C5'} />,
+    activeIcon: <svg.homeSvgBottomNav fill={'#4681F4'} />,
     component: HomeScreenStack,
   },
   {
     route: 'Wallet',
     name: 'Wallet',
-    inactiveIcon: <WalletSvg fill={'#C5C5C5'} />,
-    activeIcon: <WalletSvg fill={'#4681F4'} />,
+    inactiveIcon: <svg.walletSvgBottomNav fill={'#C5C5C5'} />,
+    activeIcon: <svg.walletSvgBottomNav fill={'#4681F4'} />,
     component: WalletScreenStack,
   },
   {
     route: 'Trading',
     name: 'Trading',
-    inactiveIcon: <TradingSvg fill={'#C5C5C5'} />,
-    activeIcon: <TradingSvg fill={'#4681F4'} />,
+    inactiveIcon: <svg.tradingSvgBottomNav fill={'#C5C5C5'} />,
+    activeIcon: <svg.tradingSvgBottomNav fill={'#4681F4'} />,
     component: TradingScreenStack,
   },
   {
     route: 'Profile',
     name: 'Profile',
-    inactiveIcon: <ProfileSvg fill={'#C5C5C5'} />,
-    activeIcon: <ProfileSvg fill={'#4681F4'} />,
+    inactiveIcon: <svg.profileSvgBottomNav fill={'#C5C5C5'} />,
+    activeIcon: <svg.profileSvgBottomNav fill={'#4681F4'} />,
     component: ProfileScreenStack,
   },
 ];
