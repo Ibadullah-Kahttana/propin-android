@@ -11,8 +11,13 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const DrawerNavContent = () => {
-  const [activeButton, setActiveButton] = useState('Home');
+const DrawerNavContent = ({navigation}) => {
+  const [activeButton, setActiveButton] = useState();
+
+  const handler = param => {
+    setActiveButton(param);
+    navigation.navigate(param);
+  };
 
   return (
     <View style={styles.drawerContent}>
@@ -26,7 +31,7 @@ const DrawerNavContent = () => {
         {/**  Home  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Home')}>
+          onPress={() => handler('Home')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -60,7 +65,7 @@ const DrawerNavContent = () => {
         {/**  Profile  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Profile')}>
+          onPress={() => handler('Profile')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -103,7 +108,7 @@ const DrawerNavContent = () => {
         {/**  Wallet  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Wallet')}>
+          onPress={() => handler('Wallet')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -148,7 +153,7 @@ const DrawerNavContent = () => {
         {/**  Trading  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Trading')}>
+          onPress={() => handler('Trading')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -191,7 +196,7 @@ const DrawerNavContent = () => {
         {/**  Products  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Products')}>
+          onPress={() => handler('Products')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -234,7 +239,7 @@ const DrawerNavContent = () => {
         {/**  Employee  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Employee')}>
+          onPress={() => handler('Employee')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -271,7 +276,7 @@ const DrawerNavContent = () => {
         {/**  Setting  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Setting')}>
+          onPress={() => handler('Home')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -314,7 +319,7 @@ const DrawerNavContent = () => {
         {/**  Help  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Help')}>
+          onPress={() => handler('Home')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
@@ -348,7 +353,7 @@ const DrawerNavContent = () => {
         {/**  Logout  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => setActiveButton('Logout')}>
+          onPress={() => handler('Home')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,

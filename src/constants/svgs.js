@@ -1,6 +1,7 @@
 // Same SVGs
 import LogoutSvg from '../assets/Svgs/DrawableSVG/LogoutIcon';
 import ProfileSvg from '../assets/Svgs/DrawableSVG/ProfileIcon';
+import UserSvg from '../assets/Svgs/ProfileScreenSvgs/User';
 
 // Left Arrow Back
 import LeftArrowSvgWhite from '../assets/Svgs/ProfileScreenSvgs/LeftArrowWhite';
@@ -81,6 +82,7 @@ const svg = {
   // Same SVGs
   LogoutSvg,
   ProfileSvg,
+  UserSvg,
 
   // Left Arrow Back
   LeftArrowSvgWhite,

@@ -13,18 +13,15 @@ import HomeScreen from '../component/NavScreens/DashBoardHome';
 import WalletScreen from '../component/NavScreens/WalletScreen';
 import TradingScreen from '../component/NavScreens/TradingScreen';
 import ProfileScreen from '../component/NavScreens/ProfileScreens/ProfileScreen';
+
+// Profile Stack Screen
 import ProfileSettings from '../component/NavScreens/ProfileScreens/ProfileSettings';
 import ChangePassword from '../component/NavScreens/ProfileScreens/ChangePassword';
 
-import AddEmployeeScreen from './NavScreens/DrawerNavigation/EmployeeScreens/AddEmployeScreen';
-import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmployeScreen';
-import AddProduct from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
+// Agency Stack Screen
 import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
 
-//-------
-
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
 const DashBoardStack = createStackNavigator();
 const WalletStack = createStackNavigator();
@@ -61,15 +58,13 @@ const TradingScreenStack = ({navigation}) => (
 const ProfileScreenStack = ({navigation}) => (
   <ProfileStack.Navigator
     initialRouteName="ProfileScreen"
+    name="ProfileStack"
     screenOptions={{
       headerShown: false,
     }}>
     <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
     <ProfileStack.Screen name="ChangePassword" component={ChangePassword} />
     <ProfileStack.Screen name="ProfileSettings" component={ProfileSettings} />
-    <ProfileStack.Screen name="AddEmployee" component={AddEmployeeScreen} />
-    <ProfileStack.Screen name="EditEmployee" component={EditEmployee} />
-    <ProfileStack.Screen name="AddProduct" component={AddProduct} />
     <ProfileStack.Screen name="AddAgency" component={AddAgencyScreen} />
   </ProfileStack.Navigator>
 );

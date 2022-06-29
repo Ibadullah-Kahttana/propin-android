@@ -18,22 +18,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const AddProductScreen = ({navigation}) => {
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
+  const ProductsListScreen = () => {
+    navigation.navigate('ProductHome');
   };
 
   return (
@@ -45,7 +31,7 @@ const AddProductScreen = ({navigation}) => {
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => navigation.navigate('ProfileScreen')}>
+          onPress={ProductsListScreen}>
           <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
@@ -75,7 +61,6 @@ const AddProductScreen = ({navigation}) => {
               style={styles.textInput}
               autoCapitalize="none"
               placeholder="Enter employee name"
-              onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
@@ -91,14 +76,11 @@ const AddProductScreen = ({navigation}) => {
         </View>
 
         <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter file or Plot number"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Enter file or Plot number"
+          />
         </View>
 
         {/** ----------  Product Type ----------*/}
@@ -112,17 +94,14 @@ const AddProductScreen = ({navigation}) => {
         </View>
 
         <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Select type"
-              onChangeText={val => textInputChange(val)}
-            />
-            <TouchableOpacity>
-              <svg.downArrowSvgGray width={17} height={17} />
-            </TouchableOpacity>
-          </View>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Select type"
+          />
+          <TouchableOpacity style={{paddingRight: 15}}>
+            <svg.downArrowSvgGray width={10} height={10} fill={'#C4C4C4'} />
+          </TouchableOpacity>
         </View>
 
         {/** ----------  Area Size and units----------*/}
@@ -139,17 +118,15 @@ const AddProductScreen = ({navigation}) => {
           <View style={styles.DropDown}>
             <Text style={styles.h4Grey}> Marla </Text>
             <TouchableOpacity>
-              <svg.downArrowSvgGray width={17} height={17} />
+              <svg.downArrowSvgGray width={10} height={10} fill={'#C4C4C4'} />
             </TouchableOpacity>
           </View>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter Size"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
+
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Enter Size"
+          />
         </View>
 
         {/** ----------  Price ----------*/}
@@ -166,7 +143,7 @@ const AddProductScreen = ({navigation}) => {
           <View style={styles.DropDown}>
             <Text style={styles.h4Grey}> PKR </Text>
             <TouchableOpacity>
-              <svg.downArrowSvgGray width={17} height={17} />
+              <svg.downArrowSvgGray width={10} height={10} fill={'#C4C4C4'} />
             </TouchableOpacity>
           </View>
           <View style={styles.action}>
@@ -174,7 +151,6 @@ const AddProductScreen = ({navigation}) => {
               style={styles.textInput}
               autoCapitalize="none"
               placeholder="Enter Price"
-              onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
@@ -195,7 +171,6 @@ const AddProductScreen = ({navigation}) => {
               style={styles.textInput}
               autoCapitalize="none"
               placeholder="Enter file or plot number"
-              onChangeText={val => textInputChange(val)}
             />
           </View>
         </View>
@@ -211,17 +186,14 @@ const AddProductScreen = ({navigation}) => {
         </View>
 
         <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Select city"
-              onChangeText={val => textInputChange(val)}
-            />
-            <TouchableOpacity>
-              <svg.downArrowSvgGray width={17} height={17} />
-            </TouchableOpacity>
-          </View>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Select city"
+          />
+          <TouchableOpacity style={{paddingRight: 15}}>
+            <svg.downArrowSvgGray width={10} height={10} fill={'#C4C4C4'} />
+          </TouchableOpacity>
         </View>
 
         {/** ----------  Area ----------*/}
@@ -235,22 +207,19 @@ const AddProductScreen = ({navigation}) => {
         </View>
 
         <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Select area"
-              onChangeText={val => textInputChange(val)}
-            />
-            <TouchableOpacity>
-              <svg.downArrowSvgGray width={17} height={17} />
-            </TouchableOpacity>
-          </View>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Select area"
+          />
+          <TouchableOpacity style={{paddingRight: 15}}>
+            <svg.downArrowSvgGray width={10} height={10} fill={'#C4C4C4'} />
+          </TouchableOpacity>
         </View>
 
         {/* -------------------------------------- */}
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={ProductsListScreen}>
           <View style={styles.SaveButton}>
             <View>
               <Text
@@ -285,32 +254,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 
-  ProfileImage: {
-    width: (windowWidth / 100) * 26,
-    height: (windowHeight / 100) * 13,
-    backgroundColor: '#F2F2F2',
-    //backgroundColor: 'yellow',
-    borderRadius: 100,
-    marginLeft: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  ProfielImageView: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 17,
-    //backgroundColor: 'yellow',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 20,
-  },
-
-  YellowCameraIcon: {
-    position: 'absolute',
-    right: 1,
-    bottom: 1,
-  },
-
   //   Text Color and Styles  -------------------------------------------------------------------
 
   h2Black: {
@@ -327,50 +270,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 
-  PersonName: {
-    alignItems: 'center',
-  },
-
   h4Grey: {
     fontSize: 15,
     fontWeight: '400',
     fontFamily: 'Roboto-Regular',
     color: '#949494',
-  },
-
-  h4Pink: {
-    fontSize: 15,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#DF3034',
-    paddingLeft: 20,
-    paddingTop: 5,
-  },
-
-  h4Black: {
-    fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Roboto-Regular',
-    color: '#000000',
-    //paddingLeft: 15,
-  },
-
-  h4White: {
-    fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
-    //paddingLeft: 15,
-  },
-
-  h4Yellow: {
-    fontSize: 16,
-    fontWeight: '600',
-    fontFamily: 'Roboto-Regular',
-    color: '#F6C000',
-    paddingLeft: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   BoldText: {
@@ -448,43 +352,13 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 
-  PhoneNoBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    // backgroundColor: 'red',
-  },
-
-  action: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'yellow',
-  },
-
   textInput: {
     // backgroundColor: 'blue',
-    flex: 1,
-    alignItems: 'center',
+    width: (windowWidth / 100) * 63,
     height: (windowHeight / 100) * 7,
+    alignItems: 'center',
     fontSize: 16,
     paddingLeft: 20,
-  },
-
-  PhoneNumbertextInput: {
-    //backgroundColor: 'blue',
-    alignItems: 'center',
-    width: (windowWidth / 100) * 63,
-    height: (windowHeight / 100) * 5,
-    fontSize: 18,
   },
 
   SaveButton: {

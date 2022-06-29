@@ -61,7 +61,7 @@ const AddAgencyScreen = ({navigation}) => {
 
       <View style={styles.ProfielImageView}>
         <View style={styles.ProfileImage}>
-          <svg.ProfileSvg width={45} height={45} />
+          <svg.UserSvg width={60} height={60} />
           <View style={styles.YellowCameraIcon}>
             <TouchableOpacity underlayColor={'transparent'}>
               <svg.cameraSvgProfile width={30} height={30} />

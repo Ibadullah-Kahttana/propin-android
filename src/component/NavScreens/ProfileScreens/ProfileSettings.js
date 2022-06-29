@@ -72,7 +72,7 @@ const ProfileSettings = ({navigation}) => {
 
       <View style={styles.ProfielImageView}>
         <View style={styles.ProfileImage}>
-          <svg.ProfileSvg width={45} height={45} />
+          <svg.UserSvg width={65} height={65} />
           <View style={styles.YellowCameraIcon}>
             <TouchableOpacity underlayColor={'transparent'}>
               <svg.cameraSvgProfile width={30} height={30} />
