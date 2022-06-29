@@ -9,11 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// Icons SVG
-
-import LeftArrowWhiteIcon from '../../../../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
-import PakistanFlagIconLoginPhoneNumber from '../../../../assets/Svgs/SignUpScreen/Pakistanflag2.svg';
-import DateTimeIcon from '../../../../assets/Svgs/EmployScreensSVG/Date';
+// Svg constants
+import svg from '../../../../constants/svgs';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
@@ -115,7 +112,7 @@ const EditEmployeeScreen = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <LeftArrowWhiteIcon width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>
@@ -171,7 +168,7 @@ const EditEmployeeScreen = ({navigation}) => {
               alignItems: 'center',
               justifyContent: 'space-around',
             }}>
-            <PakistanFlagIconLoginPhoneNumber width={25} height={25} />
+            <svg.PakistanHalfFlagSvg width={25} height={25} />
             <Text
               style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
               adjustsFontSizeToFit={true}
@@ -353,7 +350,7 @@ const EditEmployeeScreen = ({navigation}) => {
           <View style={styles.action}>
             <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
 
-            <DateTimeIcon
+            <svg.DateSvg
               height={17}
               width={17}
               fill={'#C6C6C7'}

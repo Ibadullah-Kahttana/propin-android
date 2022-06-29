@@ -3,8 +3,8 @@ import LogoutSvg from '../assets/Svgs/DrawableSVG/LogoutIcon';
 import ProfileSvg from '../assets/Svgs/DrawableSVG/ProfileIcon';
 
 // Left Arrow Back
-import LeftArrowSvgWhite from '../assets/Svgs/ProfileScreenSvgs/ProfileSettings/LeftArrowWhite';
-import upArrowSvgGray from '../../assets/Svgs/DashBoardHome/UpArrow';
+import LeftArrowSvgWhite from '../assets/Svgs/ProfileScreenSvgs/LeftArrowWhite';
+import upArrowSvgGray from '../assets/Svgs/DashBoardHome/UpArrow';
 import downArrowSvgGray from '../assets/Svgs/DashBoardHome/DownArrow';
 import downArrowSvgDarkGray from '../assets/Svgs/ProductScreenSVG/ArrowDown';
 import RightArrowBlack from '../assets/Svgs/ProfileScreenSvgs/VectorRightBlack';
@@ -26,10 +26,10 @@ import pakFlagSvgCountryScreen from '../assets/Svgs/CountryScreenSVGs/pakistanfl
 import PosterSvgCountryScreen from '../assets/Svgs/CountryScreenSVGs/grow.svg';
 
 // Dash Board home SVGs
-import QRSvgHome from '../../assets/Svgs/DashBoardHome/QRIcons';
-import searchSvgHome from '../../assets/Svgs/DashBoardHome/SearchHome';
-import profileSvgHome from '../../assets/Svgs/DashBoardHome/ProfileIconHome';
-import barSvgHome from '../../assets/Svgs/DashBoardHome/Bar';
+import QRSvgHome from '../assets/Svgs/DashBoardHome/QRIcons';
+import searchSvgHome from '../assets/Svgs/DashBoardHome/SearchHome';
+import profileSvgHome from '../assets/Svgs/DashBoardHome/ProfileIconHome';
+import barSvgHome from '../assets/Svgs/DashBoardHome/Bar';
 
 // Drawable SVGs
 import PropInLogoDrawable from '../assets/Svgs/DrawableSVG/PropInLogo';

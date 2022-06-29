@@ -18,7 +18,7 @@ const DrawerNavContent = () => {
     <View style={styles.drawerContent}>
       {/** LOG */}
       <Drawer.Section style={styles.drawerIconSection}>
-        <svg.logInLogoSVGRegister height={130} width={130} />
+        <svg.PropInLogoDrawable height={130} width={130} />
       </Drawer.Section>
 
       {/** Sections */}
