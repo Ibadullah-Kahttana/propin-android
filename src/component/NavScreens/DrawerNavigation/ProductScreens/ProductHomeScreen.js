@@ -110,16 +110,22 @@ const ProductHomeScreen = ({navigation}) => {
       {/**   Header    */}
 
       <View style={styles.Header}>
-        <Text style={styles.h2White}>Products</Text>
+        <TouchableOpacity
+          underlayColor={'transparent'}
+          onPress={() => navigation.goBack()}>
+          <svg.LeftArrowSvgWhite width={18} height={18} />
+        </TouchableOpacity>
+
+        <Text style={styles.h2White}>{'       '}Products</Text>
         <TouchableOpacity
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
+            flex: 1,
+            flexDirection: 'column',
+            alignItems: 'flex-end',
             paddingRight: 20,
           }}
           onPress={addProductNav}>
-          <svg.plusSvg width={14} height={14} />
-          <Text style={styles.h1White}> Add</Text>
+          <Text style={styles.h1White}>+ Add</Text>
         </TouchableOpacity>
       </View>
 
@@ -307,11 +313,11 @@ const styles = StyleSheet.create({
   },
 
   Header: {
+    flex: 1,
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     backgroundColor: color.blue,
     paddingTop: 20,
     paddingLeft: 20,

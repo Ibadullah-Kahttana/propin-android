@@ -23,6 +23,10 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const EditEmployeeScreen = ({navigation}) => {
+  const AddEmployeeScreen = () => {
+    navigation.navigate('AddEmployee');
+  };
+
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -111,7 +115,7 @@ const EditEmployeeScreen = ({navigation}) => {
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => navigation.navigate('ProfileScreen')}>
+          onPress={AddEmployeeScreen}>
           <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
