@@ -28,7 +28,7 @@ const ProfileScreen = ({navigation}) => {
 
         <View style={styles.ProfileCard}>
           <View style={styles.ProfileImage}>
-            <svg.ProfileSvg width={28.35} height={28.35} />
+            <svg.UserSvg width={40} height={40} />
             <View style={styles.YellowCameraIcon}>
               <TouchableOpacity>
                 <svg.cameraSvgProfile width={21} height={21} />
@@ -239,7 +239,7 @@ const ProfileScreen = ({navigation}) => {
                   justifyContent: 'space-evenly',
                 }}></View>
               <TouchableOpacity>
-                <RightArrowBlack width={12} height={12} />
+                <svg.RightArrowBlack width={12} height={12} />
               </TouchableOpacity>
             </View>
           </View>

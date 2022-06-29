@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import 'react-native-gesture-handler';
 import {StyleSheet, Dimensions, View} from 'react-native';
@@ -21,6 +13,7 @@ import RegisterScreen from './src/component/RegisterScreen';
 import SelectCityScreen from './src/component/SelectCityScreen';
 import DrawerNavigator from './src/component/DrawerNavigator';
 import SignUpScreen from './src/component/RegisterScreens/SignUpScreen';
+import BottomNavigation from './src/component/BottomNavigation';
 
 // ---------------------------------------------------------------------------------------
 
@@ -43,6 +36,8 @@ const StackNavigator = () => {
       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+
+      <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
     </Stack.Navigator>
   );
 };

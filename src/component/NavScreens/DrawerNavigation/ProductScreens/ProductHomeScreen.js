@@ -22,6 +22,11 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const ProductHomeScreen = ({navigation}) => {
+  // Add Product + Add
+  const addProductNav = () => {
+    navigation.navigate('AddProducts');
+  };
+
   const PropertyData = [
     {
       id: 1,
@@ -105,25 +110,15 @@ const ProductHomeScreen = ({navigation}) => {
       {/**   Header    */}
 
       <View style={styles.Header}>
-        <TouchableOpacity
-          underlayColor={'transparent'}
-          onPress={() => navigation.navigate('ProfileScreen')}>
-          <svg.LeftArrowSvgWhite width={18} height={18} />
-        </TouchableOpacity>
-
-        <Text style={styles.h2White}>
-          {'       '}
-          Products
-        </Text>
+        <Text style={styles.h2White}>Products</Text>
         <TouchableOpacity
           style={{
-            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
-            paddingLeft: (windowWidth / 100) * 40,
-          }}>
-          <svg.plusSvg width={15} height={15} />
+            paddingRight: 20,
+          }}
+          onPress={addProductNav}>
+          <svg.plusSvg width={14} height={14} />
           <Text style={styles.h1White}> Add</Text>
         </TouchableOpacity>
       </View>
@@ -175,7 +170,7 @@ const ProductHomeScreen = ({navigation}) => {
           </TouchableOpacity>
 
           {/*  Price Range BOX */}
-          <TouchableOpacity style={{marginRight: 30}}>
+          <TouchableOpacity style={{marginRight: 25}}>
             <View style={styles.GrayBoxPrice}>
               <Text style={styles.h4Black}> Price Range{'  '} </Text>
               <svg.downArrowSvgDarkGray
@@ -192,7 +187,7 @@ const ProductHomeScreen = ({navigation}) => {
       <View style={styles.VerticalScrollView}>
         {/**   Scroll View Vertical   */}
         <ScrollView
-          style={{marginBottom: 30}}
+          style={{paddingBottom: 30}}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
           {PropertyData.map((item, index) => (
@@ -316,16 +311,16 @@ const styles = StyleSheet.create({
     height: (windowHeight / 100) * 10,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     backgroundColor: color.blue,
     paddingTop: 20,
     paddingLeft: 20,
     marginBottom: 15,
-    paddingRight: 20,
   },
 
   HorizontalScrollView: {
     width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 5,
+    height: (windowHeight / 100) * 6,
     flexDirection: 'row',
     marginBottom: 5,
     marginLeft: 5,
@@ -333,8 +328,9 @@ const styles = StyleSheet.create({
 
   VerticalScrollView: {
     width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 80,
+    height: (windowHeight / 100) * 82,
     flexDirection: 'column',
+    //backgroundColor: 'red',
   },
 
   GrayBoxFilter: {
