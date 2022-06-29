@@ -8,7 +8,7 @@ import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmpl
 
 // Product Stack Screen
 import ProductHomeScreen from './NavScreens/DrawerNavigation/ProductScreens/ProductHomeScreen';
-import AddProduct from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
+import AddProducts from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
 
 import BottomNavigation from './BottomNavigation';
 import DrawerNavContent from './NavScreens/DrawerNavigation/DrawerNavContent';
@@ -36,7 +36,7 @@ const ProductScreenStack = ({navigation}) => (
       headerShown: false,
     }}>
     <ProductStack.Screen name="ProductHome" component={ProductHomeScreen} />
-    <ProductStack.Screen name="AddProducts" component={AddProduct} />
+    <ProductStack.Screen name="AddProducts" component={AddProducts} />
   </ProductStack.Navigator>
 );
 
@@ -44,9 +44,9 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <DrawerNavContent {...props} />}
-      initialRouteName="BottomNav"
+      initialRouteName="BottomNavigation"
       drawerType="slide">
-      <Drawer.Screen name="BottomNav" component={BottomNavigation} />
+      <Drawer.Screen name="BottomNavigation" component={BottomNavigation} />
       <Drawer.Screen name="Employee" component={EmployeeScreenStack} />
       <Drawer.Screen name="Products" component={ProductScreenStack} />
     </Drawer.Navigator>
