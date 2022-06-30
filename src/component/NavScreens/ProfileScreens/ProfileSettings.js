@@ -20,6 +20,10 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const ProfileSettings = ({navigation}) => {
+  const Profile = () => {
+    navigation.navigate('ProfileScreen');
+  };
+
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -282,7 +286,7 @@ const ProfileSettings = ({navigation}) => {
 
         {/* -------------------------------------- */}
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={Profile}>
           <View style={styles.SaveButton}>
             <View>
               <Text

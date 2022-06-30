@@ -22,8 +22,10 @@ const ProfileScreen = ({navigation}) => {
       {/** --------------------      Header       ----------------------*/}
 
       <View style={styles.LoginHeader}>
-        <TouchableOpacity underlayColor={'transparent'}>
-          <svg.listDrawerSvgWhite width={20} height={20} />
+        <TouchableOpacity
+          underlayColor={'transparent'}
+          onPress={() => navigation.openDrawer()}>
+          <svg.listDrawerSvgWhite width={20} height={20} fill={'white'} />
         </TouchableOpacity>
 
         <View style={styles.ProfileCard}>
@@ -62,8 +64,8 @@ const ProfileScreen = ({navigation}) => {
       {/**----------------------    Profile List View MID SECTION    ------------------------*/}
 
       <View style={styles.MidSection}>
-        {/**   ---   ESTIMAET  --- */}
-        <TouchableOpacity onPress={() => navigation.navigate('AddEmployee')}>
+        {/**   ---   BALANCE  --- */}
+        <TouchableOpacity>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <svg.estimateSvgProfile width={24} height={24} />
@@ -123,7 +125,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   SAVE CARD  --- */}
-        <TouchableOpacity onPress={() => navigation.navigate('EditEmployee')}>
+        <TouchableOpacity>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <svg.creditCardSvgProfile width={24} height={24} />
@@ -188,7 +190,7 @@ const ProfileScreen = ({navigation}) => {
 
       <View style={styles.AppSettingSection}>
         {/**   ---   Terms and Conditions  --- */}
-        <TouchableOpacity onPress={() => navigation.navigate('AddProduct')}>
+        <TouchableOpacity>
           <View style={styles.MidSectionView}>
             <View style={styles.InnerView1}>
               <svg.termsSvgProfile width={24} height={24} />

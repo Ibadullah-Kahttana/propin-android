@@ -3,6 +3,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // Employee Stack Screen
+import EmployeeInfo from '../component/NavScreens/DrawerNavigation/EmployeeScreens/EmployeeInfoScreen';
 import AddEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/AddEmployeScreen';
 import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmployeScreen';
 
@@ -20,10 +21,11 @@ const ProductStack = createStackNavigator();
 
 const EmployeeScreenStack = ({navigation}) => (
   <EmployeeStack.Navigator
-    initialRouteName="AddEmployee"
+    initialRouteName="EmployeeInfo"
     screenOptions={{
       headerShown: false,
     }}>
+    <EmployeeStack.Screen name="EmployeeInfo" component={EmployeeInfo} />
     <EmployeeStack.Screen name="AddEmployee" component={AddEmployee} />
     <EmployeeStack.Screen name="EditEmployee" component={EditEmployee} />
   </EmployeeStack.Navigator>

@@ -23,8 +23,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const EditEmployeeScreen = ({navigation}) => {
-  const AddEmployeeScreen = () => {
-    navigation.navigate('AddEmployee');
+  const EmployeeInfoScreen = () => {
+    navigation.navigate('EmployeeInfo');
   };
 
   const [data, setData] = React.useState({
@@ -115,7 +115,7 @@ const EditEmployeeScreen = ({navigation}) => {
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={AddEmployeeScreen}>
+          onPress={() => navigation.goBack()}>
           <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
@@ -376,7 +376,7 @@ const EditEmployeeScreen = ({navigation}) => {
 
         {/* -------------------------------------- */}
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={EmployeeInfoScreen}>
           <View style={styles.SaveButton}>
             <View>
               <Text
