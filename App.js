@@ -11,7 +11,7 @@ import LoginScreen from './src/component/Login';
 import CountryScreen from './src/component/Country';
 import RegisterScreen from './src/component/Register';
 import SelectCityScreen from './src/component/SelectCity';
-import SignUpScreen from './src/component/RegisterScreens/SignUpScreen';
+import SignUpScreen from './src/component/Register/SignUpScreen';
 import DrawerNavigator from './src/component/DrawerNavigator';
 import BottomNavigation from './src/component/BottomNavigation';
 // ---------------------------------------------------------------------------------------
