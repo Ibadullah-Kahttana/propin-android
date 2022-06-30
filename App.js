@@ -7,13 +7,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 // -----------  SCREENS -----------------------------------------------------------------
 
-import LoginScreen from './src/component/LoginScreen';
-import CountryScreen from './src/component/CountryScreen';
-import RegisterScreen from './src/component/RegisterScreen';
-import SelectCityScreen from './src/component/SelectCityScreen';
-import DrawerNavigator from './src/component/DrawerNavigator';
+import LoginScreen from './src/component/Login';
+import CountryScreen from './src/component/Country';
+import RegisterScreen from './src/component/Register';
+import SelectCityScreen from './src/component/SelectCity';
 import SignUpScreen from './src/component/RegisterScreens/SignUpScreen';
-
+import DrawerNavigator from './src/component/DrawerNavigator';
+import BottomNavigation from './src/component/BottomNavigation';
 // ---------------------------------------------------------------------------------------
 
 const windowWidth = Dimensions.get('window').width;
@@ -35,6 +35,7 @@ const StackNavigator = () => {
       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
     </Stack.Navigator>
   );
 };

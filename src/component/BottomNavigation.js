@@ -9,17 +9,17 @@ import svg from '../constants/svgs';
 
 // -----  COMPONENTS
 
-import HomeScreen from '../component/NavScreens/DashBoardHome';
-import WalletScreen from '../component/NavScreens/WalletScreen';
-import TradingScreen from '../component/NavScreens/TradingScreen';
-import ProfileScreen from '../component/NavScreens/ProfileScreens/ProfileScreen';
+import HomeScreen from './Navigations/DashBoardHome';
+import WalletScreen from './Navigations/WalletScreen';
+import TradingScreen from './Navigations/TradingScreen';
+import ProfileScreen from './Navigations/Profile/ProfileScreen';
 
 // Profile Stack Screen
-import ProfileSettings from '../component/NavScreens/ProfileScreens/ProfileSettings';
-import ChangePassword from '../component/NavScreens/ProfileScreens/ChangePassword';
+import ProfileSettings from './Navigations/Profile/ProfileSettings';
+import ChangePassword from './Navigations/Profile/ChangePassword';
 
 // Agency Stack Screen
-import AddAgencyScreen from './NavScreens/DrawerNavigation/AgencyScreens/AddAgencyScreen';
+import AddAgencyScreen from './Navigations/DrawerNav/Agency/AddAgencyScreen';
 
 const Tab = createBottomTabNavigator();
 

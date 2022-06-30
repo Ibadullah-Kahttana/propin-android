@@ -21,7 +21,7 @@ import Feather from 'react-native-vector-icons/Feather';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const LoginScreen = ({navigation}) => {
+const Login = ({navigation}) => {
   const [activeButton, setActiveButton] = useState('Email');
 
   const RegisteryScreenGoBack = () => {
@@ -719,4 +719,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default Login;

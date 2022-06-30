@@ -6,6 +6,8 @@ import {Drawer, Text} from 'react-native-paper';
 // Svg conatnts
 import svg from '../../../constants/svgs';
 
+import ProfileSettings from '../Profile/ProfileSettings';
+
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
@@ -274,9 +276,7 @@ const DrawerNavContent = ({navigation}) => {
 
       <Drawer.Section style={styles.drawerSectionContainerBottom}>
         {/**  Setting  */}
-        <TouchableOpacity
-          underlayColor={'transparent'}
-          onPress={() => handler('Home')}>
+        <TouchableOpacity underlayColor={'transparent'}>
           <View
             style={{
               height: (windowHeight / 100) * 6,

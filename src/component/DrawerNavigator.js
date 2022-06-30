@@ -3,16 +3,16 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // Employee Stack Screen
-import EmployeeInfo from '../component/NavScreens/DrawerNavigation/EmployeeScreens/EmployeeInfoScreen';
-import AddEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/AddEmployeScreen';
-import EditEmployee from './NavScreens/DrawerNavigation/EmployeeScreens/EditEmployeScreen';
+import EmployeeInfo from './Navigations/DrawerNav/Employee/EmployeeInfoScreen';
+import AddEmployee from './Navigations/DrawerNav/Employee/AddEmployeScreen';
+import EditEmployee from './Navigations/DrawerNav/Employee/EditEmployeScreen';
 
 // Product Stack Screen
-import ProductHomeScreen from './NavScreens/DrawerNavigation/ProductScreens/ProductHomeScreen';
-import AddProducts from './NavScreens/DrawerNavigation/ProductScreens/AddProduct';
+import ProductHomeScreen from './Navigations/DrawerNav/Product/ProductHomeScreen';
+import AddProducts from './Navigations/DrawerNav/Product/AddProduct';
 
 import BottomNavigation from './BottomNavigation';
-import DrawerNavContent from './NavScreens/DrawerNavigation/DrawerNavContent';
+import DrawerNavContent from './Navigations/DrawerNav/DrawerNavContent';
 
 const Drawer = createDrawerNavigator();
 
