@@ -5,7 +5,7 @@ import {StyleSheet, Dimensions, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-// -----------  SCREENS -------------------------------------------------------------------
+// -----------  SCREENS -----------------------------------------------------------------
 
 import LoginScreen from './src/component/LoginScreen';
 import CountryScreen from './src/component/CountryScreen';

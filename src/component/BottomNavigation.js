@@ -19,7 +19,7 @@ import ProfileSettings from '../component/NavScreens/ProfileScreens/ProfileSetti
 import ChangePassword from '../component/NavScreens/ProfileScreens/ChangePassword';
 
 // Agency Stack Screen
-import AddAgencyScreen from './NavScreens/DrawerNavigation/AddAgencyScreen';
+import AddAgencyScreen from './NavScreens/DrawerNavigation/AgencyScreens/AddAgencyScreen';
 
 const Tab = createBottomTabNavigator();
 
