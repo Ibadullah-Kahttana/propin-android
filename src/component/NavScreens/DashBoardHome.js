@@ -4,8 +4,9 @@ import LinearGradient from 'react-native-linear-gradient';
 
 // svgs Constants
 import svg from '../../constants/svgs';
-
 import PropertySVGOrange from '../../assets/Svgs/DashBoardHome/PropertySVGOrange.svg';
+
+//Component
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
@@ -150,7 +151,11 @@ const DashBoardHome = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.HomeScreeenHeaderNav}>
+      <View style={styles.HomeScreenHeaderNav}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <svg.listDrawerSvgWhite width={20} height={20} fill={'#000'} />
+        </TouchableOpacity>
+
         <View style={styles.HeaderNavTitle}>
           <Text
             style={styles.h1Boldblack}
@@ -413,22 +418,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f9fa',
   },
 
-  HomeScreeenHeaderNav: {
+  HomeScreenHeaderNav: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 8,
-    // backgroundColor: 'yellow',
+    //backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 15,
+    paddingLeft: 20,
   },
 
   HeaderNavTitle: {
-    width: (windowWidth / 100) * 60,
+    width: (windowWidth / 100) * 35,
     height: (windowHeight / 100) * 8,
-    // backgroundColor: 'green',
+    //backgroundColor: 'green',
     justifyContent: 'center',
-    paddingLeft: 15,
+    alignItems: 'center',
+    paddingBottom: 2,
   },
 
   h1Boldwhite: {
@@ -498,7 +505,7 @@ const styles = StyleSheet.create({
   HeaderNavIcons: {
     width: (windowWidth / 100) * 40,
     height: (windowHeight / 100) * 8,
-    // /backgroundColor: 'orange',
+    //backgroundColor: 'orange',
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 10,

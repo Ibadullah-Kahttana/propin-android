@@ -79,7 +79,7 @@ const ChangePassword = ({navigation}) => {
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => navigation.navigate('ProfileScreen')}>
+          onPress={() => navigation.goBack()}>
           <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 
@@ -223,7 +223,7 @@ const ChangePassword = ({navigation}) => {
 
       {/** --------------------      Update Image        --------------*/}
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
         <View style={styles.UpdateButton}>
           <View>
             <Text

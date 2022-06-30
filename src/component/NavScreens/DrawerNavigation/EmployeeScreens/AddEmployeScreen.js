@@ -25,8 +25,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const AddEmployeeScreen = ({navigation}) => {
-  const EditEmployeeScreen = () => {
-    navigation.navigate('EditEmployee');
+  const EmployeeInfo = () => {
+    navigation.navigate('EmployeeInfo');
   };
 
   const [data, setData] = React.useState({
@@ -375,7 +375,7 @@ const AddEmployeeScreen = ({navigation}) => {
 
         {/* -------------------------------------- */}
 
-        <TouchableOpacity onPress={EditEmployeeScreen}>
+        <TouchableOpacity onPress={EmployeeInfo}>
           <View style={styles.UpdateButton}>
             <View>
               <Text

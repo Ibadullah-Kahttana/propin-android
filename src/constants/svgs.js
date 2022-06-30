@@ -46,6 +46,8 @@ import WalletSvgDrawable from '../assets/Svgs/DrawableSVG/WalletIcon';
 
 // Employee Screen SVG
 import DateSvg from '../assets/Svgs/EmployScreensSVG/Date';
+import bagSvg from '../assets/Svgs/EmployScreensSVG/bag';
+import phoneSvg from '../assets/Svgs/EmployScreensSVG/phone';
 
 // Product Screen SVG
 import plusSvg from '../assets/Svgs/ProductScreenSVG/Plus';
@@ -127,6 +129,8 @@ const svg = {
 
   // Employee Screen SVG
   DateSvg,
+  bagSvg,
+  phoneSvg,
 
   // Product Screen SVG
   plusSvg,

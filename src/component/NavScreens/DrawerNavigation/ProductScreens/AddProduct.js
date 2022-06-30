@@ -31,7 +31,7 @@ const AddProductScreen = ({navigation}) => {
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={ProductsListScreen}>
+          onPress={() => navigation.goBack()}>
           <svg.LeftArrowSvgWhite width={18} height={18} />
         </TouchableOpacity>
 

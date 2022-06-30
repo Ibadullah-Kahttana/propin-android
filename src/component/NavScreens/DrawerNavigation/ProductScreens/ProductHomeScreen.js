@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  Switch,
   TouchableOpacity,
 } from 'react-native';
 

@@ -58,7 +58,6 @@ const TradingScreenStack = ({navigation}) => (
 const ProfileScreenStack = ({navigation}) => (
   <ProfileStack.Navigator
     initialRouteName="ProfileScreen"
-    name="ProfileStack"
     screenOptions={{
       headerShown: false,
     }}>
