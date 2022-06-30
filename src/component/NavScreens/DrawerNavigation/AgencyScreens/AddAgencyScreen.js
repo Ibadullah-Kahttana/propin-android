@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 // Svg constant
-import svg from '../../../constants/svgs';
+import svg from '../../../../constants/svgs';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
