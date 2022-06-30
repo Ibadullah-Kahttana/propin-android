@@ -34,8 +34,8 @@ const StackNavigator = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
+      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>
   );
 };

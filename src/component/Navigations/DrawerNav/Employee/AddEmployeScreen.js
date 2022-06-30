@@ -17,14 +17,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
 //import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const AddEmployeeScreen = ({navigation}) => {
+const AddEmployeeScreen = ({navigation, onChangeValue}) => {
   const EmployeeInfo = () => {
     navigation.navigate('EmployeeInfo');
   };
@@ -82,30 +83,29 @@ const AddEmployeeScreen = ({navigation}) => {
   //-------------- DATE PICKER -----------------------------------------------------------------
 
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [text, setText] = useState('Empty');
+  const [helperDate, setHelperDate] = useState(null);
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'android');
+    const currentDate = selectedDate;
     setDate(currentDate);
-
-    let tempDate = new Date(currentDate);
-    let fDate =
-      tempDate.getDate() +
-      '/' +
-      (tempDate.getMonth() + 1) +
-      '/' +
-      tempDate.getFullYear();
-
-    setText(fDate);
+    setHelperDate(currentDate);
+    onChangeValue(currentDate);
   };
 
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
+  const showMode = () => {
+    DateTimePickerAndroid.open({
+      value: date,
+      onChange,
+      mode: 'date',
+      is24Hour: true,
+    });
   };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  //-----------------------------------------------------------------------------------------------
 
   return (
     <View style={styles.container}>
@@ -353,24 +353,17 @@ const AddEmployeeScreen = ({navigation}) => {
 
         <View style={styles.ListBox}>
           <View style={styles.action}>
-            <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
+            <Text style={[styles.DateInput, styles.h4Grey]}>
+              {helperDate === null
+                ? `${'mm/dd/yyyy'}`
+                : `${moment(date).format('DD/MM/YYYY')}`}{' '}
+            </Text>
             <TouchableOpacity
               style={{paddingRight: 15}}
-              onPress={() => showMode('date')}>
+              onPress={showDatepicker}>
               <svg.DateSvg height={17} width={17} fill={'#C6C6C7'} />
             </TouchableOpacity>
           </View>
-
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          )}
         </View>
 
         {/* -------------------------------------- */}

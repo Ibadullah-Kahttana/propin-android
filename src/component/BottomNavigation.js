@@ -131,8 +131,6 @@ function BottomNavigation() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-      }}
-      tabBarOptions={{
         style: styles.bottomTab,
       }}>
       {TabArr.map((item, index) => {
