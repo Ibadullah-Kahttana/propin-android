@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Dimensions, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-// svgs Constants
 import svg from '../../constants/svgs';
+import color from '../../constants/colors';
+import dimensions from '../../constants/dimensions';
+import globalStyle from '../../constants/globalStyle';
+
 import PropertySVGOrange from '../../assets/Svgs/DashBoardHome/PropertySVGOrange.svg';
 
 //Component
@@ -545,16 +548,14 @@ const styles = StyleSheet.create({
     height: (windowHeight / 100) * 7,
     //backgroundColor: 'yellow',
     marginTop: 10,
-    borderBottomColor: '#DFE2E4',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
 
   SwitchList: {
     width: (windowWidth / 100) * 22,
-    height: (windowHeight / 100) * 7,
-    //backgroundColor: 'red',
+    height: (windowHeight / 100) * 5,
+    // backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 15,

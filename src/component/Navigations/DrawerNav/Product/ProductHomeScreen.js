@@ -11,11 +11,12 @@ import {
 
 import ToggleSwitch from 'toggle-switch-react-native';
 
-// Svg constants
 import svg from '../../../../constants/svgs';
-
-// Color constants
 import color from '../../../../constants/colors';
+import dimensions from '../../../../constants/dimensions';
+import globalStyle from '../../../../constants/globalStyle';
+
+import SwitchToggle from '../../../../controles/switchToggle';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -26,6 +27,10 @@ const ProductHomeScreen = ({navigation}) => {
     navigation.navigate('AddProducts');
   };
 
+  // Filter Product
+  const FilterProductScreen = () => {
+    navigation.navigate('FilterProduct');
+  };
   const PropertyData = [
     {
       id: 1,
@@ -123,7 +128,8 @@ const ProductHomeScreen = ({navigation}) => {
             alignItems: 'flex-end',
             paddingRight: 20,
           }}
-          onPress={addProductNav}>
+          onPress={addProductNav}
+          underlayColor={'transparent'}>
           <Text style={styles.h1White}>+ Add</Text>
         </TouchableOpacity>
       </View>
@@ -136,7 +142,9 @@ const ProductHomeScreen = ({navigation}) => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
           {/*  Filters BOX */}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={FilterProductScreen}
+            underlayColor={'transparent'}>
             <View style={styles.GrayBoxFilter}>
               <svg.filterSvgPd
                 height={15}
@@ -149,7 +157,7 @@ const ProductHomeScreen = ({navigation}) => {
           </TouchableOpacity>
 
           {/*  Sort BOX */}
-          <TouchableOpacity>
+          <TouchableOpacity underlayColor={'transparent'}>
             <View style={styles.GrayBoxSort}>
               <svg.sortSvgPd
                 height={20}
@@ -162,7 +170,7 @@ const ProductHomeScreen = ({navigation}) => {
           </TouchableOpacity>
 
           {/*  Location BOX */}
-          <TouchableOpacity>
+          <TouchableOpacity underlayColor={'transparent'}>
             <View style={styles.GrayBoxLocation}>
               <Text style={styles.h4Black}> Location {'  '}</Text>
               <svg.downArrowSvgDarkGray
@@ -175,7 +183,9 @@ const ProductHomeScreen = ({navigation}) => {
           </TouchableOpacity>
 
           {/*  Price Range BOX */}
-          <TouchableOpacity style={{marginRight: 25}}>
+          <TouchableOpacity
+            style={{marginRight: 25}}
+            underlayColor={'transparent'}>
             <View style={styles.GrayBoxPrice}>
               <Text style={styles.h4Black}> Price Range{'  '} </Text>
               <svg.downArrowSvgDarkGray
@@ -258,13 +268,13 @@ const ProductHomeScreen = ({navigation}) => {
               <View style={styles.ButtonSwitchLine}>
                 {/** Buttons */}
                 <View style={styles.buttons}>
-                  <TouchableOpacity>
+                  <TouchableOpacity underlayColor={'transparent'}>
                     <View style={styles.EditButton}>
                       <svg.penIconSvgPd width={15} height={15} />
                       <Text style={styles.h5White}>Edit</Text>
                     </View>
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity underlayColor={'transparent'}>
                     <View style={styles.DeleteButton}>
                       <svg.deleteboxSvgPd width={15} height={15} />
                       <Text style={styles.h5White}>Delete</Text>
@@ -275,23 +285,11 @@ const ProductHomeScreen = ({navigation}) => {
                 <View style={styles.switches}>
                   <View style={styles.archivedSwitch}>
                     <Text style={styles.h4Black}>Archived</Text>
-                    <ToggleSwitch
-                      isOn={true}
-                      onColor="#4681F4"
-                      offColor="#D2D2D2"
-                      onToggle={isOn => console.log('changed to : ', isOn)}
-                      style={{transform: [{scaleX: 0.6}, {scaleY: 0.6}]}}
-                    />
+                    <SwitchToggle />
                   </View>
                   <View style={styles.listedSwitch}>
                     <Text style={styles.h4Grey}> Listed</Text>
-                    <ToggleSwitch
-                      isOn={false}
-                      onColor="#4681F4"
-                      offColor="#D2D2D2"
-                      onToggle={isOn => console.log('changed to : ', isOn)}
-                      style={{transform: [{scaleX: 0.6}, {scaleY: 0.6}]}}
-                    />
+                    <SwitchToggle />
                   </View>
                 </View>
               </View>
@@ -341,7 +339,7 @@ const styles = StyleSheet.create({
   GrayBoxFilter: {
     width: (windowWidth / 100) * 24,
     height: (windowHeight / 100) * 5,
-    backgroundColor: color.lightGray,
+    backgroundColor: color.lightGrayHigh,
     borderRadius: 10,
     marginLeft: 15,
     flexDirection: 'row',

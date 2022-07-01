@@ -4,8 +4,10 @@ import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-// Svg Constants
 import svg from '../constants/svgs';
+import color from '../constants/colors';
+import dimensions from '../constants/dimensions';
+import globalStyle from '../constants/globalStyle';
 
 // -----  COMPONENTS
 
@@ -115,11 +117,6 @@ const TabButton = props => {
       <View style={styles.iconContainer}>
         {focused ? item.activeIcon : item.inactiveIcon}
       </View>
-
-      {/* <Text
-        style={[focused ? styles.iconTextFocused : styles.iconTextUnfocused]}>
-        {item.name}
-      </Text> */}
     </TouchableOpacity>
   );
 };
@@ -161,12 +158,12 @@ const styles = StyleSheet.create({
     height: (windowHeight / 100) * 7,
   },
   iconTextFocused: {
-    fontSize: 13,
+    fontSize: 15,
     color: '#4681F4',
   },
   iconTextUnfocused: {
     color: '#7D7F88',
-    fontSize: 13,
+    fontSize: 10,
   },
   iconContainer: {
     padding: 5,

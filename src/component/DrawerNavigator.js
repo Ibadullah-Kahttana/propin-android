@@ -10,6 +10,7 @@ import EditEmployee from './Navigations/DrawerNav/Employee/EditEmployeScreen';
 // Product Stack Screen
 import ProductHomeScreen from './Navigations/DrawerNav/Product/ProductHomeScreen';
 import AddProducts from './Navigations/DrawerNav/Product/AddProduct';
+import FilterProduct from './Navigations/DrawerNav/Product/FilterProduct';
 
 import BottomNavigation from './BottomNavigation';
 import DrawerNavContent from './Navigations/DrawerNav/DrawerNavContent';
@@ -39,6 +40,7 @@ const ProductScreenStack = ({navigation}) => (
     }}>
     <ProductStack.Screen name="ProductHome" component={ProductHomeScreen} />
     <ProductStack.Screen name="AddProducts" component={AddProducts} />
+    <ProductStack.Screen name="FilterProduct" component={FilterProduct} />
   </ProductStack.Navigator>
 );
 

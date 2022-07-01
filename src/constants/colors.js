@@ -1,7 +1,14 @@
 const colors = {
-  white: '#FFF',
+  white: '#FFFFFF',
+  halfWhite: '#E5E5E5',
   blue: '#4681F4',
-  lightGray: '#EBECEC',
+  lightGrayHigh: '#EBECEC',
+  lightGrayLow: '#E6E6E6',
+  lightGrayMedium: '#EBECEC',
+  darkGray: '#D1D1D1',
+  yellow: 'yellow',
+  red: 'red',
+  green: 'green',
 };
 
 export default colors;
