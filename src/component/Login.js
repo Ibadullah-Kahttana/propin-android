@@ -10,8 +10,10 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-// Svgs Constant
 import svg from '../constants/svgs';
+import color from '../constants/colors';
+import dimensions from '../constants/dimensions';
+import globalStyle from '../constants/globalStyle';
 
 // ------- ICONS
 import {Icon} from 'react-native-elements';

@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-// Svg Constants
 import svg from '../../../../constants/svgs';
+import color from '../../../../constants/colors';
+import dimensions from '../../../../constants/dimensions';
+import globalStyle from '../../../../constants/globalStyle';
 
 import {ScrollView} from 'react-native-gesture-handler';
 

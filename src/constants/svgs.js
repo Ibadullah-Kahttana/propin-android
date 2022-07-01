@@ -80,6 +80,20 @@ import GoogleSvgRegister from '../assets/Svgs/LogInScreenSVG/GoogleCircle.svg';
 // Select City Svg
 import LocationCircleSvgSelectCity from '../assets/Svgs/SelectCitySVGS/LocationCircleIcon.svg';
 
+// Filter Product SVG
+
+import crossGray from '../assets/Svgs/ProductScreenSVG/cross';
+import areaRangeFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/areaRange';
+import checkAllFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/checkAll';
+import houseFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/house';
+import priceRangeFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/priceRange';
+import propertyFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/property';
+import rotateLeftFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/rotate-left';
+import selectLocationFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/selectLocation';
+import shieldFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/shield';
+import uperPortionFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/uperPortion';
+import videoFilter from '../assets/Svgs/ProductScreenSVG/FilterSVG/video';
+
 const svg = {
   // Same SVGs
   LogoutSvg,
@@ -162,6 +176,19 @@ const svg = {
 
   // Select City Svg
   LocationCircleSvgSelectCity,
+
+  //Filter Svg
+  areaRangeFilter,
+  checkAllFilter,
+  houseFilter,
+  priceRangeFilter,
+  propertyFilter,
+  rotateLeftFilter,
+  selectLocationFilter,
+  shieldFilter,
+  uperPortionFilter,
+  videoFilter,
+  crossGray,
 };
 
 export default svg;

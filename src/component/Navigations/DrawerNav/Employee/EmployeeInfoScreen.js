@@ -11,11 +11,10 @@ import {
 
 import ToggleSwitch from 'toggle-switch-react-native';
 
-// Svg constants
 import svg from '../../../../constants/svgs';
-
-// Color constants
 import color from '../../../../constants/colors';
+import dimensions from '../../../../constants/dimensions';
+import globalStyle from '../../../../constants/globalStyle';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -366,7 +365,7 @@ const styles = StyleSheet.create({
   GrayBoxFilter: {
     width: (windowWidth / 100) * 24,
     height: (windowHeight / 100) * 5,
-    backgroundColor: color.lightGray,
+    backgroundColor: color.lightGrayHigh,
     borderRadius: 10,
     marginLeft: 15,
     flexDirection: 'row',

@@ -10,8 +10,10 @@ import {
   Pressable,
 } from 'react-native';
 
-//Svgs Constant
 import svg from '../constants/svgs';
+import color from '../constants/colors';
+import dimensions from '../constants/dimensions';
+import globalStyle from '../constants/globalStyle';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

@@ -10,8 +10,10 @@ import {
   Platform,
 } from 'react-native';
 
-// svg constants
 import svg from '../../../../constants/svgs';
+import color from '../../../../constants/colors';
+import dimensions from '../../../../constants/dimensions';
+import globalStyle from '../../../../constants/globalStyle';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';

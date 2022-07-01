@@ -3,10 +3,10 @@ import React, {useState} from 'react';
 
 import {Drawer, Text} from 'react-native-paper';
 
-// Svg conatnts
 import svg from '../../../constants/svgs';
-
-import ProfileSettings from '../Profile/ProfileSettings';
+import color from '../../../constants/colors';
+import dimensions from '../../../constants/dimensions';
+import globalStyle from '../../../constants/globalStyle';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
