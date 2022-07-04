@@ -97,7 +97,11 @@ const Login = ({navigation}) => {
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>
           <TouchableOpacity onPress={RegisteryScreenGoBack}>
-            <svg.LeftArrowSvgWhite width={17} height={17} />
+            <svg.LeftArrowSvgWhite
+              width={17}
+              height={17}
+              style={{paddingLeft: 30}}
+            />
           </TouchableOpacity>
         </View>
 

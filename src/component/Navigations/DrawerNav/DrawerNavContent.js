@@ -9,6 +9,7 @@ import dimensions from '../../../constants/dimensions';
 import globalStyle from '../../../constants/globalStyle';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import ProfileScreen from '../Profile/ProfileScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -276,20 +277,22 @@ const DrawerNavContent = ({navigation}) => {
 
       <Drawer.Section style={styles.drawerSectionContainerBottom}>
         {/**  Setting  */}
-        <TouchableOpacity underlayColor={'transparent'}>
+        <TouchableOpacity
+          underlayColor={'transparent'}
+          onPress={() => handler('Profile')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
               width: (windowWidth / 100) * 50,
               backgroundColor:
-                activeButton === 'Setting' ? '#FFFFFF' : '#4681F4',
+                activeButton === 'Profile' ? '#FFFFFF' : '#4681F4',
               flexDirection: 'row',
               alignItems: 'center',
               borderTopRightRadius: 50,
               borderBottomRightRadius: 50,
             }}>
             <View style={styles.ButtonIconConatiner}>
-              {activeButton === 'Setting' ? (
+              {activeButton === 'Profile' ? (
                 <svg.SettingsSvgDrawable
                   width={25}
                   height={25}
@@ -305,7 +308,7 @@ const DrawerNavContent = ({navigation}) => {
             </View>
             <Text
               style={{
-                color: activeButton === 'Setting' ? '#4681F4' : '#FFFFFF',
+                color: activeButton === 'Profile' ? '#4681F4' : '#FFFFFF',
                 fontSize: 17,
                 fontWeight: '600',
                 fontFamily: 'Roboto-Regular',
