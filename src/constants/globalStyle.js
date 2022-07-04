@@ -14,6 +14,22 @@ const globalStyle = StyleSheet.create({
     marginBottom: 15,
   },
 
+  // Drawer Animation -------------------------------
+
+  stack: {
+    flex: 1,
+    shadowColor: '#FFF',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 5,
+    overflow: 'hidden',
+  },
+
+  //----------------------------------------------
   textInput: {
     backgroundColor: color.red,
     flex: 1,
