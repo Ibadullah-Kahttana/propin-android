@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Dimensions,
   Text,
-  TextInput,
   View,
   StatusBar,
   TouchableOpacity,
@@ -13,11 +12,20 @@ import {
 //Svgs Constant
 import svg from '../../constants/svgs';
 
+// ---- UseForm Hook
+import {useForm, Controller} from 'react-hook-form';
+
+// ------- Custom Input
+import CustomInput from '../../controles/CustomInput';
+
+// ------- Email Regex
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 import {Icon} from 'react-native-elements';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
 
 import {ScrollView} from 'react-native-gesture-handler';
+import globalStyle from '../../constants/globalStyle';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,68 +33,58 @@ const windowHeight = Dimensions.get('window').height;
 const SignUpScreen = ({navigation}) => {
   const [activeButton, setActiveButton] = useState('Agent');
 
-  const RegisteryScreenGoBack = () => {
-    navigation.navigate('RegisterScreen');
+  // React Hook useForm
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+    watch,
+  } = useForm({
+    defaultValues: {
+      agentName: '',
+      agentEmail: '',
+      agentPhoneNumber: '',
+      agentPassword: '',
+      agentConfirmPassword: '',
+
+      agencyName: '',
+      agencyEmail: '',
+      agencyPhoneNumber: '',
+      agencyPassword: '',
+      agencyConfirmPassword: '',
+    },
+  });
+
+  console.log(errors);
+
+  // Password Match Function
+  const agentpwd = watch('agentPassword');
+  const agencypwd = watch('agencyPassword');
+
+  // OnPress Functions
+
+  const onPressTermsCondition = () => {
+    console.warn('Terms & Conditions pressed');
   };
 
-  const LogInScreen = () => {
+  const onSignUpGoogle = () => {
+    console.warn('Google on Pressed');
+  };
+
+  const onSignUpFacebook = () => {
+    console.warn('Facebook Pressed on Pressed');
+  };
+
+  // Navigation Functions
+
+  const onSignUpAgencyPressed = data => {
+    console.log(data);
     navigation.navigate('LoginScreen');
   };
 
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
-
-  //const {signIn} = React.useContext(AuthContext);
-
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
-  };
-
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
-  };
-
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
-  };
-
-  const loginHandle = (userName, password) => {
-    signIn(userName, password);
+  const onSignUpAgentPressed = data => {
+    console.log(data);
+    navigation.navigate('LoginScreen');
   };
 
   return (
@@ -95,15 +93,20 @@ const SignUpScreen = ({navigation}) => {
 
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>
-          <TouchableOpacity onPress={RegisteryScreenGoBack}>
-            <svg.LeftArrowSvgWhite width={17} height={17} />
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{paddingLeft: 10}}>
+            <svg.LeftArrowSvgWhite width={17} height={17} fill={'#FFFFFF'} />
           </TouchableOpacity>
         </View>
 
         {/* -------------------------------------- */}
 
         <View style={styles.LoginScreenLoginText}>
-          <Text style={styles.h1} adjustsFontSizeToFit={true} numberOfLines={1}>
+          <Text
+            style={globalStyle.TitleText}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
             Register
           </Text>
         </View>
@@ -124,7 +127,7 @@ const SignUpScreen = ({navigation}) => {
               justifyContent: 'center',
             }}>
             <Text
-              style={styles.BoldText}
+              style={globalStyle.h2White}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Agent
@@ -146,7 +149,7 @@ const SignUpScreen = ({navigation}) => {
               justifyContent: 'center',
             }}>
             <Text
-              style={styles.BoldText}
+              style={globalStyle.h2White}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Agency
@@ -154,207 +157,130 @@ const SignUpScreen = ({navigation}) => {
           </TouchableHighlight>
         </View>
       </View>
-      {/* ------
-        
-        -------------------------------- */}
-
       {/* ---------------------------------------- */}
 
       {activeButton === 'Agent' ? (
         <ScrollView>
-          <View style={styles.NameheadingText}>
+          {/** Agent Name */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Name
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.NameBox}>
-            <View style={styles.action}>
-              <FontAwesome
-                name="user-o"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-              <TextInput
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Enter your name"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="agentName"
+            placeholder="Enter your name"
+            control={control}
+            rules={{required: 'Name is Required'}}
+            svg1={<svg.userLoginSVG width={24} height={24} />}
+          />
 
-          {/* ---------------------------------------------------------------- */}
-          <View style={styles.EmailheadingText}>
+          {/* Agent Email */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Email
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.EmailBox}>
-            <View style={styles.action}>
-              <FontAwesome
-                name="envelope-o"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-              <TextInput
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Enter your email"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="agentEmail"
+            placeholder="Enter your email"
+            control={control}
+            rules={{
+              required: 'Email Required',
+              pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
+            }}
+            svg1={<svg.envelope width={25} height={25} />}
+          />
 
-          {/**--------------------------------------------------------------------- */}
-          <View style={styles.PhoneNumbertext}>
+          {/** Agent Phone Number */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Phone Number
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.PhoneNoBox}>
-            <View
-              style={{
-                height: (windowHeight / 100) * 7,
-                width: (windowWidth / 100) * 30,
-                paddingLeft: 5,
-                //backgroundColor: 'yellow',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}>
-              <svg.PakistanHalfFlagSvg width={25} height={25} />
-              <Text
-                style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-                adjustsFontSizeToFit={true}
-                numberOfLines={1}>
-                {' '}
-                +92
-              </Text>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </View>
-            <View style={styles.action}>
-              <TextInput
-                style={styles.PhoneNumbertextInput}
-                autoCapitalize="none"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="agentPhoneNumber"
+            control={control}
+            rules={{required: 'PhoneNumer is Required'}}
+            countryCode="  +92"
+            svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
+          />
 
-          {/* -------------------------------------- */}
-          <View style={styles.Passwordheadingtext}>
+          {/* Agent Password */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Password
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.PasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
+          <CustomInput
+            name="agentPassword"
+            placeholder="Your password"
+            control={control}
+            secureTextEntry
+            rules={{
+              required: 'Password Required',
+              minLength: {
+                value: 5,
+                message: 'Password should be minimum 5 character long',
+              },
+            }}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
 
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
+          {/* Agent Confirm Password */}
 
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* -------------------------------------- */}
-
-          <View style={styles.ConfirmPasswordheadingtext}>
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Confirm Password
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.ConfirmPasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
+          <CustomInput
+            name="agentConfirmPassword"
+            placeholder="Confirm your password"
+            control={control}
+            secureTextEntry
+            rules={{
+              required: 'Please Comfirm Password',
+              validate: value => value === agentpwd || 'Password do no match',
+            }}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
+          {/* -----------------   Sign Up Agent   ------------------- */}
 
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Confirm your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
-
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* -------------------------------------- */}
-
-          <TouchableOpacity onPress={LogInScreen}>
+          <TouchableOpacity onPress={handleSubmit(onSignUpAgentPressed)}>
             <View style={styles.SignUpButton}>
               <View
                 style={{
@@ -366,7 +292,7 @@ const SignUpScreen = ({navigation}) => {
                   marginLeft: 55,
                 }}>
                 <Text
-                  style={styles.BoldText}
+                  style={globalStyle.h2White}
                   adjustsFontSizeToFit={true}
                   numberOfLines={1}>
                   Sign Up
@@ -386,22 +312,12 @@ const SignUpScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
 
-          {/* --------------------------------------------------------- */}
-          <View style={styles.ForgetPassText}>
-            <TouchableOpacity>
-              <Text
-                style={styles.ForgetGrayText}
-                adjustsFontSizeToFit={true}
-                numberOfLines={1}>
-                Forget password?
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* -------------------------------------- */}
+          {/* OR */}
+
           <View style={styles.orView}>
             <View style={styles.ORLines}></View>
             <Text
-              style={styles.h3}
+              style={globalStyle.h2black}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               OR
@@ -409,19 +325,20 @@ const SignUpScreen = ({navigation}) => {
             <View style={styles.ORLines}></View>
           </View>
 
-          {/* -------------------------------------- */}
+          {/* Social Icons */}
+
           <TouchableHighlight underlayColor="#DDDDDD">
             <View style={styles.SocialLinksGoogleFacebook}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onSignUpGoogle}>
                 <svg.GoogleCircleSvg width={50} height={50} />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onSignUpFacebook}>
                 <svg.FacebookCircleSvg width={50} height={50} />
               </TouchableOpacity>
             </View>
           </TouchableHighlight>
 
-          {/* -------------------------------------- */}
+          {/* Bottom Text */}
 
           <View style={styles.BottomText}>
             <Text
@@ -438,7 +355,7 @@ const SignUpScreen = ({navigation}) => {
                 numberOfLines={1}>
                 our{''}
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onPressTermsCondition}>
                 <Text
                   style={styles.BlueText}
                   adjustsFontSizeToFit={true}
@@ -451,199 +368,126 @@ const SignUpScreen = ({navigation}) => {
         </ScrollView>
       ) : (
         <ScrollView>
-          <View style={styles.NameheadingText}>
+          {/** Agency Name */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Agency Name
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.NameBox}>
-            <View style={styles.action}>
-              <FontAwesome
-                name="user-o"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-              <TextInput
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Enter agency name"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
-          {/* ---------------------------------------------------------------- */}
-          <View style={styles.EmailheadingText}>
+          <CustomInput
+            name="agencyName"
+            placeholder="Enter agency name"
+            control={control}
+            rules={{required: 'AgencyName is Required'}}
+            svg1={<svg.userLoginSVG width={24} height={24} />}
+          />
+
+          {/** Agency Email */}
+
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Email
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.EmailBox}>
-            <View style={styles.action}>
-              <FontAwesome
-                name="envelope-o"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-              <TextInput
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Enter email"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="agencyEmail"
+            placeholder="Enter email"
+            control={control}
+            rules={{
+              required: 'Email Required',
+              pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
+            }}
+            svg1={<svg.envelope width={25} height={25} />}
+          />
 
-          {/* ---------------------------------------------------------------------------- */}
+          {/** Agency Phone Number */}
 
-          <View style={styles.PhoneNumbertext}>
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Phone Number
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.PhoneNoBox}>
-            <View
-              style={{
-                height: (windowHeight / 100) * 7,
-                width: (windowWidth / 100) * 30,
-                paddingLeft: 5,
-                //backgroundColor: 'yellow',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}>
-              <svg.PakistanHalfFlagSvg width={25} height={25} />
-              <Text
-                style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-                adjustsFontSizeToFit={true}
-                numberOfLines={1}>
-                {' '}
-                +92
-              </Text>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </View>
-            <View style={styles.action}>
-              <TextInput
-                style={styles.PhoneNumbertextInput}
-                autoCapitalize="none"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="agencyPhoneNumber"
+            control={control}
+            rules={{required: 'PhoneNumer is Required'}}
+            countryCode="  +92"
+            svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
+          />
 
-          {/* -------------------------------------- */}
+          {/* Agency Password */}
 
-          <View style={styles.Passwordheadingtext}>
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Password
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.PasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
+          <CustomInput
+            name="agencyPassword"
+            placeholder="Your password"
+            control={control}
+            secureTextEntry
+            rules={{
+              required: 'agency Password Required',
+              minLength: {
+                value: 5,
+                message: 'Password should be minimum 5 character long',
+              },
+            }}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
 
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
+          {/* Agency Confirm Password */}
 
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-          {/* -------------------------------------- */}
-
-          <View style={styles.ConfirmPasswordheadingtext}>
+          <View style={globalStyle.InputHeadingText}>
             <Text
               style={styles.textfontsize1}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Confirm Password
             </Text>
-            <Text style={styles.Asteric}> *</Text>
+            <Text style={globalStyle.Asteric}> *</Text>
           </View>
 
-          <View style={styles.ConfirmPasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Confirm your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
-
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-
+          <CustomInput
+            name="agencyConfirmPassword"
+            placeholder="Confirm your password"
+            control={control}
+            secureTextEntry
+            rules={{
+              required: 'Please Comfirm Password',
+              validate: value => value === agencypwd || 'Password do no match',
+            }}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
           {/* -------------------------------------- */}
 
-          <TouchableOpacity onPress={LogInScreen}>
+          <TouchableOpacity onPress={handleSubmit(onSignUpAgencyPressed)}>
             <View style={styles.SignUpButton}>
               <View
                 style={{
@@ -655,7 +499,7 @@ const SignUpScreen = ({navigation}) => {
                   marginLeft: 55,
                 }}>
                 <Text
-                  style={styles.BoldText}
+                  style={globalStyle.h2White}
                   adjustsFontSizeToFit={true}
                   numberOfLines={1}>
                   Sign Up
@@ -692,7 +536,7 @@ const SignUpScreen = ({navigation}) => {
                 numberOfLines={1}>
                 our{''}
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onPressTermsCondition}>
                 <Text
                   style={styles.BlueText}
                   adjustsFontSizeToFit={true}
@@ -752,33 +596,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  h1: {
-    fontSize: 35,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
-  },
-
-  Asteric: {
-    fontSize: 15,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: 'red',
-  },
-
-  h3: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#2C3131',
-  },
-
-  EmailPhonePassMidBox: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 35,
-    // /backgroundColor: 'yellow',
-  },
-
   EmailPhoneNumberSwitch: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 7,
@@ -787,21 +604,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomRightRadius: 50,
-  },
-
-  EmailSwitch: {
-    width: (windowWidth / 100) * 50,
-    height: (windowHeight / 100) * 6,
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  BoldText: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
   },
 
   PhoneNumberSwitch: {
@@ -813,167 +615,11 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
 
-  NameBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-
-  EmailBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-
-  PhoneNoBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    // backgroundColor: 'red',
-  },
-
-  PasswordBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-
-  ConfirmPasswordBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-  NameheadingText: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    marginLeft: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
-
-    // backgroundColor: 'yellow',
-  },
-
-  EmailheadingText: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    marginLeft: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    // backgroundColor: 'yellow',
-  },
-
   textfontsize1: {
     fontSize: 16,
     fontWeight: '400',
     fontFamily: 'Roboto-Regular',
     color: 'black',
-  },
-
-  PhoneNumbertext: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    alignItems: 'center',
-    marginTop: 10,
-    marginLeft: 20,
-    flexDirection: 'row',
-    //backgroundColor: 'yellow',
-  },
-
-  action: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'yellow',
-  },
-
-  textInput: {
-    // backgroundColor: 'blue',
-    flex: 1,
-    alignItems: 'center',
-    height: (windowHeight / 100) * 7,
-    fontSize: 16,
-  },
-
-  PhoneNumbertextInput: {
-    //backgroundColor: 'blue',
-    alignItems: 'center',
-    width: (windowWidth / 100) * 60,
-    height: (windowHeight / 100) * 5,
-    fontSize: 18,
-  },
-
-  Passwordheadingtext: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginLeft: 20,
-    alignItems: 'center',
-    // backgroundColor: 'yellow',
-  },
-
-  ConfirmPasswordheadingtext: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginLeft: 20,
-    alignItems: 'center',
-    // backgroundColor: 'yellow',
-  },
-
-  ForgetPassText: {
-    width: (windowWidth / 100) * 93,
-    height: (windowHeight / 100) * 3,
-    //backgroundColor: 'yellow',
-    alignItems: 'flex-end',
-    marginTop: 15,
   },
 
   SignUpButton: {
@@ -1050,11 +696,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     color: '#6797f5',
     paddingLeft: 7,
-  },
-
-  imgBackgroundlightElipse: {
-    width: (windowWidth / 100) * 10,
-    height: (windowHeight / 100) * 15,
   },
 });
 

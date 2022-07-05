@@ -32,11 +32,26 @@ const globalStyle = StyleSheet.create({
   //----------------------------------------------
   textInput: {
     backgroundColor: color.red,
-    flex: 1,
+    //flex: 1,
     alignItems: 'center',
-    height: dimensions.width / 10,
+    height: dimensions.height / 15,
+    width: dimensions.width / 1.6,
     justifyContent: 'center',
     fontSize: 16,
+  },
+
+  TitleText: {
+    fontSize: 35,
+    fontWeight: '700',
+    fontFamily: 'Roboto-Regular',
+    color: '#FFFFFF',
+  },
+
+  Asteric: {
+    fontSize: 15,
+    fontWeight: '700',
+    fontFamily: 'Roboto-Regular',
+    color: 'red',
   },
 
   h1White: {
@@ -282,6 +297,21 @@ const globalStyle = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  //==================================================================================
+
+  //     Input Filed Heading Text
+
+  InputHeadingText: {
+    width: dimensions.width / 1.5,
+    height: dimensions.height / 25,
+    flexDirection: 'row',
+    marginTop: 15,
+    marginBottom: 5,
+    marginLeft: 20,
+    alignItems: 'center',
+    //backgroundColor: 'yellow',
   },
 });
 

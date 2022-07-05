@@ -32,10 +32,6 @@ const CountryScreen = ({navigation}) => {
     navigation.navigate('SignUpScreen');
   };
 
-  const BottomNavigationHomeScreen = () => {
-    navigation.navigate('BottomNavigation');
-  };
-
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#f8f9fa'} barStyle="dark-content" />

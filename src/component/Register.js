@@ -19,6 +19,22 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const RegisterScreen = ({navigation}) => {
+  // OnPress Functions
+
+  const onPressTermsCondition = () => {
+    console.warn('Terms & Conditions pressed');
+  };
+
+  const onSignUpGoogle = () => {
+    console.warn('Google on Pressed');
+  };
+
+  const onSignUpFacebook = () => {
+    console.warn('Facebook Pressed on Pressed');
+  };
+
+  // Navigation Functions
+
   const RegisteryLoginOption = () => {
     navigation.navigate('LoginScreen');
   };
@@ -57,10 +73,10 @@ const RegisterScreen = ({navigation}) => {
       {/* -------------------------------------- */}
       <TouchableHighlight underlayColor="#DDDDDD">
         <View style={styles.SocialLinksGoogleFacebook}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onSignUpGoogle}>
             <svg.GoogleSvgRegister width={60} height={60} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onSignUpFacebook}>
             <svg.FacebookWhiteSvgRegister width={60} height={60} />
           </TouchableOpacity>
         </View>
@@ -102,7 +118,7 @@ const RegisterScreen = ({navigation}) => {
             numberOfLines={1}>
             our{''}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onPressTermsCondition}>
             <Text
               style={styles.BlueText}
               adjustsFontSizeToFit={true}
