@@ -80,7 +80,7 @@ const DrawerNavigator = () => {
 
   const scale = Animated.interpolateNode(progress, {
     inputRange: [0, 1],
-    outputRange: [1, 0.9],
+    outputRange: [1, 0.85],
   });
 
   const borderRadius = Animated.interpolateNode(progress, {

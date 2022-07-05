@@ -9,13 +9,12 @@ import dimensions from '../../../constants/dimensions';
 import globalStyle from '../../../constants/globalStyle';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import ProfileScreen from '../Profile/ProfileScreen';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const DrawerNavContent = ({navigation}) => {
-  const [activeButton, setActiveButton] = useState();
+  const [activeButton, setActiveButton] = useState('Home');
 
   const handler = param => {
     setActiveButton(param);

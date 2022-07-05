@@ -14,36 +14,77 @@ import SelectCityScreen from './src/component/SelectCity';
 import SignUpScreen from './src/component/Register/SignUpScreen';
 import DrawerNavigator from './src/component/DrawerNavigator';
 import BottomNavigation from './src/component/BottomNavigation';
+
 // ---------------------------------------------------------------------------------------
 
-const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Stack = createStackNavigator();
-const BottomStack = createStackNavigator();
 
-const StackNavigator = () => {
+const SignedInStack = createStackNavigator();
+const SignedOutStack = createStackNavigator();
+
+const SignedOutStackNavigator = () => {
   return (
-    <Stack.Navigator
+    <SignedOutStack.Navigator
       initialRouteName="RegisteryScreen"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-      <Stack.Screen name="CountryScreen" component={CountryScreen} />
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
-      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-      <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-    </Stack.Navigator>
+      <SignedOutStack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <SignedOutStack.Screen name="CountryScreen" component={CountryScreen} />
+
+      <SignedOutStack.Screen
+        name="SelectCityScreen"
+        component={SelectCityScreen}
+      />
+      <SignedOutStack.Screen name="LoginScreen" component={LoginScreen} />
+      <SignedOutStack.Screen name="SignUpScreen" component={SignUpScreen} />
+    </SignedOutStack.Navigator>
   );
 };
+
+const SignedInStackNavigator = () => {
+  return (
+    <SignedInStack.Navigator
+      initialRouteName="DrawerNavigator"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <SignedInStack.Screen
+        name="DrawerNavigator"
+        component={DrawerNavigator}
+      />
+      <SignedInStack.Screen
+        name="BottomNavigation"
+        component={BottomNavigation}
+      />
+    </SignedInStack.Navigator>
+  );
+};
+
+// const StackNavigator = () => {
+//   return (
+//     <Stack.Navigator
+//       initialRouteName="RegisteryScreen"
+//       screenOptions={{
+//         headerShown: false,
+//       }}>
+//       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+//       <Stack.Screen name="CountryScreen" component={CountryScreen} />
+//       <Stack.Screen name="LoginScreen" component={LoginScreen} />
+//       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
+//       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+//       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
+//       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+//     </Stack.Navigator>
+//   );
+// };
 
 const App = () => {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <SignedOutStackNavigator />
     </NavigationContainer>
   );
 };

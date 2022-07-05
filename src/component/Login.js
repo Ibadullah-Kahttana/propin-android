@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Dimensions,
   Text,
-  TextInput,
   View,
   StatusBar,
   TouchableOpacity,
@@ -15,79 +14,63 @@ import color from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import globalStyle from '../constants/globalStyle';
 
+// ---- UseForm Hook
+import {useForm, Controller} from 'react-hook-form';
+
+// ------- Custom Input
+import CustomInput from '../controles/CustomInput';
+
 // ------- ICONS
 import {Icon} from 'react-native-elements';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
 
+// ------- Email Regex
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+//
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Login = ({navigation}) => {
-  const [activeButton, setActiveButton] = useState('Email');
+  // React Hook useForm
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      userName: '',
+      userPassword: '',
+    },
+  });
 
-  const RegisteryScreenGoBack = () => {
-    navigation.navigate('RegisterScreen');
-  };
+  // On Press Function
 
-  const NavigationScreen = () => {
+  const onLoginPressed = data => {
+    console.log(JSON.stringify(data));
     navigation.navigate('DrawerNavigator');
   };
 
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
-
-  // const {signIn} = React.useContext(AuthContext);
-
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
+  const onForgetPassword = () => {
+    console.warn('Forget Password Pressed');
   };
 
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
+  const onLoginInGoogle = () => {
+    console.warn('Google on Pressed');
   };
 
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
+  const onLoginInFacebook = () => {
+    console.warn('Facebook Pressed on Pressed');
   };
 
-  const loginHandle = (userName, password) => {
-    signIn(userName, password);
+  const onPressTermsCondition = () => {
+    console.warn('Terms & Conditions pressed');
+  };
+
+  // Navigation Functions
+
+  const RegisteryScreenGoBack = () => {
+    navigation.navigate('RegisterScreen');
   };
 
   return (
@@ -101,13 +84,17 @@ const Login = ({navigation}) => {
               width={17}
               height={17}
               style={{paddingLeft: 30}}
+              fill={'#FFFFFF'}
             />
           </TouchableOpacity>
         </View>
 
         {/* Login Screen Text */}
         <View style={styles.LoginScreenLoginText}>
-          <Text style={styles.h1} adjustsFontSizeToFit={true} numberOfLines={1}>
+          <Text
+            style={globalStyle.TitleText}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
             Login
           </Text>
         </View>
@@ -115,27 +102,26 @@ const Login = ({navigation}) => {
         {/* Email phone Number Switch */}
         <View style={styles.EmailPhoneNumberSwitch}>
           <TouchableHighlight
-            underlayColor={'transparent'}
-            onPress={() => setActiveButton('Email')}
+            //underlayColor={'transparent'}
+            //onPress={() => setActiveButton('Email')}
             style={{
-              borderBottomColor: activeButton === 'Email' ? 'white' : '#4681F4',
-              borderBottomWidth: 5,
-
-              // backgroundColor: 'red',
-              height: (windowHeight / 100) * 7,
-              width: (windowWidth / 100) * 50,
+              // borderBottomColor: activeButton === 'Email' ? 'white' : '#4681F4',
+              // borderBottomWidth: 5,
+              //backgroundColor: 'red',
+              height: dimensions.height / 15,
+              width: dimensions.width / 1.5,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
             <Text
-              style={styles.BoldText}
+              style={globalStyle.h2White}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               Email
             </Text>
           </TouchableHighlight>
 
-          <TouchableHighlight
+          {/* <TouchableHighlight
             underlayColor={'transparent'}
             onPress={() => setActiveButton('PhoneNumber')}
             style={{
@@ -155,14 +141,65 @@ const Login = ({navigation}) => {
               numberOfLines={1}>
               Phone Number
             </Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
         </View>
       </View>
 
-      {/* ---------------------------------------- */}
+      <View style={{justifyContent: 'space-between'}}>
+        {/* Email */}
+        <View style={globalStyle.InputHeadingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Email
+          </Text>
+          <Text style={globalStyle.Asteric}> *</Text>
+        </View>
 
-      {activeButton === 'Email' ? (
+        <CustomInput
+          name="userName"
+          placeholder="Enter your name"
+          control={control}
+          rules={{
+            required: 'User Name Required',
+            pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
+          }}
+          svg1={<svg.userLoginSVG width={24} height={24} />}
+        />
+
+        {/* Password */}
+        <View style={globalStyle.InputHeadingText}>
+          <Text
+            style={styles.textfontsize1}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            Password
+          </Text>
+          <Text style={globalStyle.Asteric}> *</Text>
+        </View>
+
+        <CustomInput
+          name="userPassword"
+          placeholder="Your password"
+          control={control}
+          secureTextEntry
+          rules={{
+            required: 'User Password Required',
+            minLength: {
+              value: 5,
+              message: 'Password should be minimum 5 character long',
+            },
+          }}
+          svg1={<svg.loginLock width={24} height={24} />}
+          svg2={<svg.EyeOpen width={20} height={20} />}
+          svg3={<svg.EyeClosed width={20} height={20} />}
+        />
+      </View>
+
+      {/* {activeButton === 'Email' ? (
         <View style={{justifyContent: 'space-between'}}>
+          {/* Email 
           <View style={styles.EmailheadingText}>
             <Text
               style={styles.textfontsize1}
@@ -173,29 +210,15 @@ const Login = ({navigation}) => {
             <Text style={styles.Asteric}> *</Text>
           </View>
 
-          <View style={styles.EmailBox}>
-            <View style={styles.action}>
-              <FontAwesome
-                name="user-o"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-              <TextInput
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Enter your name"
-                onChangeText={val => textInputChange(val)}
-              />
-              {/* {data.check_textInputChange ? (
-            <Animatable.View animation={'bounceIn'}>
-              <Feather name="check-circle" color="green" size={20} />
-            </Animatable.View>
-          ) : null} */}
-            </View>
-          </View>
+          <CustomInput
+            name="userName"
+            placeholder="Enter your name"
+            control={control}
+            rules={{required: true}}
+            svg1={<svg.userLoginSVG width={24} height={24} />}
+          />
 
-          {/* -------------------------------------- */}
+          {/* Password 
           <View style={styles.Passwordheadingtext}>
             <Text
               style={styles.textfontsize1}
@@ -206,45 +229,22 @@ const Login = ({navigation}) => {
             <Text style={styles.Asteric}> *</Text>
           </View>
 
-          {/* ---------------------------------------- */}
-
-          <View style={styles.PasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
-
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* -------------------------------------- */}
+          <CustomInput
+            name="userPassword"
+            placeholder="Your password"
+            control={control}
+            secureTextEntry
+            rules={{required: true}}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
         </View>
       ) : (
         <View style={{justifyContent: 'space-between'}}>
+
+        
+          {/* Phone Number 
           <View style={styles.PhoneNumbertext}>
             <Text
               style={styles.textfontsize1}
@@ -255,42 +255,16 @@ const Login = ({navigation}) => {
             <Text style={styles.Asteric}> *</Text>
           </View>
 
-          <View style={styles.PhoneNoBox}>
-            <View
-              style={{
-                height: (windowHeight / 100) * 7,
-                width: (windowWidth / 100) * 30,
-                paddingLeft: 5,
-                //backgroundColor: 'yellow',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-              }}>
-              <svg.PakistanHalfFlagSvg width={25} height={25} />
-              <Text
-                style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-                adjustsFontSizeToFit={true}
-                numberOfLines={1}>
-                {' '}
-                +92
-              </Text>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </View>
-            <View style={styles.action}>
-              <TextInput
-                style={styles.PhoneNumbertextInput}
-                autoCapitalize="none"
-                onChangeText={val => textInputChange(val)}
-              />
-            </View>
-          </View>
+          <CustomInput
+            name="userPhoneNumber"
+            control={control}
+            secureTextEntry
+            rules={{required: true}}
+            countryCode="  +92"
+            svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
+          />
 
-          {/* -------------------------------------- */}
+          {/* Password 
           <View style={styles.Passwordheadingtext}>
             <Text
               style={styles.textfontsize1}
@@ -301,51 +275,27 @@ const Login = ({navigation}) => {
             <Text style={styles.Asteric}> *</Text>
           </View>
 
-          {/* ---------------------------------------- */}
-
-          <View style={styles.PasswordBox}>
-            <View style={styles.action}>
-              <Feather
-                name="lock"
-                color="#171717"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-
-              <TextInput
-                secureTextEntry={data.secureTextEntry ? true : false}
-                style={styles.textInput}
-                autoCapitalize="none"
-                placeholder="Your password"
-                onChangeText={val => handlePasswordChange(val)}
-              />
-
-              <TouchableOpacity
-                onPress={updateSecureTextEntry}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'flex-end',
-                  paddingRight: 10,
-                }}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye" color="#C6C6C7" size={17} />
-                ) : (
-                  <Feather name="eye-off" color="#C6C6C7" size={17} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
+          <CustomInput
+            name="userPassword"
+            placeholder="Your password"
+            control={control}
+            secureTextEntry
+            rules={{required: true}}
+            svg1={<svg.loginLock width={24} height={24} />}
+            svg2={<svg.EyeOpen width={20} height={20} />}
+            svg3={<svg.EyeClosed width={20} height={20} />}
+          />
         </View>
-      )}
+      )} */}
       {/* -------------------------------------- */}
 
-      <TouchableOpacity onPress={NavigationScreen}>
+      <TouchableOpacity onPress={handleSubmit(onLoginPressed)}>
         <View style={styles.LogInButton}>
           <View
             style={{
               width: (windowWidth / 100) * 60,
-              height: (windowHeight / 100) * 8,
-              // backgroundColor: 'yellow',
+              height: (windowHeight / 100) * 6,
+              //backgroundColor: 'yellow',
               alignItems: 'center',
               justifyContent: 'center',
               marginLeft: 55,
@@ -368,7 +318,7 @@ const Login = ({navigation}) => {
 
       {/* --------------------------------------------------------- */}
       <View style={styles.ForgetPassText}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onForgetPassword}>
           <Text
             style={styles.ForgetGrayText}
             adjustsFontSizeToFit={true}
@@ -380,7 +330,10 @@ const Login = ({navigation}) => {
       {/* -------------------------------------- */}
       <View style={styles.orView}>
         <View style={styles.ORLines}></View>
-        <Text style={styles.h3} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={globalStyle.h2black}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}>
           OR
         </Text>
         <View style={styles.ORLines}></View>
@@ -389,10 +342,10 @@ const Login = ({navigation}) => {
       {/* -------------------------------------- */}
       <TouchableHighlight underlayColor="#DDDDDD">
         <View style={styles.SocialLinksGoogleFacebook}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onLoginInGoogle}>
             <svg.GoogleCircleSvg width={50} height={50} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onLoginInFacebook}>
             <svg.FacebookCircleSvg width={50} height={50} />
           </TouchableOpacity>
         </View>
@@ -415,7 +368,7 @@ const Login = ({navigation}) => {
             numberOfLines={1}>
             our{''}
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onPressTermsCondition}>
             <Text
               style={styles.BlueText}
               adjustsFontSizeToFit={true}
@@ -472,33 +425,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  h1: {
-    fontSize: 35,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
-  },
-
-  Asteric: {
-    fontSize: 15,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: 'red',
-  },
-
-  h3: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#2C3131',
-  },
-
-  EmailPhonePassMidBox: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 35,
-    // /backgroundColor: 'yellow',
-  },
-
   EmailPhoneNumberSwitch: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 7,
@@ -507,14 +433,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomRightRadius: 50,
-  },
-
-  EmailSwitch: {
-    width: (windowWidth / 100) * 50,
-    height: (windowHeight / 100) * 6,
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 
   BoldText: {
@@ -533,109 +451,11 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
 
-  EmailBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-
-  PhoneNoBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    // backgroundColor: 'red',
-  },
-
-  PasswordBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    //marginTop: 5,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginLeft: 20,
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 5,
-  },
-
-  EmailheadingText: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    marginTop: 10,
-    marginLeft: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    // backgroundColor: 'yellow',
-  },
-
   textfontsize1: {
     fontSize: 18,
     fontWeight: '400',
     fontFamily: 'Roboto-Regular',
-    color: '#8F92A1',
-  },
-
-  PhoneNumbertext: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    alignItems: 'center',
-    marginTop: 10,
-    marginLeft: 20,
-    flexDirection: 'row',
-    //backgroundColor: 'yellow',
-  },
-
-  action: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'yellow',
-  },
-
-  textInput: {
-    // backgroundColor: 'blue',
-    flex: 1,
-    alignItems: 'center',
-    height: (windowHeight / 100) * 7,
-    fontSize: 16,
-  },
-
-  PhoneNumbertextInput: {
-    //backgroundColor: 'blue',
-    alignItems: 'center',
-    width: (windowWidth / 100) * 60,
-    height: (windowHeight / 100) * 5,
-    fontSize: 18,
-  },
-
-  Passwordheadingtext: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginLeft: 20,
-    alignItems: 'center',
-    // backgroundColor: 'yellow',
+    color: 'black',
   },
 
   ForgetPassText: {
@@ -717,11 +537,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     color: '#6797f5',
     paddingLeft: 7,
-  },
-
-  imgBackgroundlightElipse: {
-    width: (windowWidth / 100) * 10,
-    height: (windowHeight / 100) * 15,
   },
 });
 

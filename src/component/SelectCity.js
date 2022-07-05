@@ -101,7 +101,7 @@ const SelectCityScreen = ({navigation}) => {
         <TouchableOpacity
           onPress={CountryScreenGoBack}
           style={{paddingLeft: 15}}>
-          <svg.LeftArrowSvgWhite width={17} height={17} />
+          <svg.LeftArrowSvgWhite width={17} height={17} fill={'#000'} />
         </TouchableOpacity>
         <Text
           style={styles.h3Bold}

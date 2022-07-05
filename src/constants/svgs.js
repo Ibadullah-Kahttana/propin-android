@@ -2,6 +2,13 @@
 import LogoutSvg from '../assets/Svgs/DrawableSVG/LogoutIcon';
 import ProfileSvg from '../assets/Svgs/DrawableSVG/ProfileIcon';
 import UserSvg from '../assets/Svgs/ProfileScreenSvgs/User';
+import envelope from '../assets/Svgs/SignUpScreen/envelope';
+
+//LoginSVG
+import userLoginSVG from '../assets/Svgs/LogInScreenSVG/userLoginSvg';
+import loginLock from '../assets/Svgs/LogInScreenSVG/lock';
+import EyeOpen from '../assets/Svgs/LogInScreenSVG/EyeOpen';
+import EyeClosed from '../assets/Svgs/LogInScreenSVG/EyeClosed';
 
 // Left Arrow Back
 import LeftArrowSvgWhite from '../assets/Svgs/ProfileScreenSvgs/LeftArrowWhite';
@@ -99,6 +106,13 @@ const svg = {
   LogoutSvg,
   ProfileSvg,
   UserSvg,
+  envelope,
+
+  //LoginSVG
+  userLoginSVG,
+  loginLock,
+  EyeOpen,
+  EyeClosed,
 
   // Left Arrow Back
   LeftArrowSvgWhite,
