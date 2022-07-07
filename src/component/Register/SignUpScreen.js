@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -12,15 +12,21 @@ import {
 //Svgs Constant
 import svg from '../../constants/svgs';
 
-// ---- UseForm Hook
-import {useForm, Controller} from 'react-hook-form';
-
 // ------- Custom Input
 import CustomInput from '../../controles/CustomInput';
 
 // ------- Email Regex
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+// ------ Auth Context
+import {AuthContext} from '../../context/AuthContext';
+
+// ------ Custom Loader
+import Loader from '../../controles/Loader';
+
+//------  Netwrok logger
+import NetworkLogger from 'react-native-network-logger';
 
 import {Icon} from 'react-native-elements';
 
@@ -33,35 +39,38 @@ const windowHeight = Dimensions.get('window').height;
 const SignUpScreen = ({navigation}) => {
   const [activeButton, setActiveButton] = useState('Agent');
 
-  // React Hook useForm
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-    watch,
-  } = useForm({
-    defaultValues: {
-      agentName: '',
-      agentEmail: '',
-      agentPhoneNumber: '',
-      agentPassword: '',
-      agentConfirmPassword: '',
+  // Input Filed States Agent and Agency
+  const [agentName, setAgentName] = useState('');
+  const [agentEmail, setAgentEmail] = useState('');
+  const [agentPhoneNumber, setAgentPhoneNumber] = useState('');
+  const [agentPassword, setAgentPassword] = useState('');
+  const [agentConfirmPassword, setAgentConfirmPassword] = useState('');
 
-      agencyName: '',
-      agencyEmail: '',
-      agencyPhoneNumber: '',
-      agencyPassword: '',
-      agencyConfirmPassword: '',
-    },
-  });
+  const resetAgentState = () => {
+    setAgentName('');
+    setAgentEmail('');
+    setAgentPhoneNumber('');
+    setAgentPassword('');
+    setAgentConfirmPassword('');
+    setActiveButton('Agency');
+  };
 
-  console.log(errors);
+  const [agencyName, setAgencyName] = useState('');
+  const [agencyEmail, setAgencyEmail] = useState('');
+  const [agencyPhoneNumber, setAgencyPhoneNumber] = useState('');
+  const [agencyPassword, setAgencyPassword] = useState('');
+  const [agencyConfirmPassword, setAgencyConfirmPassword] = useState('');
 
-  // Password Match Function
-  const agentpwd = watch('agentPassword');
-  const agencypwd = watch('agencyPassword');
+  const resetAgencyState = () => {
+    setAgencyName('');
+    setAgencyEmail('');
+    setAgencyPhoneNumber('');
+    setAgencyPassword('');
+    setAgencyConfirmPassword('');
+    setActiveButton('Agent');
+  };
 
-  // OnPress Functions
+  const {isLoading, agentRegister, agencyRegister} = useContext(AuthContext);
 
   const onPressTermsCondition = () => {
     console.warn('Terms & Conditions pressed');
@@ -77,13 +86,13 @@ const SignUpScreen = ({navigation}) => {
 
   // Navigation Functions
 
-  const onSignUpAgencyPressed = data => {
-    console.log(data);
+  const onSignUpAgencyPressed = () => {
+    //console.log(data);
     navigation.navigate('LoginScreen');
   };
 
-  const onSignUpAgentPressed = data => {
-    console.log(data);
+  const onSignUpAgentPressed = () => {
+    //console.log(data);
     navigation.navigate('LoginScreen');
   };
 
@@ -115,7 +124,7 @@ const SignUpScreen = ({navigation}) => {
         <View style={styles.EmailPhoneNumberSwitch}>
           <TouchableHighlight
             underlayColor={'transparent'}
-            onPress={() => setActiveButton('Agent')}
+            onPress={resetAgencyState}
             style={{
               borderBottomColor: activeButton === 'Agent' ? 'white' : '#4681F4',
               borderBottomWidth: 5,
@@ -136,7 +145,7 @@ const SignUpScreen = ({navigation}) => {
 
           <TouchableHighlight
             underlayColor={'transparent'}
-            onPress={() => setActiveButton('Agency')}
+            onPress={resetAgentState}
             style={{
               borderBottomColor:
                 activeButton === 'Agency' ? 'white' : '#4681F4',
@@ -176,8 +185,10 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agentName"
             placeholder="Enter your name"
-            control={control}
-            rules={{required: 'Name is Required'}}
+            value={agentName}
+            onChangeText={text => setAgentName(text)}
+            // control={control}
+            // rules={{required: 'Name is Required'}}
             svg1={<svg.userLoginSVG width={24} height={24} />}
           />
 
@@ -196,11 +207,13 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agentEmail"
             placeholder="Enter your email"
-            control={control}
-            rules={{
-              required: 'Email Required',
-              pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
-            }}
+            value={agentEmail}
+            onChangeText={text => setAgentEmail(text)}
+            // control={control}
+            // rules={{
+            //   required: 'Email Required',
+            //   pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
+            // }}
             svg1={<svg.envelope width={25} height={25} />}
           />
 
@@ -218,8 +231,10 @@ const SignUpScreen = ({navigation}) => {
 
           <CustomInput
             name="agentPhoneNumber"
-            control={control}
-            rules={{required: 'PhoneNumer is Required'}}
+            value={agentPhoneNumber}
+            onChangeText={text => setAgentPhoneNumber(text)}
+            // control={control}
+            // rules={{required: 'PhoneNumer is Required'}}
             countryCode="  +92"
             svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
           />
@@ -239,15 +254,17 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agentPassword"
             placeholder="Your password"
-            control={control}
+            value={agentPassword}
+            onChangeText={text => setAgentPassword(text)}
+            //  control={control}
             secureTextEntry
-            rules={{
-              required: 'Password Required',
-              minLength: {
-                value: 5,
-                message: 'Password should be minimum 5 character long',
-              },
-            }}
+            // rules={{
+            //   required: 'Password Required',
+            //   minLength: {
+            //     value: 5,
+            //     message: 'Password should be minimum 5 character long',
+            //   },
+            // }}
             svg1={<svg.loginLock width={24} height={24} />}
             svg2={<svg.EyeOpen width={20} height={20} />}
             svg3={<svg.EyeClosed width={20} height={20} />}
@@ -268,19 +285,30 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agentConfirmPassword"
             placeholder="Confirm your password"
-            control={control}
+            value={agentConfirmPassword}
+            onChangeText={text => setAgentConfirmPassword(text)}
+            //control={control}
             secureTextEntry
-            rules={{
-              required: 'Please Comfirm Password',
-              validate: value => value === agentpwd || 'Password do no match',
-            }}
+            // rules={{
+            //   required: 'Please Comfirm Password',
+            //   validate: value => value === agentpwd || 'Password do no match',
+            // }}
             svg1={<svg.loginLock width={24} height={24} />}
             svg2={<svg.EyeOpen width={20} height={20} />}
             svg3={<svg.EyeClosed width={20} height={20} />}
           />
           {/* -----------------   Sign Up Agent   ------------------- */}
 
-          <TouchableOpacity onPress={handleSubmit(onSignUpAgentPressed)}>
+          <TouchableOpacity
+            onPress={() => {
+              agentRegister(
+                agentName,
+                agentEmail,
+                agentPhoneNumber,
+                agentPassword,
+                agentConfirmPassword,
+              );
+            }}>
             <View style={styles.SignUpButton}>
               <View
                 style={{
@@ -365,6 +393,8 @@ const SignUpScreen = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+
+          <NetworkLogger />
         </ScrollView>
       ) : (
         <ScrollView>
@@ -383,8 +413,10 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agencyName"
             placeholder="Enter agency name"
-            control={control}
-            rules={{required: 'AgencyName is Required'}}
+            value={agencyName}
+            onChangeText={text => setAgencyName(text)}
+            // control={control}
+            // rules={{required: 'AgencyName is Required'}}
             svg1={<svg.userLoginSVG width={24} height={24} />}
           />
 
@@ -403,11 +435,13 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agencyEmail"
             placeholder="Enter email"
-            control={control}
-            rules={{
-              required: 'Email Required',
-              pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
-            }}
+            value={agencyEmail}
+            onChangeText={text => setAgencyEmail(text)}
+            // control={control}
+            // rules={{
+            //   required: 'Email Required',
+            //   pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
+            // }}
             svg1={<svg.envelope width={25} height={25} />}
           />
 
@@ -425,8 +459,10 @@ const SignUpScreen = ({navigation}) => {
 
           <CustomInput
             name="agencyPhoneNumber"
-            control={control}
-            rules={{required: 'PhoneNumer is Required'}}
+            // control={control}
+            // rules={{required: 'PhoneNumer is Required'}}
+            value={agencyPhoneNumber}
+            onChangeText={text => setAgencyPhoneNumber(text)}
             countryCode="  +92"
             svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
           />
@@ -446,15 +482,17 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agencyPassword"
             placeholder="Your password"
-            control={control}
+            value={agencyPassword}
+            onChangeText={text => setAgencyPassword(text)}
+            // control={control}
             secureTextEntry
-            rules={{
-              required: 'agency Password Required',
-              minLength: {
-                value: 5,
-                message: 'Password should be minimum 5 character long',
-              },
-            }}
+            // rules={{
+            //   required: 'agency Password Required',
+            //   minLength: {
+            //     value: 5,
+            //     message: 'Password should be minimum 5 character long',
+            //   },
+            // }}
             svg1={<svg.loginLock width={24} height={24} />}
             svg2={<svg.EyeOpen width={20} height={20} />}
             svg3={<svg.EyeClosed width={20} height={20} />}
@@ -475,19 +513,30 @@ const SignUpScreen = ({navigation}) => {
           <CustomInput
             name="agencyConfirmPassword"
             placeholder="Confirm your password"
-            control={control}
+            value={agencyConfirmPassword}
+            onChangeText={text => setAgencyConfirmPassword(text)}
+            //control={control}
             secureTextEntry
-            rules={{
-              required: 'Please Comfirm Password',
-              validate: value => value === agencypwd || 'Password do no match',
-            }}
+            // rules={{
+            //   required: 'Please Comfirm Password',
+            //   validate: value => value === agencypwd || 'Password do no match',
+            // }}
             svg1={<svg.loginLock width={24} height={24} />}
             svg2={<svg.EyeOpen width={20} height={20} />}
             svg3={<svg.EyeClosed width={20} height={20} />}
           />
           {/* -------------------------------------- */}
 
-          <TouchableOpacity onPress={handleSubmit(onSignUpAgencyPressed)}>
+          <TouchableOpacity
+            onPress={() => {
+              agencyRegister(
+                agencyName,
+                agencyEmail,
+                agencyPhoneNumber,
+                agencyPassword,
+                agencyConfirmPassword,
+              );
+            }}>
             <View style={styles.SignUpButton}>
               <View
                 style={{
@@ -546,6 +595,7 @@ const SignUpScreen = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          <NetworkLogger />
         </ScrollView>
       )}
       {/* -------------------------------------- */}
@@ -580,6 +630,7 @@ const styles = StyleSheet.create({
   headerNav: {
     height: (windowHeight / 100) * 6,
     width: (windowWidth / 100) * 10,
+    flexDirection: 'row',
     //backgroundColor: 'yellow',
     justifyContent: 'center',
     paddingLeft: 4,

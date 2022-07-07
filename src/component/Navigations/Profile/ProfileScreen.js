@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -13,13 +13,22 @@ import color from '../../../constants/colors';
 import dimensions from '../../../constants/dimensions';
 import globalStyle from '../../../constants/globalStyle';
 
+// ------ Custom Loader
+import Loader from '../../../controles/Loader';
+
+// ------ Auth Context
+import {AuthContext} from '../../../context/AuthContext';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const ProfileScreen = ({navigation}) => {
+  const {userInfo, isLoading, logout} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
+      <Loader loading={isLoading} />
 
       {/** --------------------      Header       ----------------------*/}
 
@@ -279,10 +288,10 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   Log Out  --- */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={logout()}>
           <View style={styles.MidSectionViewYellow}>
             <View style={styles.InnerView1}>
-              <svg.LogoutSvg width={24} height={24} />
+              <svg.LogoutSvg width={30} height={30} fill={'#FFFFFF'} />
               <Text
                 style={[styles.h4White, styles.cardText]}
                 adjustsFontSizeToFit={true}

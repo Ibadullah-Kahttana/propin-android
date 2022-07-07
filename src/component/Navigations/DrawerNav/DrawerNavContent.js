@@ -1,5 +1,5 @@
 import {View, StyleSheet, Dimensions} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 
 import {Drawer, Text} from 'react-native-paper';
 
@@ -8,6 +8,12 @@ import color from '../../../constants/colors';
 import dimensions from '../../../constants/dimensions';
 import globalStyle from '../../../constants/globalStyle';
 
+// ------ Custom Loader
+import Loader from '../../../controles/Loader';
+
+// ------ Auth Context
+import {AuthContext} from '../../../context/AuthContext';
+
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
@@ -15,6 +21,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const DrawerNavContent = ({navigation}) => {
   const [activeButton, setActiveButton] = useState('Home');
+  const {userInfo, isLoading, logout} = useContext(AuthContext);
 
   const handler = param => {
     setActiveButton(param);
@@ -23,6 +30,7 @@ const DrawerNavContent = ({navigation}) => {
 
   return (
     <View style={styles.drawerContent}>
+      <Loader loading={isLoading} />
       {/** LOG */}
       <Drawer.Section style={styles.drawerIconSection}>
         <svg.PropInLogoDrawable height={130} width={130} />
@@ -355,7 +363,7 @@ const DrawerNavContent = ({navigation}) => {
         {/**  Logout  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => handler('Home')}>
+          onPress={(() => handler('Home'), logout())}>
           <View
             style={{
               height: (windowHeight / 100) * 6,

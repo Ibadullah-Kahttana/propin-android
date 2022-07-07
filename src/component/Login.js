@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -14,9 +14,6 @@ import color from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import globalStyle from '../constants/globalStyle';
 
-// ---- UseForm Hook
-import {useForm, Controller} from 'react-hook-form';
-
 // ------- Custom Input
 import CustomInput from '../controles/CustomInput';
 
@@ -27,27 +24,29 @@ import {Icon} from 'react-native-elements';
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-//
+// ------ Auth Context
+import {AuthContext} from '../context/AuthContext';
+
+// ------ Custom Loader
+import Loader from '../controles/Loader';
+
+//------  Netwrok logger
+import NetworkLogger from 'react-native-network-logger';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Login = ({navigation}) => {
-  // React Hook useForm
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm({
-    defaultValues: {
-      userName: '',
-      userPassword: '',
-    },
-  });
+  // useStates Email Passowrd
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
-  // On Press Function
+  const {isLoading, login} = useContext(AuthContext);
+
+  const val = useContext(AuthContext);
 
   const onLoginPressed = data => {
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     navigation.navigate('DrawerNavigator');
   };
 
@@ -75,6 +74,7 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Loader loading={isLoading} />
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
 
       <View style={styles.LoginHeader}>
@@ -160,11 +160,8 @@ const Login = ({navigation}) => {
         <CustomInput
           name="userName"
           placeholder="Enter your name"
-          control={control}
-          rules={{
-            required: 'User Name Required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
-          }}
+          value={email}
+          onChangeText={text => setEmail(text)}
           svg1={<svg.userLoginSVG width={24} height={24} />}
         />
 
@@ -182,15 +179,9 @@ const Login = ({navigation}) => {
         <CustomInput
           name="userPassword"
           placeholder="Your password"
-          control={control}
+          value={password}
+          onChangeText={text => setPassword(text)}
           secureTextEntry
-          rules={{
-            required: 'User Password Required',
-            minLength: {
-              value: 5,
-              message: 'Password should be minimum 5 character long',
-            },
-          }}
           svg1={<svg.loginLock width={24} height={24} />}
           svg2={<svg.EyeOpen width={20} height={20} />}
           svg3={<svg.EyeClosed width={20} height={20} />}
@@ -289,7 +280,10 @@ const Login = ({navigation}) => {
       )} */}
       {/* -------------------------------------- */}
 
-      <TouchableOpacity onPress={handleSubmit(onLoginPressed)}>
+      <TouchableOpacity
+        onPress={() => {
+          login(email, password);
+        }}>
         <View style={styles.LogInButton}>
           <View
             style={{
@@ -327,6 +321,7 @@ const Login = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+
       {/* -------------------------------------- */}
       <View style={styles.orView}>
         <View style={styles.ORLines}></View>
@@ -378,6 +373,8 @@ const Login = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+
+      <NetworkLogger />
     </View>
   );
 };
