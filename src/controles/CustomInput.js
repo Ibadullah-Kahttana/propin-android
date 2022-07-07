@@ -12,66 +12,43 @@ import colors from '../constants/colors';
 import globalStyle from '../constants/globalStyle';
 import dimensions from '../constants/dimensions';
 
-import Feather from 'react-native-vector-icons/Feather';
-
 const CustomInput = ({
-  control,
-  name,
-  rules = {},
+  value,
+  onChangeText,
   placeholder,
   countryCode,
   svg1,
   svg2,
-  svg3,
+
   secureTextEntry,
 }) => {
   return (
-    <Controller
-      control={control}
-      name={name}
-      rules={rules}
-      render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
-        <>
-          <View
-            style={[
-              styles.conatiner,
-              {borderColor: error ? 'red' : '#DFE2E4'},
-            ]}>
-            {/** SVG 1 */}
-            <View style={{paddingLeft: 5, paddingRight: 5}}>{svg1}</View>
+    <View style={[styles.conatiner, {borderColor: '#DFE2E4'}]}>
+      {/** SVG 1 */}
+      <View style={{paddingLeft: 5, paddingRight: 5}}>{svg1}</View>
 
-            {/** Country Code */}
-            <Text
-              style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {countryCode}
-            </Text>
+      {/** Country Code */}
+      <Text
+        style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}>
+        {countryCode}
+      </Text>
 
-            {/** TextInput Filed */}
-            <TextInput
-              placeholder={placeholder}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              style={styles.input}
-              secureTextEntry={secureTextEntry}
-            />
+      {/** TextInput Filed */}
+      <TextInput
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+        value={value}
+        style={styles.input}
+        secureTextEntry={secureTextEntry}
+      />
 
-            {/** Eye Icon */}
-            <TouchableOpacity>
-              {secureTextEntry ? <View>{svg2}</View> : <View>{svg3}</View>}
-            </TouchableOpacity>
-          </View>
-
-          {error && (
-            <Text style={{color: 'red', alignSelf: 'stretch', paddingLeft: 20}}>
-              {error.message || 'Error'}
-            </Text>
-          )}
-        </>
-      )}
-    />
+      {/** Eye Icon */}
+      <TouchableOpacity>
+        <View>{svg2}</View>
+      </TouchableOpacity>
+    </View>
   );
 };
 
