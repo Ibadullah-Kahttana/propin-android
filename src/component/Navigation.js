@@ -15,7 +15,6 @@ import RegisterScreen from './Register';
 import SelectCityScreen from './SelectCity';
 import SignUpScreen from './Register/SignUpScreen';
 import DrawerNavigator from './DrawerNavigator';
-import BottomNavigation from './BottomNavigation';
 
 // -------------- Auth Provider ----------------------------------------------------------
 
@@ -28,118 +27,33 @@ const windowHeight = Dimensions.get('window').height;
 
 const Stack = createStackNavigator();
 
-const SignedInStack = createStackNavigator();
-const SignedOutStack = createStackNavigator();
-
-const SignedOutStackNavigator = () => {
+const StackNavigator = () => {
   return (
-    <SignedOutStack.Navigator
+    <Stack.Navigator
       initialRouteName="RegisteryScreen"
       screenOptions={{
         headerShown: false,
       }}>
-      <SignedOutStack.Screen
-        name="RegisteryScreen"
-        component={RegisterScreen}
-      />
-      <SignedOutStack.Screen name="CountryScreen" component={CountryScreen} />
-
-      <SignedOutStack.Screen
-        name="SelectCityScreen"
-        component={SelectCityScreen}
-      />
-      <SignedOutStack.Screen name="LoginScreen" component={LoginScreen} />
-      <SignedOutStack.Screen name="SignUpScreen" component={SignUpScreen} />
-    </SignedOutStack.Navigator>
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <Stack.Screen name="CountryScreen" component={CountryScreen} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
+      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+    </Stack.Navigator>
   );
 };
 
-// const SignedInStackNavigator = () => {
-//   return (
-//     <SignedInStack.Navigator
-//       initialRouteName="DrawerNavigator"
-//       screenOptions={{
-//         headerShown: false,
-//       }}>
-//       <SignedInStack.Screen
-//         name="DrawerNavigator"
-//         component={DrawerNavigator}
-//       />
-//       <SignedInStack.Screen
-//         name="BottomNavigation"
-//         component={BottomNavigation}
-//       />
-//     </SignedInStack.Navigator>
-//   );
-// };
-
-// const AuthScreens = () => {
-//   return (
-//     <SignedInStack.Navigator
-//       initialRouteName="DrawerNavigator"
-//       screenOptions={{
-//         headerShown: false,
-//       }}>
-//       <SignedInStack.Screen
-//         name="DrawerNavigator"
-//         component={DrawerNavigator}
-//       />
-//       <SignedInStack.Screen
-//         name="BottomNavigation"
-//         component={BottomNavigation}
-//       />
-//     </SignedInStack.Navigator>
-//   );
-// };
-// const StackNavigator = () => {
-//   return (
-//     <Stack.Navigator
-//       initialRouteName="RegisteryScreen"
-//       screenOptions={{
-//         headerShown: false,
-//       }}>
-//       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-//       <Stack.Screen name="CountryScreen" component={CountryScreen} />
-//       <Stack.Screen name="LoginScreen" component={LoginScreen} />
-//       <Stack.Screen name="SelectCityScreen" component={SelectCityScreen} />
-//       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-//       <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
-//       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-//     </Stack.Navigator>
-//   );
-// };
-
 const Navigation = () => {
-  const {splashLoading} = useContext(AuthContext);
-
-  const [AuthState, setAuthState] = useState('');
-  console.log('Auth Tokken -> ', AuthState);
-  const getData = async () => {
-    try {
-      const AuthToken = await AsyncStorage.getItem('userToken');
-      setAuthState(AuthToken);
-      return AuthToken != null ? JSON.parse(AuthToken) : null;
-    } catch (e) {
-      console.log(`Auth Tokken Error ${e}`);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const {splashLoading, userToken} = useContext(AuthContext);
 
   return (
     <NavigationContainer>
       {splashLoading ? (
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-      ) : AuthState !== null ? (
+        <SplashScreen options={{headerShown: false}} />
+      ) : userToken !== null ? (
         <DrawerNavigator />
       ) : (
-        <SignedOutStackNavigator />
+        <StackNavigator />
       )}
     </NavigationContainer>
   );

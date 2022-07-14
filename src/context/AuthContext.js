@@ -8,8 +8,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
   // Use State For Async
   const [isLoading, setIsLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
-  const [token, setToken] = useState({});
+  const [agentInfo, setAgentInfo] = useState(null);
+  const [agencyInfo, setAgencyInfo] = useState(null);
+  const [userToken, setUserToken] = useState(null);
   const [splashLoading, setSplashLoading] = useState(false);
 
   // Agent Register
@@ -24,11 +25,11 @@ export const AuthProvider = ({children}) => {
         confirm_password,
       })
       .then(res => {
-        let userInfo = res.data;
-        setUserInfo(userInfo);
-        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        let agentInfo = res.data.data;
+        setAgentInfo(agentInfo);
+        AsyncStorage.setItem('agentInfo', JSON.stringify(agentInfo));
         setIsLoading(false);
-        console.log(userInfo);
+        console.log(agentInfo);
       })
       .catch(e => {
         console.log(`register error ${e}`);
@@ -38,21 +39,23 @@ export const AuthProvider = ({children}) => {
 
   // Agency Register
   const agencyRegister = (name, email, phone, password, confirm_password) => {
+    const data = {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+      confirm_password: confirm_password,
+    };
+
     setIsLoading(true);
     axios
-      .post(`${BASE_URL}/register`, {
-        name,
-        email,
-        phone,
-        password,
-        confirm_password,
-      })
+      .post(`${BASE_URL}/register`, data)
       .then(res => {
-        let userInfo = res.data;
-        setUserInfo(userInfo);
-        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+        let agencyInfo = res.data;
+        setAgencyInfo(agencyInfo);
+        AsyncStorage.setItem('agencyInfo', JSON.stringify(agencyInfo));
         setIsLoading(false);
-        console.log(userInfo);
+        console.log(agencyInfo);
       })
       .catch(e => {
         console.log(`register error ${e.response.data.errors}`);
@@ -69,34 +72,18 @@ export const AuthProvider = ({children}) => {
         password,
       })
       .then(async res => {
-        let userInf;
-        userInf = res.data;
-
-        console.log('user Info -----> ', userInf);
+        let userInfo;
         let userToken;
-        userToken = res.data.data.token;
-        setToken(userToken);
-        let userEmail = res.data.data.email;
-        let userPassword = res.data.data.password;
-        let userName = res.data.data.name;
-        let userRole = res.data.data.role;
-        let userAvatr = res.data.data.avatar;
-        console.log('Email = ', userEmail);
-        console.log('Password = ', userPassword);
-        console.log('My Data', userToken);
+        userInfo = res.data.data;
+        console.log('User Info = ', userInfo);
+        userToken = userInfo.token;
+        setUserToken(userToken);
+        console.log('Token ID = ', userToken);
         try {
-          await AsyncStorage.setItem('userInfo', JSON.stringify(userInf));
           await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
         } catch (error) {
           console.log(error);
         }
-        console.log('Input Email ----- : ', email);
-        console.log('Input PAssword  ----- : ', password);
-        console.log('Name =', userName);
-        console.log('Avatar =', userAvatr);
-        console.log('Role =', userRole);
-        console.log('token', token);
-
         setIsLoading(false);
       })
       .catch(e => {
@@ -108,10 +95,10 @@ export const AuthProvider = ({children}) => {
   const logout = async () => {
     setIsLoading(true);
     try {
-      console.log('Before Remove Token', token);
+      let userToken = await AsyncStorage.getItem('userToken');
+      userToken = JSON.parse(userToken);
       await AsyncStorage.removeItem('userToken');
-      setToken({});
-      console.log('After Remove Token', token);
+      setUserToken(null);
       setIsLoading(false);
     } catch (e) {
       console.log(e);
@@ -122,15 +109,10 @@ export const AuthProvider = ({children}) => {
     try {
       setSplashLoading(true);
       let Token;
-      Token = null;
-      try {
-        Token = await AsyncStorage.getItem('userToken');
-        Token = JSON.parse(Token);
-        console.log('use Effect State = ', Token);
-      } catch (e) {
-        console.log(e);
-      }
-      // console.log('Effect user token : ', Token);
+      Token = await AsyncStorage.getItem('userToken');
+      Token = JSON.parse(Token);
+      console.log('use Effect State = ', Token);
+      setUserToken(Token);
       setSplashLoading(false);
     } catch (e) {
       setSplashLoading(false);
@@ -146,9 +128,10 @@ export const AuthProvider = ({children}) => {
     <AuthContext.Provider
       value={{
         isLoading,
-        userInfo,
+        agentInfo,
+        agencyInfo,
         splashLoading,
-        token,
+        userToken,
         agentRegister,
         agencyRegister,
         login,
