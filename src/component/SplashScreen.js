@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
 
 const SplashScreen = () => {
-  setTimeout(() => {}, 3000);
+  setTimeout(() => {}, 10000);
   return (
     <View>
       <ActivityIndicator size="large" color="#555" />

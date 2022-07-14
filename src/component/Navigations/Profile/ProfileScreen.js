@@ -25,8 +25,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const ProfileScreen = ({navigation}) => {
-  const {userInfo, isLoading, logout} = useContext(AuthContext);
-  const UserINFO = AsyncStorage.getItem('userInfo');
+  const {isLoading, logout} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -56,15 +55,11 @@ const ProfileScreen = ({navigation}) => {
             <Text
               style={[styles.h2Black, styles.PersonName]}
               adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {UserINFO.name}
-            </Text>
+              numberOfLines={1}></Text>
             <Text
               style={[styles.h4Grey, styles.PersonEmail]}
               adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {UserINFO.email}
-            </Text>
+              numberOfLines={1}></Text>
           </View>
 
           <TouchableOpacity

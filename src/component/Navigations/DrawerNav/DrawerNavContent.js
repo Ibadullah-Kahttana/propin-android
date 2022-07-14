@@ -28,11 +28,6 @@ const DrawerNavContent = ({navigation}) => {
     navigation.navigate(param);
   };
 
-  const onLogoutPressed = ({navigation}) => {
-    logout();
-    navigation.naviagte('RegisteryScreen');
-  };
-
   return (
     <View style={styles.drawerContent}>
       <Loader loading={isLoading} />
@@ -366,9 +361,7 @@ const DrawerNavContent = ({navigation}) => {
         </TouchableOpacity>
 
         {/**  Logout  */}
-        <TouchableOpacity
-          underlayColor={'transparent'}
-          onPress={() => onLogoutPressed}>
+        <TouchableOpacity underlayColor={'transparent'} onPress={logout}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
