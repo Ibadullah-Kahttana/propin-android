@@ -13,6 +13,8 @@ import color from '../../../constants/colors';
 import dimensions from '../../../constants/dimensions';
 import globalStyle from '../../../constants/globalStyle';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // ------ Custom Loader
 import Loader from '../../../controles/Loader';
 
@@ -24,6 +26,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const ProfileScreen = ({navigation}) => {
   const {userInfo, isLoading, logout} = useContext(AuthContext);
+  const UserINFO = AsyncStorage.getItem('userInfo');
 
   return (
     <View style={styles.container}>
@@ -54,13 +57,13 @@ const ProfileScreen = ({navigation}) => {
               style={[styles.h2Black, styles.PersonName]}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
-              John Doe
+              {UserINFO.name}
             </Text>
             <Text
               style={[styles.h4Grey, styles.PersonEmail]}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
-              john@example.com
+              {UserINFO.email}
             </Text>
           </View>
 
@@ -288,7 +291,7 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
 
         {/**   ---   Log Out  --- */}
-        <TouchableOpacity onPress={logout()}>
+        <TouchableOpacity onPress={logout}>
           <View style={styles.MidSectionViewYellow}>
             <View style={styles.InnerView1}>
               <svg.LogoutSvg width={30} height={30} fill={'#FFFFFF'} />

@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-  Modal,
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
+import {Modal, StyleSheet, Dimensions, ActivityIndicator} from 'react-native';
 import {BlurView} from 'expo-blur';
-import svg from '../constants/svgs';
 
 const {width, height} = Dimensions.get('window');
 const Loader = props => {

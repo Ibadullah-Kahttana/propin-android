@@ -7,9 +7,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Animated from 'react-native-reanimated';
 
 import colors from '../constants/colors';
-import svg from '../constants/svgs';
-
-import LinearGradient from 'react-native-linear-gradient';
 
 // Employee Stack Screen
 import EmployeeInfo from './Navigations/DrawerNav/Employee/EmployeeInfoScreen';

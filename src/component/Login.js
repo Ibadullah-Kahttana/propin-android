@@ -43,10 +43,8 @@ const Login = ({navigation}) => {
 
   const {isLoading, login} = useContext(AuthContext);
 
-  const val = useContext(AuthContext);
-
-  const onLoginPressed = data => {
-    //console.log(JSON.stringify(data));
+  const onLoginPressed = (mail, pass) => {
+    login(mail, pass);
     navigation.navigate('DrawerNavigator');
   };
 

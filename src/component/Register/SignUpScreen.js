@@ -22,7 +22,7 @@ const EMAIL_REGEX =
 // ------ Auth Context
 import {AuthContext} from '../../context/AuthContext';
 
-// ------ Custom Loader
+// ------ Custom
 import Loader from '../../controles/Loader';
 
 //------  Netwrok logger
@@ -99,6 +99,7 @@ const SignUpScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
+      <Loader loading={isLoading} />
 
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>

@@ -424,11 +424,11 @@ const styles = StyleSheet.create({
   HomeScreenHeaderNav: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 8,
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 5,
     paddingLeft: 20,
   },
 
