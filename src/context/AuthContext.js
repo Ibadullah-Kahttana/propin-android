@@ -15,15 +15,17 @@ export const AuthProvider = ({children}) => {
 
   // Agent Register
   const agentRegister = (name, email, phone, password, confirm_password) => {
+    const agenctdata = {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+      confirm_password: confirm_password,
+    };
+
     setIsLoading(true);
     axios
-      .post(`${BASE_URL}/register`, {
-        name,
-        email,
-        phone,
-        password,
-        confirm_password,
-      })
+      .post(`${BASE_URL}/register`, agenctdata)
       .then(res => {
         let agentInfo = res.data.data;
         setAgentInfo(agentInfo);
@@ -39,7 +41,7 @@ export const AuthProvider = ({children}) => {
 
   // Agency Register
   const agencyRegister = (name, email, phone, password, confirm_password) => {
-    const data = {
+    const agencydata = {
       name: name,
       email: email,
       phone: phone,
@@ -49,7 +51,7 @@ export const AuthProvider = ({children}) => {
 
     setIsLoading(true);
     axios
-      .post(`${BASE_URL}/register`, data)
+      .post(`${BASE_URL}/register`, agencydata)
       .then(res => {
         let agencyInfo = res.data;
         setAgencyInfo(agencyInfo);
