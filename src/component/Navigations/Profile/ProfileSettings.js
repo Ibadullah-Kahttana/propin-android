@@ -65,7 +65,7 @@ const ProfileSettings = ({navigation}) => {
         <TouchableOpacity
           underlayColor={'transparent'}
           onPress={() => navigation.navigate('ProfileScreen')}>
-          <svg.LeftArrowSvgWhite width={18} height={18} />
+          <svg.LeftArrowSvgWhite width={18} height={18} fill={'white'} />
         </TouchableOpacity>
 
         <Text style={styles.h2White}>

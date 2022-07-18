@@ -424,11 +424,10 @@ const styles = StyleSheet.create({
   HomeScreenHeaderNav: {
     width: (windowWidth / 100) * 100,
     height: (windowHeight / 100) * 8,
-    // backgroundColor: 'yellow',
+    //backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: 5,
     paddingLeft: 20,
   },
 
@@ -516,9 +515,11 @@ const styles = StyleSheet.create({
   },
 
   HorizontalScrollView: {
-    width: (windowWidth / 100) * 100,
+    width: (windowWidth / 100) * 92,
     height: (windowHeight / 100) * 20,
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
   },
 
@@ -528,7 +529,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     width: (windowWidth / 100) * 70,
     height: (windowHeight / 100) * 18,
-    marginLeft: 15,
+    marginRight: 15,
     flexDirection: 'column',
     justifyContent: 'space-around',
     borderRadius: 15,
@@ -545,17 +546,19 @@ const styles = StyleSheet.create({
 
   SwitchListsHomeScreen: {
     width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 7,
+    height: (windowHeight / 100) * 5,
     //backgroundColor: 'yellow',
-    marginTop: 10,
     flexDirection: 'row',
+    marginTop: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#DFE2E4',
     alignItems: 'center',
   },
 
   SwitchList: {
     width: (windowWidth / 100) * 22,
-    height: (windowHeight / 100) * 5,
-    // backgroundColor: 'red',
+    height: (windowHeight / 100) * 4.9,
+    //backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 15,
@@ -577,7 +580,7 @@ const styles = StyleSheet.create({
 
   watchlistNav: {
     width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 6,
+    height: (windowHeight / 100) * 5,
     //backgroundColor: 'yellow',
     marginTop: 5,
     alignItems: 'center',

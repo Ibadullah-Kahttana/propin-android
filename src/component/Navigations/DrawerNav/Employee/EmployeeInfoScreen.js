@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,17 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 
-import ToggleSwitch from 'toggle-switch-react-native';
+import axios from 'axios';
+import {BASE_URL} from '../../../../config';
 
 import svg from '../../../../constants/svgs';
 import color from '../../../../constants/colors';
-import dimensions from '../../../../constants/dimensions';
-import globalStyle from '../../../../constants/globalStyle';
+
+//------  Netwrok logger
+import NetworkLogger from 'react-native-network-logger';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -30,78 +33,114 @@ const EmployeeInfoScreen = ({navigation}) => {
     navigation.navigate('EditEmployee');
   };
 
-  const EmployeeData = [
-    {
-      id: 1,
-      employeeName: 'John Doe',
-      employeeEmail: 'johnDoe@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '345',
-      employeephoneNo: '565432',
-      employeeDesignation: ' Supplu Chain and Logistics ',
-      Date: '12/04/2022',
-    },
-    {
-      id: 2,
-      employeeName: 'IbadUllah Kahttana',
-      employeeEmail: 'ibadullahKahttana@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '340',
-      employeephoneNo: '0192509',
-      employeeDesignation: 'Junior Software engineer ',
-      Dateemploye: '12/04/2022',
-    },
-    {
-      id: 3,
-      employeeName: 'Ali Khan',
-      employeeEmail: 'AliKhan@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '340',
-      employeephoneNo: '2345432',
-      employeeDesignation: 'Web Developer ',
-      Dateemploye: '11/07/2020',
-    },
-    {
-      id: 4,
-      employeeName: 'John Doe',
-      employeeEmail: 'johnDoe@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '345',
-      employeephoneNo: '565432',
-      employeeDesignation: ' Supplu Chain and Logistics ',
-      Dateemploye: '12/04/2022',
-    },
-    {
-      id: 5,
-      employeeName: 'John Doe',
-      employeeEmail: 'johnDoe@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '345',
-      employeephoneNo: '565432',
-      employeeDesignation: ' Supplu Chain and Logistics ',
-      Dateemploye: '12/04/2022',
-    },
-    {
-      id: 6,
-      employeeName: 'John Doe',
-      employeeEmail: 'johnDoe@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '345',
-      employeephoneNo: '565432',
-      employeeDesignation: ' Supplu Chain and Logistics ',
-      Dateemploye: '12/04/2022',
-    },
-    {
-      id: 7,
-      employeeName: 'John Doe',
-      employeeEmail: 'johnDoe@gmail.com',
-      countryCode: '+92',
-      netwrokCode: '345',
-      employeephoneNo: '565432',
-      employeeDesignation: ' Supplu Chain and Logistics ',
-      Dateemploye: '12/04/2022',
-    },
-  ];
+  //==================================================================================
+
+  // const [employName, setEmployName] = useState(null);
+  // const [employEmail, setEmployEmail] = useState(null);
+  // const [employPhoneNumber, setEmployPhoneNumber] = useState(null);
+  // const [employDesignation, setEmployDesignation] = useState(null);
+  // const [date, setdate] = useState(null);
+  // const [employAvatar, setEmployAvatar] = useState(null);
+
+  const [employeData, setEmployeData] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`${BASE_URL}/employee`)
+  //     .then(res => {
+  //       let employeName = res;
+  //       setEmployName(employName);
+  //       console.log('Employee Info = ', employeName);
+  //     })
+  //     .catch(e => {
+  //       console.log(`Employe Info Error = ${e}`);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/employee`)
+      .then(response => {
+        setEmployeData('Employe Info  = ', response.data.success);
+      })
+      .catch(error => {
+        console.log('Employe Info Error = ', error);
+      });
+  }, []);
+
+  //==================================================================================
+  // const EmployeeData = [
+  //   {
+  //     id: 1,
+  //     employeeName: 'John Doe',
+  //     employeeEmail: 'johnDoe@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '345',
+  //     employeephoneNo: '565432',
+  //     employeeDesignation: ' Supplu Chain and Logistics ',
+  //     Date: '12/04/2022',
+  //   },
+  //   {
+  //     id: 2,
+  //     employeeName: 'IbadUllah Kahttana',
+  //     employeeEmail: 'ibadullahKahttana@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '340',
+  //     employeephoneNo: '0192509',
+  //     employeeDesignation: 'Junior Software engineer ',
+  //     Dateemploye: '12/04/2022',
+  //   },
+  //   {
+  //     id: 3,
+  //     employeeName: 'Ali Khan',
+  //     employeeEmail: 'AliKhan@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '340',
+  //     employeephoneNo: '2345432',
+  //     employeeDesignation: 'Web Developer ',
+  //     Dateemploye: '11/07/2020',
+  //   },
+  //   {
+  //     id: 4,
+  //     employeeName: 'John Doe',
+  //     employeeEmail: 'johnDoe@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '345',
+  //     employeephoneNo: '565432',
+  //     employeeDesignation: ' Supplu Chain and Logistics ',
+  //     Dateemploye: '12/04/2022',
+  //   },
+  //   {
+  //     id: 5,
+  //     employeeName: 'John Doe',
+  //     employeeEmail: 'johnDoe@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '345',
+  //     employeephoneNo: '565432',
+  //     employeeDesignation: ' Supplu Chain and Logistics ',
+  //     Dateemploye: '12/04/2022',
+  //   },
+  //   {
+  //     id: 6,
+  //     employeeName: 'John Doe',
+  //     employeeEmail: 'johnDoe@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '345',
+  //     employeephoneNo: '565432',
+  //     employeeDesignation: ' Supplu Chain and Logistics ',
+  //     Dateemploye: '12/04/2022',
+  //   },
+  //   {
+  //     id: 7,
+  //     employeeName: 'John Doe',
+  //     employeeEmail: 'johnDoe@gmail.com',
+  //     countryCode: '+92',
+  //     netwrokCode: '345',
+  //     employeephoneNo: '565432',
+  //     employeeDesignation: ' Supplu Chain and Logistics ',
+  //     Dateemploye: '12/04/2022',
+  //   },
+  // ];
 
   return (
     <View style={styles.container}>
@@ -229,12 +268,106 @@ const EmployeeInfoScreen = ({navigation}) => {
           style={{paddingBottom: 30}}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
+          <FlatList
+            data={employeData}
+            renderItem={({item}) => (
+              <View elevation={8} style={styles.plotDescriptionBox}>
+                <View style={styles.plotDescriptionBoxInner}>
+                  <View style={styles.profyleInfo}>
+                    {/** Profile Card */}
+                    <View style={styles.profileImage}>
+                      <svg.UserSvg width={40} height={40} />
+                      <View style={styles.YellowCameraIcon}></View>
+                    </View>
+
+                    <View style={styles.profyleNameEmail}>
+                      <Text
+                        style={styles.h1blackBold}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={1}>
+                        {item.name}
+                      </Text>
+                      <Text
+                        style={styles.h4Grey}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={1}>
+                        {item.email}
+                      </Text>
+                    </View>
+
+                    <View style={styles.profyleSwitch}></View>
+                  </View>
+                  {/** Phone Designation Box */}
+                  <View style={styles.PhoneDesignation}>
+                    <View style={styles.PhoneBox}>
+                      <svg.phoneSvg width={17} height={17} />
+                      <Text
+                        style={styles.h5Grey}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={1}>
+                        {' '}
+                        {item.phone}
+                      </Text>
+                    </View>
+                    <View style={styles.DesignationBox}>
+                      <svg.bagSvg width={17} height={17} />
+                      <Text
+                        style={styles.h5Grey}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={1}>
+                        {item.designation}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/** Date Button box Box */}
+                  <View style={styles.DateButton}>
+                    <View style={styles.DateBox}>
+                      <svg.DateSvg width={17} height={17} fill={'#7D8088'} />
+                      <Text
+                        style={styles.h5Grey}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={1}>
+                        {'    '}
+                        {item.date_of_joining}
+                      </Text>
+                    </View>
+                    <View style={styles.ButtonBox}>
+                      <TouchableOpacity onPress={EditEmployee}>
+                        <View style={styles.EditButton}>
+                          <svg.penIconSvgPd width={15} height={15} />
+                          <Text
+                            style={styles.h5White}
+                            adjustsFontSizeToFit={true}
+                            numberOfLines={1}>
+                            Edit
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                      <TouchableOpacity>
+                        <View style={styles.DeleteButton}>
+                          <svg.deleteboxSvgPd width={15} height={15} />
+                          <Text
+                            style={styles.h5White}
+                            adjustsFontSizeToFit={true}
+                            numberOfLines={1}>
+                            Delete
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
           {/**  ---  LOOP --- */}
-          {EmployeeData.map((item, index) => (
+          {/* {EmployeeData.map((item, index) => (
             <View elevation={8} style={styles.plotDescriptionBox}>
               <View style={styles.plotDescriptionBoxInner}>
                 <View style={styles.profyleInfo}>
-                  {/** Profile Card */}
+                  {/** Profile Card 
                   <View style={styles.profileImage}>
                     <svg.UserSvg width={40} height={40} />
                     <View style={styles.YellowCameraIcon}></View>
@@ -257,7 +390,7 @@ const EmployeeInfoScreen = ({navigation}) => {
 
                   <View style={styles.profyleSwitch}></View>
                 </View>
-                {/** Phone Designation Box */}
+                {/** Phone Designation Box 
                 <View style={styles.PhoneDesignation}>
                   <View style={styles.PhoneBox}>
                     <svg.phoneSvg width={17} height={17} />
@@ -281,7 +414,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                   </View>
                 </View>
 
-                {/** Date Button box Box */}
+                {/** Date Button box Box 
                 <View style={styles.DateButton}>
                   <View style={styles.DateBox}>
                     <svg.DateSvg width={17} height={17} fill={'#7D8088'} />
@@ -320,7 +453,9 @@ const EmployeeInfoScreen = ({navigation}) => {
                 </View>
               </View>
             </View>
-          ))}
+          ))} */}
+
+          <NetworkLogger />
         </ScrollView>
       </View>
     </View>
