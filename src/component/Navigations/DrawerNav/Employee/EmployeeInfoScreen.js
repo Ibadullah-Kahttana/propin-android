@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 
 import axios from 'axios';
@@ -18,136 +19,64 @@ import color from '../../../../constants/colors';
 
 //------  Netwrok logger
 import NetworkLogger from 'react-native-network-logger';
+import {AuthContext} from '../../../../context/AuthContext';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const EmployeeInfoScreen = ({navigation}) => {
-  // Add Product + Add
+  const [employeData, setEmployeData] = useState([]);
+  const [employeID, setEmployeeID] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const pullMe = () => {
+    setRefresh(true);
+    getAllEmployess();
+    setTimeout(() => {
+      setRefresh(false);
+    }, 1000);
+  };
+
   const addEmployee = () => {
     navigation.navigate('AddEmployee');
   };
 
-  // Add Product + Add
-  const EditEmployee = () => {
-    navigation.navigate('EditEmployee');
+  const EditEmployee = (id, name, email) => {
+    console.log('ID = ', id);
+    console.log('Name = ', name);
+    console.log('Email = ', email);
+
+    // navigation.navigate('EditEmployee');
   };
 
-  //==================================================================================
+  const {userToken} = useContext(AuthContext);
 
-  // const [employName, setEmployName] = useState(null);
-  // const [employEmail, setEmployEmail] = useState(null);
-  // const [employPhoneNumber, setEmployPhoneNumber] = useState(null);
-  // const [employDesignation, setEmployDesignation] = useState(null);
-  // const [date, setdate] = useState(null);
-  // const [employAvatar, setEmployAvatar] = useState(null);
-
-  const [employeData, setEmployeData] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${BASE_URL}/employee`)
-  //     .then(res => {
-  //       let employeName = res;
-  //       setEmployName(employName);
-  //       console.log('Employee Info = ', employeName);
-  //     })
-  //     .catch(e => {
-  //       console.log(`Employe Info Error = ${e}`);
-  //     });
-  // }, []);
-
-  useEffect(() => {
+  const getAllEmployess = () => {
     axios
-      .get(`${BASE_URL}/employee`)
+      .get(`${BASE_URL}/employee`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
       .then(response => {
-        setEmployeData('Employe Info  = ', response.data.success);
+        let employeData = response.data.data;
+        console.log('Employee Data = ', JSON.stringify(employeData, null, 2));
       })
       .catch(error => {
         console.log('Employe Info Error = ', error);
       });
-  }, []);
+  };
 
-  //==================================================================================
-  // const EmployeeData = [
-  //   {
-  //     id: 1,
-  //     employeeName: 'John Doe',
-  //     employeeEmail: 'johnDoe@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '345',
-  //     employeephoneNo: '565432',
-  //     employeeDesignation: ' Supplu Chain and Logistics ',
-  //     Date: '12/04/2022',
-  //   },
-  //   {
-  //     id: 2,
-  //     employeeName: 'IbadUllah Kahttana',
-  //     employeeEmail: 'ibadullahKahttana@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '340',
-  //     employeephoneNo: '0192509',
-  //     employeeDesignation: 'Junior Software engineer ',
-  //     Dateemploye: '12/04/2022',
-  //   },
-  //   {
-  //     id: 3,
-  //     employeeName: 'Ali Khan',
-  //     employeeEmail: 'AliKhan@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '340',
-  //     employeephoneNo: '2345432',
-  //     employeeDesignation: 'Web Developer ',
-  //     Dateemploye: '11/07/2020',
-  //   },
-  //   {
-  //     id: 4,
-  //     employeeName: 'John Doe',
-  //     employeeEmail: 'johnDoe@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '345',
-  //     employeephoneNo: '565432',
-  //     employeeDesignation: ' Supplu Chain and Logistics ',
-  //     Dateemploye: '12/04/2022',
-  //   },
-  //   {
-  //     id: 5,
-  //     employeeName: 'John Doe',
-  //     employeeEmail: 'johnDoe@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '345',
-  //     employeephoneNo: '565432',
-  //     employeeDesignation: ' Supplu Chain and Logistics ',
-  //     Dateemploye: '12/04/2022',
-  //   },
-  //   {
-  //     id: 6,
-  //     employeeName: 'John Doe',
-  //     employeeEmail: 'johnDoe@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '345',
-  //     employeephoneNo: '565432',
-  //     employeeDesignation: ' Supplu Chain and Logistics ',
-  //     Dateemploye: '12/04/2022',
-  //   },
-  //   {
-  //     id: 7,
-  //     employeeName: 'John Doe',
-  //     employeeEmail: 'johnDoe@gmail.com',
-  //     countryCode: '+92',
-  //     netwrokCode: '345',
-  //     employeephoneNo: '565432',
-  //     employeeDesignation: ' Supplu Chain and Logistics ',
-  //     Dateemploye: '12/04/2022',
-  //   },
-  // ];
+  useEffect(() => {
+    getAllEmployess();
+  }, []);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
 
       {/**   Header    */}
-
       <View style={styles.Header}>
         <TouchableOpacity
           underlayColor={'transparent'}
@@ -267,7 +196,10 @@ const EmployeeInfoScreen = ({navigation}) => {
         <ScrollView
           style={{paddingBottom: 30}}
           showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}>
+          showsHorizontalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={() => pullMe()} />
+          }>
           <FlatList
             data={employeData}
             renderItem={({item}) => (
@@ -315,7 +247,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                         style={styles.h5Grey}
                         adjustsFontSizeToFit={true}
                         numberOfLines={1}>
-                        {item.designation}
+                        {item.Designation}
                       </Text>
                     </View>
                   </View>
@@ -333,7 +265,10 @@ const EmployeeInfoScreen = ({navigation}) => {
                       </Text>
                     </View>
                     <View style={styles.ButtonBox}>
-                      <TouchableOpacity onPress={EditEmployee}>
+                      <TouchableOpacity
+                        onPress={() =>
+                          EditEmployee(item.id, item.name, item.email)
+                        }>
                         <View style={styles.EditButton}>
                           <svg.penIconSvgPd width={15} height={15} />
                           <Text

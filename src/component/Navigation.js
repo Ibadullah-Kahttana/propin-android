@@ -48,7 +48,13 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {userToken !== null ? <DrawerNavigator /> : <StackNavigator />}
+      {splashLoading ? (
+        <SplashScreen options={{headerShown: false}} />
+      ) : userToken !== null ? (
+        <DrawerNavigator />
+      ) : (
+        <StackNavigator />
+      )}
     </NavigationContainer>
   );
 };
