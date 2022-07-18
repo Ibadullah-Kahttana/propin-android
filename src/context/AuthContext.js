@@ -119,11 +119,26 @@ export const AuthProvider = ({children}) => {
       let userToken = await AsyncStorage.getItem('userToken');
       userToken = JSON.parse(userToken);
       await AsyncStorage.removeItem('userToken');
+
+      let userName = await AsyncStorage.getItem('userName');
+      userName = JSON.parse(userName);
+      await AsyncStorage.removeItem('userName');
+
+      let userEmail = await AsyncStorage.getItem('userEmail');
+      userEmail = JSON.parse(userEmail);
+      await AsyncStorage.removeItem('userEmail');
+
+      let userRole = await AsyncStorage.getItem('userRole');
+      userRole = JSON.parse(userRole);
+      await AsyncStorage.removeItem('userRole');
+
       setUserToken(null);
       setUserRole(null);
       setUserEmail(null);
       setUserName(null);
       setIsLoading(false);
+      setSplashLoading(true);
+      setSplashLoading(false);
     } catch (e) {
       console.log(e);
     }

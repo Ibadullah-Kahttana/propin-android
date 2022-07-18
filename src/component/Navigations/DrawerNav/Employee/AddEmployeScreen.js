@@ -1,85 +1,70 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import axios from 'axios';
+import {BASE_URL} from '../../../../config';
+
 import {
   View,
   Text,
   StatusBar,
   StyleSheet,
   Dimensions,
-  TextInput,
   TouchableOpacity,
+  ScrollView,
   Platform,
 } from 'react-native';
 
 import svg from '../../../../constants/svgs';
-import color from '../../../../constants/colors';
-import dimensions from '../../../../constants/dimensions';
-import globalStyle from '../../../../constants/globalStyle';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-
-//import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
-import {ScrollView} from 'react-native-gesture-handler';
+//------  Netwrok logger
+import NetworkLogger from 'react-native-network-logger';
+
+// ------- Custom Input
+import CustomInput from '../../../../controles/CustomInput';
+
+import {AuthContext} from '../../../../context/AuthContext';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const AddEmployeeScreen = ({navigation, onChangeValue}) => {
+  const [employeeName, setEmployeeName] = useState('');
+  const [employeeEmail, setEmployeeEmail] = useState('');
+  const [employeePhoneNumber, setEmployeePhoneNumber] = useState('');
+  const [employeePassword, setEmployeePassword] = useState('');
+  // const [agentConfirmPassword, setEmployeeConfirmPassword] = useState('');
+
+  const {userToken} = useContext(AuthContext);
+
   const EmployeeInfo = () => {
     navigation.navigate('EmployeeInfo');
   };
 
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
-
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
+  // Agent Register
+  const addEmployee = () => {
+    const data = {
+      name: employeeName,
+      email: employeeEmail,
+      phone: employeePhoneNumber,
+      password: employeePassword,
+    };
+    axios
+      .post(`${BASE_URL}/agents`, data, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(response => {
+        let employeeInfo = response.data.data;
+        console.log('Employee Added Info = ', employeeInfo);
+        navigation.navigate('EmployeeInfo');
+        alert('Employee Added Successfull');
+      })
+      .catch(e => {
+        console.log(`Add Employee error ${e}`);
       });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
-  };
-
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
-  };
-
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
   };
 
   //-------------- DATE PICKER -----------------------------------------------------------------
@@ -131,7 +116,7 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
       {/** --------------------      Scrol List      --------------------*/}
 
       <ScrollView>
-        {/** ----------  Name  ----------*/}
+        {/**  Name  */}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
@@ -142,18 +127,15 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter Employee name"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
+        <CustomInput
+          name="employeeName"
+          placeholder="Enter Employee name"
+          value={employeeName}
+          onChangeText={text => setEmployeeName(text)}
+          svg1={<svg.userLoginSVG width={24} height={24} />}
+        />
 
-        {/** ----------  Phone Number  ----------*/}
+        {/**   Phone Number  */}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
@@ -164,45 +146,16 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.PhoneNoBox}>
-          <View
-            style={{
-              height: (windowHeight / 100) * 7,
-              width: (windowWidth / 100) * 30,
-              paddingLeft: 5,
-              //backgroundColor: 'yellow',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}>
-            <svg.PakistanHalfFlagSvg width={25} height={25} />
-            <Text
-              style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {' '}
-              +92
-            </Text>
-            <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.PhoneNumbertextInput}
-              autoCapitalize="none"
-              placeholder="xxx xxxxxx"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
+        <CustomInput
+          name="employeePhoneNumber"
+          value={employeePhoneNumber}
+          placeholder="xxx xxxxxxx"
+          onChangeText={text => setEmployeePhoneNumber(text)}
+          countryCode="  +92"
+          svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
+        />
 
-        {/** ----------  Email  ----------*/}
+        {/**  Email   */}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
@@ -213,18 +166,15 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter employee email"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
+        <CustomInput
+          name="employeeEmail"
+          placeholder="Enter employee email"
+          value={employeeEmail}
+          onChangeText={text => setEmployeeEmail(text)}
+          svg1={<svg.envelope width={25} height={25} />}
+        />
 
-        {/** --------------------      Password       ----------------------*/}
+        {/**    Password   */}
         <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
@@ -235,41 +185,32 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <Feather
-              name="lock"
-              color="#171717"
-              size={17}
-              style={{paddingLeft: 10, paddingRight: 10}}
-            />
+        <CustomInput
+          name="employeePassword"
+          value={employeePassword}
+          placeholder="Enter employee password"
+          onChangeText={text => setEmployeePassword(text)}
+          secureTextEntry
+          svg1={<svg.loginLock width={24} height={24} />}
+          svg2={<svg.EyeOpen width={20} height={20} />}
+        />
 
-            <TextInput
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter your password"
-              onChangeText={val => handlePasswordChange(val)}
-            />
-
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-                paddingRight: 10,
-              }}>
-              {data.secureTextEntry ? (
-                <Feather name="eye" color="#C6C6C7" size={17} />
-              ) : (
-                <Feather name="eye-off" color="#C6C6C7" size={17} />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
+        {/* <TouchableOpacity
+          onPress={secureTextEntry}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            paddingRight: 10,
+          }}>
+          {employeePassword.secureTextEntry ? (
+            <Feather name="eye" color="#C6C6C7" size={17} />
+          ) : (
+            <Feather name="eye-off" color="#C6C6C7" size={17} />
+          )}
+        </TouchableOpacity> */}
 
         {/** --------------------      Confirm Password       ----------------------*/}
-        <View style={styles.headingText}>
+        {/* <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
@@ -310,10 +251,10 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
               )}
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
         {/** ----------  Designation ----------*/}
-        <View style={styles.headingText}>
+        {/* <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
@@ -340,10 +281,10 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
               />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
         {/** ----------  Date ----------*/}
-        <View style={styles.headingText}>
+        {/* <View style={styles.headingText}>
           <Text
             style={styles.textfontsize1}
             adjustsFontSizeToFit={true}
@@ -366,11 +307,11 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
               <svg.DateSvg height={17} width={17} fill={'#C6C6C7'} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
         {/* -------------------------------------- */}
 
-        <TouchableOpacity onPress={EmployeeInfo}>
+        <TouchableOpacity onPress={addEmployee}>
           <View style={styles.UpdateButton}>
             <View>
               <Text
@@ -382,6 +323,7 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
             </View>
           </View>
         </TouchableOpacity>
+        <NetworkLogger />
       </ScrollView>
     </View>
   );

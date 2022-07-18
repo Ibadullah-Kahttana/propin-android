@@ -64,8 +64,8 @@ const ProfileScreenStack = ({navigation}) => (
       headerShown: false,
     }}>
     <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
-    <ProfileStack.Screen name="ChangePassword" component={ChangePassword} />
     <ProfileStack.Screen name="ProfileSettings" component={ProfileSettings} />
+    <ProfileStack.Screen name="ChangePassword" component={ChangePassword} />
     <ProfileStack.Screen name="AddAgency" component={AddAgencyScreen} />
   </ProfileStack.Navigator>
 );

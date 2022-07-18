@@ -19,7 +19,6 @@ const CustomInput = ({
   countryCode,
   svg1,
   svg2,
-
   secureTextEntry,
 }) => {
   return (
