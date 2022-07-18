@@ -11,21 +11,22 @@ export const AuthProvider = ({children}) => {
   const [agentInfo, setAgentInfo] = useState(null);
   const [agencyInfo, setAgencyInfo] = useState(null);
   const [userToken, setUserToken] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [splashLoading, setSplashLoading] = useState(false);
 
   // Agent Register
   const agentRegister = (name, email, phone, password, confirm_password) => {
-    const agenctdata = {
-      name: name,
-      email: email,
-      phone: phone,
-      password: password,
-      confirm_password: confirm_password,
-    };
-
     setIsLoading(true);
     axios
-      .post(`${BASE_URL}/register`, agenctdata)
+      .post(`${BASE_URL}/register`, {
+        name,
+        email,
+        phone,
+        password,
+        confirm_password,
+      })
       .then(res => {
         let agentInfo = res.data.data;
         setAgentInfo(agentInfo);
@@ -41,7 +42,7 @@ export const AuthProvider = ({children}) => {
 
   // Agency Register
   const agencyRegister = (name, email, phone, password, confirm_password) => {
-    const agencydata = {
+    const data = {
       name: name,
       email: email,
       phone: phone,
@@ -51,7 +52,7 @@ export const AuthProvider = ({children}) => {
 
     setIsLoading(true);
     axios
-      .post(`${BASE_URL}/register`, agencydata)
+      .post(`${BASE_URL}/register`, data)
       .then(res => {
         let agencyInfo = res.data;
         setAgencyInfo(agencyInfo);
@@ -81,8 +82,26 @@ export const AuthProvider = ({children}) => {
         userToken = userInfo.token;
         setUserToken(userToken);
         console.log('Token ID = ', userToken);
+
+        let userRole;
+        userRole = userInfo.role;
+        setUserRole(userRole);
+        console.log('User Role = ', userRole);
+
+        let userName;
+        userName = userInfo.name;
+        setUserName(userName);
+        console.log('User Name = ', userName);
+
+        let userEmail;
+        userEmail = userInfo.email;
+        setUserEmail(userEmail);
+        console.log('User Email = ', userEmail);
         try {
           await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
+          await AsyncStorage.setItem('userName', JSON.stringify(userName));
+          await AsyncStorage.setItem('userEmail', JSON.stringify(userEmail));
+          await AsyncStorage.setItem('userRole', JSON.stringify(userRole));
         } catch (error) {
           console.log(error);
         }
@@ -101,6 +120,9 @@ export const AuthProvider = ({children}) => {
       userToken = JSON.parse(userToken);
       await AsyncStorage.removeItem('userToken');
       setUserToken(null);
+      setUserRole(null);
+      setUserEmail(null);
+      setUserName(null);
       setIsLoading(false);
     } catch (e) {
       console.log(e);
@@ -113,8 +135,28 @@ export const AuthProvider = ({children}) => {
       let Token;
       Token = await AsyncStorage.getItem('userToken');
       Token = JSON.parse(Token);
-      console.log('use Effect State = ', Token);
+      console.log('use Effect Token = ', Token);
+
+      let Role;
+      Role = await AsyncStorage.getItem('userRole');
+      Role = JSON.parse(Role);
+      console.log('Use Effect Role = ', Role);
+
+      let name;
+      name = await AsyncStorage.getItem('userName');
+      name = JSON.parse(name);
+      console.log('Use Effect Name = ', name);
+
+      let email;
+      email = await AsyncStorage.getItem('userEmail');
+      email = JSON.parse(email);
+      console.log('Use Effect Email = ', email);
+
       setUserToken(Token);
+      setUserRole(Role);
+      setUserEmail(email);
+      setUserName(name);
+
       setSplashLoading(false);
     } catch (e) {
       setSplashLoading(false);
@@ -134,6 +176,9 @@ export const AuthProvider = ({children}) => {
         agencyInfo,
         splashLoading,
         userToken,
+        userRole,
+        userEmail,
+        userName,
         agentRegister,
         agencyRegister,
         login,

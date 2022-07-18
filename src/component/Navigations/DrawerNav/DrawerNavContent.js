@@ -286,20 +286,20 @@ const DrawerNavContent = ({navigation}) => {
         {/**  Setting  */}
         <TouchableOpacity
           underlayColor={'transparent'}
-          onPress={() => handler('Profile')}>
+          onPress={() => handler('ProfileSettings')}>
           <View
             style={{
               height: (windowHeight / 100) * 6,
               width: (windowWidth / 100) * 50,
               backgroundColor:
-                activeButton === 'Profile' ? '#FFFFFF' : '#4681F4',
+                activeButton === 'ProfileSettings' ? '#FFFFFF' : '#4681F4',
               flexDirection: 'row',
               alignItems: 'center',
               borderTopRightRadius: 50,
               borderBottomRightRadius: 50,
             }}>
             <View style={styles.ButtonIconConatiner}>
-              {activeButton === 'Profile' ? (
+              {activeButton === 'ProfileSettings' ? (
                 <svg.SettingsSvgDrawable
                   width={25}
                   height={25}
@@ -315,7 +315,8 @@ const DrawerNavContent = ({navigation}) => {
             </View>
             <Text
               style={{
-                color: activeButton === 'Profile' ? '#4681F4' : '#FFFFFF',
+                color:
+                  activeButton === 'ProfileSettings' ? '#4681F4' : '#FFFFFF',
                 fontSize: 17,
                 fontWeight: '600',
                 fontFamily: 'Roboto-Regular',

@@ -32,6 +32,7 @@ import Loader from '../controles/Loader';
 
 //------  Netwrok logger
 import NetworkLogger from 'react-native-network-logger';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -320,8 +321,11 @@ const Login = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
+      <ScrollView style={{height: dimensions.height * 10}}>
+        <NetworkLogger />
+      </ScrollView>
       {/* -------------------------------------- */}
-      <View style={styles.orView}>
+      {/* <View style={styles.orView}>
         <View style={styles.ORLines}></View>
         <Text
           style={globalStyle.h2black}
@@ -330,10 +334,10 @@ const Login = ({navigation}) => {
           OR
         </Text>
         <View style={styles.ORLines}></View>
-      </View>
+      </View> */}
 
       {/* -------------------------------------- */}
-      <TouchableHighlight underlayColor="#DDDDDD">
+      {/* <TouchableHighlight underlayColor="#DDDDDD">
         <View style={styles.SocialLinksGoogleFacebook}>
           <TouchableOpacity onPress={onLoginInGoogle}>
             <svg.GoogleCircleSvg width={50} height={50} />
@@ -342,10 +346,10 @@ const Login = ({navigation}) => {
             <svg.FacebookCircleSvg width={50} height={50} />
           </TouchableOpacity>
         </View>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
 
       {/* -------------------------------------- */}
-
+      {/* 
       <View style={styles.BottomText}>
         <Text
           style={styles.GrayText}
@@ -370,9 +374,7 @@ const Login = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      <NetworkLogger />
+      </View> */}
     </View>
   );
 };
