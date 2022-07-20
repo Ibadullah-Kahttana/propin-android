@@ -38,10 +38,6 @@ const AddEmployeeScreen = ({navigation, onChangeValue}) => {
 
   const {userToken} = useContext(AuthContext);
 
-  const EmployeeInfo = () => {
-    navigation.navigate('EmployeeInfo');
-  };
-
   // Agent Register
   const addEmployee = () => {
     const data = {

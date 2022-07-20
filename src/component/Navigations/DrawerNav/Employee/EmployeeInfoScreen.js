@@ -26,8 +26,6 @@ const windowHeight = Dimensions.get('window').height;
 
 const EmployeeInfoScreen = ({navigation}) => {
   const [employeData, setEmployeData] = useState([]);
-  const [employeID, setEmployeeID] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   const pullMe = () => {
@@ -42,12 +40,10 @@ const EmployeeInfoScreen = ({navigation}) => {
     navigation.navigate('AddEmployee');
   };
 
-  const EditEmployee = (id, name, email) => {
-    console.log('ID = ', id);
-    console.log('Name = ', name);
-    console.log('Email = ', email);
-
-    // navigation.navigate('EditEmployee');
+  const EditEmployee = id => {
+    navigation.navigate('EditEmployee', {
+      keyID: id,
+    });
   };
 
   const {userToken} = useContext(AuthContext);
@@ -61,6 +57,7 @@ const EmployeeInfoScreen = ({navigation}) => {
       })
       .then(response => {
         let employeData = response.data.data;
+        setEmployeData(employeData);
         console.log('Employee Data = ', JSON.stringify(employeData, null, 2));
       })
       .catch(error => {
@@ -71,6 +68,26 @@ const EmployeeInfoScreen = ({navigation}) => {
   useEffect(() => {
     getAllEmployess();
   }, []);
+
+  const deleteEmploye = id => {
+    axios
+      .delete(`${BASE_URL}/employee/${id}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(response => {
+        let employeData = response.data.data;
+        console.log(
+          'Employee Delete Data = ',
+          JSON.stringify(employeData, null, 2),
+        );
+        alert('Employee Deleted Successfull');
+      })
+      .catch(error => {
+        console.log('Employe Delete Daata Error = ', error);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -247,7 +264,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                         style={styles.h5Grey}
                         adjustsFontSizeToFit={true}
                         numberOfLines={1}>
-                        {item.Designation}
+                        {item.designation}
                       </Text>
                     </View>
                   </View>
@@ -265,10 +282,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                       </Text>
                     </View>
                     <View style={styles.ButtonBox}>
-                      <TouchableOpacity
-                        onPress={() =>
-                          EditEmployee(item.id, item.name, item.email)
-                        }>
+                      <TouchableOpacity onPress={() => EditEmployee(item.id)}>
                         <View style={styles.EditButton}>
                           <svg.penIconSvgPd width={15} height={15} />
                           <Text
@@ -279,7 +293,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                           </Text>
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={() => deleteEmploye(item.id)}>
                         <View style={styles.DeleteButton}>
                           <svg.deleteboxSvgPd width={15} height={15} />
                           <Text

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -7,105 +7,134 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 import svg from '../../../../constants/svgs';
-import color from '../../../../constants/colors';
-import dimensions from '../../../../constants/dimensions';
-import globalStyle from '../../../../constants/globalStyle';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
+import axios from 'axios';
+import {BASE_URL} from '../../../../config';
+import {AuthContext} from '../../../../context/AuthContext';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
-import {ScrollView} from 'react-native-gesture-handler';
+//------  Netwrok logger
+import NetworkLogger from 'react-native-network-logger';
+
+// ------- Custom Input
+import CustomInput from '../../../../controles/CustomInput';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const EditEmployeeScreen = ({navigation}) => {
+const EditEmployeeScreen = ({navigation, route}) => {
+  const [employeeName, setEmployeeName] = useState('');
+  const [employeeEmail, setEmployeeEmail] = useState('');
+  const [employeePhoneNumber, setEmployeePhoneNumber] = useState('');
+  const [employeeDesignation, setEmployeeDesignation] = useState('');
+  const [employeeJoinDate, setEmployeeJoinDate] = useState('');
+
+  const [employeData, setEmployeData] = useState([]);
+
   const EmployeeInfoScreen = () => {
     navigation.navigate('EmployeeInfo');
   };
 
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
+  const EmployeeID = route.params.keyID;
 
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
-  };
+  const updateEmployee = () => {
+    const data = {
+      name: employeeName,
+      phone: employeePhoneNumber,
+      email: employeeEmail,
+      date_of_joining: employeeJoinDate,
+      designation_id: employeeDesignation,
+    };
+    console.log('Updated Employee Data = ', JSON.stringify(data, null, 2));
 
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
+    axios
+      .put(`${BASE_URL}/employee/${EmployeeID}`, data, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(response => {
+        let employeData = response.data.data;
+        setEmployeData(employeData);
+        console.log(
+          'Employee Put Updated Data = ',
+          JSON.stringify(employeData, null, 2),
+        );
+        navigation.navigate('EmployeeInfo');
+        alert('Employee Updated Successfull');
+      })
+      .catch(error => {
+        console.log('Employe Put Updated Daata Error = ', error);
       });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
-  };
-
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
   };
 
   //-------------- DATE PICKER -----------------------------------------------------------------
 
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [text, setText] = useState('Empty');
+  // const [date, setDate] = useState(new Date());
+  // const [helperDate, setHelperDate] = useState(null);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'android');
-    setDate(currentDate);
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate;
+  //   setDate(currentDate);
+  //   setHelperDate(currentDate);
+  //   onChangeValue(currentDate);
+  // };
 
-    let tempDate = new Date(currentDate);
-    let fDate =
-      tempDate.getDate() +
-      '/' +
-      (tempDate.getMonth() + 1) +
-      '/' +
-      tempDate.getFullYear();
+  // const showMode = () => {
+  //   DateTimePickerAndroid.open({
+  //     value: date,
+  //     onChange,
+  //     mode: 'date',
+  //     is24Hour: true,
+  //   });
+  // };
 
-    setText(fDate);
-  };
+  // const showDatepicker = () => {
+  //   showMode('date');
+  // };
 
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
-  };
+  const {userToken} = useContext(AuthContext);
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/employee/${EmployeeID}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then(response => {
+        let employeData = response.data.data;
+        setEmployeData(employeData);
+        console.log('Employee Data = ', JSON.stringify(employeData, null, 2));
+
+        console.log('Employe Getted Name = ', employeData.name);
+        setEmployeeName(employeData.name);
+
+        console.log('Employe Getted Email = ', employeData.email);
+        setEmployeeEmail(employeData.email);
+
+        console.log('Employe Getted Phone = ', employeData.phone);
+        setEmployeePhoneNumber(employeData.phone);
+
+        console.log('Employe Getted Designation = ', employeData.designation);
+        setEmployeeDesignation(employeData.designation);
+
+        console.log(
+          'Employe Getted Date of Joining = ',
+          employeData.date_of_joining,
+        );
+        setEmployeeJoinDate(employeData.date_of_joining);
+      })
+      .catch(error => {
+        console.log('Employe Info Error = ', error);
+      });
+  }, []);
 
   //----------------------------------------------------------------------------------------------
   return (
@@ -141,16 +170,13 @@ const EditEmployeeScreen = ({navigation}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter Employee name"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
+        <CustomInput
+          name="employeeName"
+          placeholder="Employee name"
+          value={employeeName}
+          onChangeText={text => setEmployeeName(text)}
+          svg1={<svg.userLoginSVG width={24} height={24} />}
+        />
 
         {/** ----------  Phone Number  ----------*/}
         <View style={styles.headingText}>
@@ -163,43 +189,14 @@ const EditEmployeeScreen = ({navigation}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.PhoneNoBox}>
-          <View
-            style={{
-              height: (windowHeight / 100) * 7,
-              width: (windowWidth / 100) * 30,
-              paddingLeft: 5,
-              //backgroundColor: 'yellow',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}>
-            <svg.PakistanHalfFlagSvg width={25} height={25} />
-            <Text
-              style={{fontSize: 17, fontWeight: '700', color: '#2C3131'}}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {' '}
-              +92
-            </Text>
-            <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 10}}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.PhoneNumbertextInput}
-              autoCapitalize="none"
-              placeholder="xxx xxxxxx"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
+        <CustomInput
+          name="employeePhoneNumber"
+          value={employeePhoneNumber}
+          placeholder="xxx xxxxxxx"
+          onChangeText={text => setEmployeePhoneNumber(text)}
+          countryCode="  +92"
+          svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
+        />
 
         {/** ----------  Email  ----------*/}
         <View style={styles.headingText}>
@@ -212,104 +209,13 @@ const EditEmployeeScreen = ({navigation}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter employee email"
-              onChangeText={val => textInputChange(val)}
-            />
-          </View>
-        </View>
-
-        {/** --------------------      Password       ----------------------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Password
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <Feather
-              name="lock"
-              color="#171717"
-              size={17}
-              style={{paddingLeft: 10, paddingRight: 10}}
-            />
-
-            <TextInput
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Enter your password"
-              onChangeText={val => handlePasswordChange(val)}
-            />
-
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-                paddingRight: 10,
-              }}>
-              {data.secureTextEntry ? (
-                <Feather name="eye" color="#C6C6C7" size={17} />
-              ) : (
-                <Feather name="eye-off" color="#C6C6C7" size={17} />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/** --------------------      Confirm Password       ----------------------*/}
-        <View style={styles.headingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Confirm Password
-          </Text>
-          <Text style={styles.Asteric}> *</Text>
-        </View>
-
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <Feather
-              name="lock"
-              color="#171717"
-              size={17}
-              style={{paddingLeft: 10, paddingRight: 10}}
-            />
-
-            <TextInput
-              secureTextEntry={data.secureTextEntry ? true : false}
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Confirm your password"
-              onChangeText={val => handlePasswordChange(val)}
-            />
-
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-                paddingRight: 10,
-              }}>
-              {data.secureTextEntry ? (
-                <Feather name="eye" color="#C6C6C7" size={17} />
-              ) : (
-                <Feather name="eye-off" color="#C6C6C7" size={17} />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
+        <CustomInput
+          name="employeeEmail"
+          placeholder="Employee email"
+          value={employeeEmail}
+          onChangeText={text => setEmployeeEmail(text)}
+          svg1={<svg.envelope width={25} height={25} />}
+        />
 
         {/** ----------  Designation ----------*/}
         <View style={styles.headingText}>
@@ -322,24 +228,12 @@ const EditEmployeeScreen = ({navigation}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
-          <View style={styles.action}>
-            <TextInput
-              style={styles.textInput}
-              autoCapitalize="none"
-              placeholder="Select designation"
-              onChangeText={val => textInputChange(val)}
-            />
-            <TouchableOpacity>
-              <FontAwesome
-                name="caret-down"
-                color="#828282"
-                size={17}
-                style={{paddingLeft: 10, paddingRight: 20}}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <CustomInput
+          name="employeeDesignation"
+          placeholder="Employee Designation"
+          value={employeeDesignation}
+          onChangeText={text => setEmployeeDesignation(text)}
+        />
 
         {/** ----------  Date ----------*/}
         <View style={styles.headingText}>
@@ -352,33 +246,35 @@ const EditEmployeeScreen = ({navigation}) => {
           <Text style={styles.Asteric}> *</Text>
         </View>
 
-        <View style={styles.ListBox}>
+        <CustomInput
+          name="employeeJoinDate"
+          placeholder={employeeJoinDate}
+          value={employeeJoinDate}
+          onChangeText={text => setEmployeeJoinDate(text)}
+          svg2={
+            <TouchableOpacity style={{paddingLeft: 25}}>
+              <svg.DateSvg height={17} width={17} fill={'#C6C6C7'} />
+            </TouchableOpacity>
+          }
+        />
+
+        {/* <View style={styles.ListBox}>
           <View style={styles.action}>
-            <Text style={[styles.DateInput, styles.h4Grey]}>{text}</Text>
-
-            <svg.DateSvg
-              height={17}
-              width={17}
-              fill={'#C6C6C7'}
-              onPress={() => showMode('date')}
-            />
+            <Text style={[styles.DateInput, styles.h4Grey]}>
+              {helperDate === null
+                ? `${'mm/dd/yyyy'}`
+                : `${moment(date).format('DD/MM/YYYY')}`}{' '}
+            </Text>
+            <TouchableOpacity
+              style={{paddingRight: 15}}
+              onPress={showDatepicker}>
+              <svg.DateSvg height={17} width={17} fill={'#C6C6C7'} />
+            </TouchableOpacity>
           </View>
-
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          )}
-        </View>
-
+        </View> */}
         {/* -------------------------------------- */}
 
-        <TouchableOpacity onPress={EmployeeInfoScreen}>
+        <TouchableOpacity onPress={updateEmployee}>
           <View style={styles.SaveButton}>
             <View>
               <Text
