@@ -28,8 +28,6 @@ import Loader from '../../controles/Loader';
 //------  Netwrok logger
 import NetworkLogger from 'react-native-network-logger';
 
-import {Icon} from 'react-native-elements';
-
 import {ScrollView} from 'react-native-gesture-handler';
 import globalStyle from '../../constants/globalStyle';
 
@@ -53,6 +51,7 @@ const SignUpScreen = ({navigation}) => {
     setAgentPassword('');
     setAgentConfirmPassword('');
     setActiveButton('Agency');
+    setAgentError({});
   };
 
   const [agencyName, setAgencyName] = useState('');
@@ -68,9 +67,18 @@ const SignUpScreen = ({navigation}) => {
     setAgencyPassword('');
     setAgencyConfirmPassword('');
     setActiveButton('Agent');
+    setAgencyError({});
   };
 
-  const {isLoading, agentRegister, agencyRegister} = useContext(AuthContext);
+  const {
+    isLoading,
+    agentRegister,
+    agencyRegister,
+    agentError,
+    setAgentError,
+    agencyError,
+    setAgencyError,
+  } = useContext(AuthContext);
 
   const onPressTermsCondition = () => {
     console.warn('Terms & Conditions pressed');
@@ -173,131 +181,118 @@ const SignUpScreen = ({navigation}) => {
         <ScrollView>
           {/** Agent Name */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Name
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Name"
             name="agentName"
             placeholder="Enter your name"
             value={agentName}
             onChangeText={text => setAgentName(text)}
-            // control={control}
-            // rules={{required: 'Name is Required'}}
             svg1={<svg.userLoginSVG width={24} height={24} />}
           />
 
+          {agentError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agentError.name}
+            </Text>
+          )}
+
           {/* Agent Email */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Email
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Email"
             name="agentEmail"
             placeholder="Enter your email"
             value={agentEmail}
             onChangeText={text => setAgentEmail(text)}
-            // control={control}
-            // rules={{
-            //   required: 'Email Required',
-            //   pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
-            // }}
             svg1={<svg.envelope width={25} height={25} />}
           />
 
+          {agentError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agentError.email}
+            </Text>
+          )}
+
           {/** Agent Phone Number */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Phone Number
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            keyboardType="numeric"
+            label="Phone Number"
             name="agentPhoneNumber"
             value={agentPhoneNumber}
             onChangeText={text => setAgentPhoneNumber(text)}
-            // control={control}
-            // rules={{required: 'PhoneNumer is Required'}}
             countryCode="  +92"
             svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
           />
 
+          {agentError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agentError.phone}
+            </Text>
+          )}
+
           {/* Agent Password */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Password
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="password"
             name="agentPassword"
             placeholder="Your password"
             value={agentPassword}
             onChangeText={text => setAgentPassword(text)}
-            //  control={control}
             secureTextEntry
-            // rules={{
-            //   required: 'Password Required',
-            //   minLength: {
-            //     value: 5,
-            //     message: 'Password should be minimum 5 character long',
-            //   },
-            // }}
             svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
+            password
           />
+
+          {agentError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agentError.password}
+            </Text>
+          )}
 
           {/* Agent Confirm Password */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Confirm Password
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Confirm Password"
             name="agentConfirmPassword"
             placeholder="Confirm your password"
             value={agentConfirmPassword}
             onChangeText={text => setAgentConfirmPassword(text)}
-            //control={control}
             secureTextEntry
-            // rules={{
-            //   required: 'Please Comfirm Password',
-            //   validate: value => value === agentpwd || 'Password do no match',
-            // }}
             svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
+            password
           />
+
+          {agentError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agentError.confirm_password}
+            </Text>
+          )}
           {/* -----------------   Sign Up Agent   ------------------- */}
 
           <TouchableOpacity
@@ -318,7 +313,6 @@ const SignUpScreen = ({navigation}) => {
                   // backgroundColor: 'yellow',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginLeft: 55,
                 }}>
                 <Text
                   style={globalStyle.h2White}
@@ -326,17 +320,6 @@ const SignUpScreen = ({navigation}) => {
                   numberOfLines={1}>
                   Sign Up
                 </Text>
-              </View>
-
-              <View style={{marginRight: 15}}>
-                <TouchableOpacity style={{paddingLeft: 20}}>
-                  <Icon
-                    type="fontawesome"
-                    name="login"
-                    size={18}
-                    color="#FFFFFF"
-                  />
-                </TouchableOpacity>
               </View>
             </View>
           </TouchableOpacity>
@@ -401,131 +384,117 @@ const SignUpScreen = ({navigation}) => {
         <ScrollView>
           {/** Agency Name */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Agency Name
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Agency Name"
             name="agencyName"
             placeholder="Enter agency name"
             value={agencyName}
             onChangeText={text => setAgencyName(text)}
-            // control={control}
-            // rules={{required: 'AgencyName is Required'}}
             svg1={<svg.userLoginSVG width={24} height={24} />}
           />
 
+          {agencyError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agencyError.name}
+            </Text>
+          )}
+
           {/** Agency Email */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Email
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Email"
             name="agencyEmail"
             placeholder="Enter email"
             value={agencyEmail}
             onChangeText={text => setAgencyEmail(text)}
-            // control={control}
-            // rules={{
-            //   required: 'Email Required',
-            //   pattern: {value: EMAIL_REGEX, message: 'Email is Invalid'},
-            // }}
             svg1={<svg.envelope width={25} height={25} />}
           />
 
+          {agencyError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agencyError.email}
+            </Text>
+          )}
+
           {/** Agency Phone Number */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Phone Number
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Phone Number"
             name="agencyPhoneNumber"
-            // control={control}
-            // rules={{required: 'PhoneNumer is Required'}}
             value={agencyPhoneNumber}
             onChangeText={text => setAgencyPhoneNumber(text)}
             countryCode="  +92"
             svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
           />
 
+          {agencyError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agencyError.phone}
+            </Text>
+          )}
+
           {/* Agency Password */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Password
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Password"
             name="agencyPassword"
             placeholder="Your password"
             value={agencyPassword}
             onChangeText={text => setAgencyPassword(text)}
-            // control={control}
             secureTextEntry
-            // rules={{
-            //   required: 'agency Password Required',
-            //   minLength: {
-            //     value: 5,
-            //     message: 'Password should be minimum 5 character long',
-            //   },
-            // }}
             svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
           />
+
+          {agencyError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agencyError.password}
+            </Text>
+          )}
 
           {/* Agency Confirm Password */}
 
-          <View style={globalStyle.InputHeadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Confirm Password
-            </Text>
-            <Text style={globalStyle.Asteric}> *</Text>
-          </View>
-
           <CustomInput
+            label="Confirm Password"
             name="agencyConfirmPassword"
             placeholder="Confirm your password"
             value={agencyConfirmPassword}
             onChangeText={text => setAgencyConfirmPassword(text)}
-            //control={control}
             secureTextEntry
-            // rules={{
-            //   required: 'Please Comfirm Password',
-            //   validate: value => value === agencypwd || 'Password do no match',
-            // }}
             svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
           />
+
+          {agencyError && (
+            <Text
+              style={{
+                paddingTop: 5,
+                paddingLeft: 20,
+                color: 'red',
+                fontSize: 12,
+              }}>
+              {agencyError.confirm_password}
+            </Text>
+          )}
+
           {/* -------------------------------------- */}
 
           <TouchableOpacity
@@ -546,7 +515,6 @@ const SignUpScreen = ({navigation}) => {
                   // backgroundColor: 'yellow',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginLeft: 55,
                 }}>
                 <Text
                   style={globalStyle.h2White}
@@ -554,17 +522,6 @@ const SignUpScreen = ({navigation}) => {
                   numberOfLines={1}>
                   Sign Up
                 </Text>
-              </View>
-
-              <View style={{marginRight: 15}}>
-                <TouchableOpacity style={{paddingLeft: 20}}>
-                  <Icon
-                    type="fontawesome"
-                    name="login"
-                    size={18}
-                    color="#FFFFFF"
-                  />
-                </TouchableOpacity>
               </View>
             </View>
           </TouchableOpacity>
