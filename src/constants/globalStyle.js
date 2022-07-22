@@ -138,6 +138,14 @@ const globalStyle = StyleSheet.create({
     color: color.darkGrayHigh,
   },
 
+  h3GreyForget: {
+    fontSize: 16,
+    fontWeight: '500',
+    fontFamily: 'Roboto-Regular',
+    color: '#949494',
+    textDecorationLine: 'underline',
+  },
+
   h3Blue: {
     fontSize: 16,
     fontWeight: '700',

@@ -7,47 +7,37 @@ import {
   StatusBar,
   TouchableOpacity,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 
+//  Constants
 import svg from '../constants/svgs';
 import color from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import globalStyle from '../constants/globalStyle';
 
-// ------- Custom Input
+//  Custom Controls
 import CustomInput from '../controles/CustomInput';
+import CustomButton from '../controles/customButton';
 
-// ------- ICONS
-import {Icon} from 'react-native-elements';
-
-// ------- Email Regex
-const EMAIL_REGEX =
-  /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-// ------ Auth Context
+// Auth Context
 import {AuthContext} from '../context/AuthContext';
 
-// ------ Custom Loader
+// Custom Loader
 import Loader from '../controles/Loader';
 
-//------  Netwrok logger
+// Netwrok logger
 import NetworkLogger from 'react-native-network-logger';
-import {ScrollView} from 'react-native-gesture-handler';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const Login = ({navigation}) => {
-  // useStates Email Passowrd
+  // useStates
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const {isLoading, login} = useContext(AuthContext);
-
-  const onLoginPressed = (mail, pass) => {
-    login(mail, pass);
-    navigation.navigate('DrawerNavigator');
-  };
+  const {isLoading, login, loginError, setLoginError} = useContext(AuthContext);
 
   const onForgetPassword = () => {
     console.warn('Forget Password Pressed');
@@ -65,16 +55,16 @@ const Login = ({navigation}) => {
     console.warn('Terms & Conditions pressed');
   };
 
-  // Navigation Functions
-
+  // goback()
   const RegisteryScreenGoBack = () => {
     navigation.navigate('RegisterScreen');
+    setLoginError({});
   };
 
   return (
     <View style={styles.container}>
       <Loader loading={isLoading} />
-      <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
+      <StatusBar backgroundColor={color.blue} barStyle="light-content" />
 
       <View style={styles.LoginHeader}>
         <View style={styles.headerNav}>
@@ -144,237 +134,144 @@ const Login = ({navigation}) => {
         </View>
       </View>
 
-      <View style={{justifyContent: 'space-between'}}>
-        {/* Email */}
-        <View style={globalStyle.InputHeadingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Email
-          </Text>
-          <Text style={globalStyle.Asteric}> *</Text>
-        </View>
-
-        <CustomInput
-          name="userName"
-          placeholder="Enter your name"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          svg1={<svg.userLoginSVG width={24} height={24} />}
-        />
-
-        {/* Password */}
-        <View style={globalStyle.InputHeadingText}>
-          <Text
-            style={styles.textfontsize1}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Password
-          </Text>
-          <Text style={globalStyle.Asteric}> *</Text>
-        </View>
-
-        <CustomInput
-          name="userPassword"
-          placeholder="Your password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          secureTextEntry
-          svg1={<svg.loginLock width={24} height={24} />}
-          svg2={<svg.EyeOpen width={20} height={20} />}
-          svg3={<svg.EyeClosed width={20} height={20} />}
-        />
-      </View>
-
-      {/* {activeButton === 'Email' ? (
-        <View style={{justifyContent: 'space-between'}}>
-          {/* Email 
-          <View style={styles.EmailheadingText}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Email
-            </Text>
-            <Text style={styles.Asteric}> *</Text>
-          </View>
-
+      <ScrollView>
+        <View
+          style={{
+            justifyContent: 'space-between',
+            // backgroundColor: 'yellow',
+            paddingTop: 15,
+          }}>
+          {/** Email */}
           <CustomInput
-            name="userName"
+            label="Email"
+            name="email"
             placeholder="Enter your name"
-            control={control}
-            rules={{required: true}}
+            value={email}
+            onChangeText={text => setEmail(text)}
             svg1={<svg.userLoginSVG width={24} height={24} />}
           />
 
-          {/* Password 
-          <View style={styles.Passwordheadingtext}>
+          {loginError && (
             <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Password
+              style={{
+                paddingLeft: 20,
+                color: color.red,
+                fontSize: 12,
+              }}>
+              {loginError.email}
             </Text>
-            <Text style={styles.Asteric}> *</Text>
-          </View>
+          )}
 
+          {/**  Password */}
           <CustomInput
-            name="userPassword"
+            label="Password"
+            name="password"
             placeholder="Your password"
-            control={control}
+            value={password}
+            onChangeText={text => setPassword(text)}
             secureTextEntry
-            rules={{required: true}}
             svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
+            password
           />
+
+          {loginError && (
+            <Text
+              style={{
+                paddingLeft: 20,
+                color: color.red,
+                fontSize: 12,
+              }}>
+              {loginError.password}
+            </Text>
+          )}
+        </View>
+
+        {/* {activeButton === 'Email' ? (
+        <View style={{justifyContent: 'space-between'}}>
+         
         </View>
       ) : (
         <View style={{justifyContent: 'space-between'}}>
-
-        
-          {/* Phone Number 
-          <View style={styles.PhoneNumbertext}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Phone Number
-            </Text>
-            <Text style={styles.Asteric}> *</Text>
-          </View>
-
-          <CustomInput
-            name="userPhoneNumber"
-            control={control}
-            secureTextEntry
-            rules={{required: true}}
-            countryCode="  +92"
-            svg1={<svg.PakistanHalfFlagSvg width={25} height={25} />}
-          />
-
-          {/* Password 
-          <View style={styles.Passwordheadingtext}>
-            <Text
-              style={styles.textfontsize1}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              Password
-            </Text>
-            <Text style={styles.Asteric}> *</Text>
-          </View>
-
-          <CustomInput
-            name="userPassword"
-            placeholder="Your password"
-            control={control}
-            secureTextEntry
-            rules={{required: true}}
-            svg1={<svg.loginLock width={24} height={24} />}
-            svg2={<svg.EyeOpen width={20} height={20} />}
-            svg3={<svg.EyeClosed width={20} height={20} />}
-          />
         </View>
       )} */}
-      {/* -------------------------------------- */}
+        {/* -------------------------------------- */}
 
-      <TouchableOpacity
-        onPress={() => {
-          login(email, password);
-        }}>
-        <View style={styles.LogInButton}>
-          <View
-            style={{
-              width: (windowWidth / 100) * 60,
-              height: (windowHeight / 100) * 6,
-              //backgroundColor: 'yellow',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginLeft: 55,
-            }}>
+        <TouchableOpacity
+          onPress={() => {
+            login(email, password);
+          }}>
+          <CustomButton
+            label="Log In"
+            svg1={<svg.LogInSvg width={20} height={20} fill={'white'} />}
+          />
+        </TouchableOpacity>
+
+        {/* --------------------------------------------------------- */}
+        <View style={styles.ForgetPassText}>
+          <TouchableOpacity onPress={onForgetPassword}>
             <Text
-              style={styles.BoldText}
+              style={globalStyle.h3GreyForget}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
-              Log In
+              Forget password?
             </Text>
-          </View>
+          </TouchableOpacity>
+        </View>
 
-          <View style={{marginRight: 15}}>
-            <TouchableOpacity style={{paddingLeft: 20}}>
-              <Icon type="fontawesome" name="login" size={18} color="#FFFFFF" />
+        {/* -------------------------------------- */}
+        <View style={styles.orView}>
+          <View style={styles.ORLines}></View>
+          <Text
+            style={globalStyle.h2black}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            OR
+          </Text>
+          <View style={styles.ORLines}></View>
+        </View>
+
+        {/* -------------------------------------- */}
+        <TouchableHighlight underlayColor="#DDDDDD">
+          <View style={styles.SocialLinksGoogleFacebook}>
+            <TouchableOpacity onPress={onLoginInGoogle}>
+              <svg.GoogleCircleSvg width={50} height={50} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onLoginInFacebook}>
+              <svg.FacebookCircleSvg width={50} height={50} />
+            </TouchableOpacity>
+          </View>
+        </TouchableHighlight>
+
+        {/* -------------------------------------- */}
+
+        <View style={styles.BottomText}>
+          <Text
+            style={globalStyle.h3Grey}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            By creating an account you agree to our
+          </Text>
+
+          <View style={{flexDirection: 'row'}}>
+            <Text
+              style={globalStyle.h3Grey}
+              adjustsFontSizeToFit={true}
+              numberOfLines={1}>
+              our{''}
+            </Text>
+            <TouchableOpacity onPress={onPressTermsCondition}>
+              <Text
+                style={globalStyle.h3Blue}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                {'  '}Terms & Conditions
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-      </TouchableOpacity>
 
-      {/* --------------------------------------------------------- */}
-      <View style={styles.ForgetPassText}>
-        <TouchableOpacity onPress={onForgetPassword}>
-          <Text
-            style={styles.ForgetGrayText}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Forget password?
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <ScrollView style={{height: dimensions.height * 10}}>
         <NetworkLogger />
       </ScrollView>
-      {/* -------------------------------------- */}
-      {/* <View style={styles.orView}>
-        <View style={styles.ORLines}></View>
-        <Text
-          style={globalStyle.h2black}
-          adjustsFontSizeToFit={true}
-          numberOfLines={1}>
-          OR
-        </Text>
-        <View style={styles.ORLines}></View>
-      </View> */}
-
-      {/* -------------------------------------- */}
-      {/* <TouchableHighlight underlayColor="#DDDDDD">
-        <View style={styles.SocialLinksGoogleFacebook}>
-          <TouchableOpacity onPress={onLoginInGoogle}>
-            <svg.GoogleCircleSvg width={50} height={50} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onLoginInFacebook}>
-            <svg.FacebookCircleSvg width={50} height={50} />
-          </TouchableOpacity>
-        </View>
-      </TouchableHighlight> */}
-
-      {/* -------------------------------------- */}
-      {/* 
-      <View style={styles.BottomText}>
-        <Text
-          style={styles.GrayText}
-          adjustsFontSizeToFit={true}
-          numberOfLines={1}>
-          By creating an account you agree to our
-        </Text>
-
-        <View style={{flexDirection: 'row'}}>
-          <Text
-            style={styles.GrayText}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            our{''}
-          </Text>
-          <TouchableOpacity onPress={onPressTermsCondition}>
-            <Text
-              style={styles.BlueText}
-              adjustsFontSizeToFit={true}
-              numberOfLines={1}>
-              {''}Terms & Conditions
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View> */}
     </View>
   );
 };
@@ -397,21 +294,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-  },
-
   headerNav: {
-    height: (windowHeight / 100) * 6,
-    width: (windowWidth / 100) * 10,
-    //backgroundColor: 'yellow',
+    height: dimensions.height / 20,
+    width: dimensions.width / 8,
+    flexDirection: 'row',
+    // backgroundColor: 'yellow',
     justifyContent: 'center',
+    alignItems: 'center',
     paddingLeft: 4,
     marginTop: 8,
     marginRight: 8,
-    marginLeft: 4,
   },
 
   LoginScreenLoginText: {
@@ -432,13 +324,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
   },
 
-  BoldText: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
-  },
-
   PhoneNumberSwitch: {
     width: (windowWidth / 100) * 50,
     height: (windowHeight / 100) * 6,
@@ -448,19 +333,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
 
-  textfontsize1: {
-    fontSize: 18,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: 'black',
-  },
-
   ForgetPassText: {
-    width: (windowWidth / 100) * 93,
+    width: dimensions.width / 1.1,
     height: (windowHeight / 100) * 3,
     //backgroundColor: 'yellow',
     alignItems: 'flex-end',
-    marginTop: 15,
+    margin: 15,
   },
 
   LogInButton: {
@@ -511,29 +389,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  GrayText: {
-    fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#bec0c4',
-  },
-
-  ForgetGrayText: {
-    fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#bec0c4',
-    textDecorationLine: 'underline',
-  },
-
-  BlueText: {
-    fontSize: 17,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#6797f5',
-    paddingLeft: 7,
   },
 });
 

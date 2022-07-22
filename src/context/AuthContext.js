@@ -40,7 +40,7 @@ export const AuthProvider = ({children}) => {
         AsyncStorage.setItem('agentInfo', JSON.stringify(agentInfo));
         setIsLoading(false);
         console.log(agentInfo);
-        alert(agentInfo.data);
+        alert(agentInfo);
       })
       .catch(e => {
         if (e) {
@@ -128,7 +128,7 @@ export const AuthProvider = ({children}) => {
       .catch(e => {
         if (e) {
           setLoginError([]);
-          let er = e.response.data;
+          let er = e.response.data.errors;
           setLoginError(er);
           console.log('Login error =  ', JSON.stringify(er, null, 2));
         }
@@ -218,6 +218,8 @@ export const AuthProvider = ({children}) => {
         userName,
         agencyError,
         agentError,
+        loginError,
+        setLoginError,
         setAgencyError,
         setAgentError,
         agentRegister,

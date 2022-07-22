@@ -45,27 +45,39 @@ const RegisterScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'#f8f9fa'} barStyle="dark-content" />
+      <StatusBar
+        backgroundColor={color.backgroundColor}
+        barStyle="dark-content"
+      />
 
       <View style={styles.RegisterScreenimageView}>
         <svg.logInLogoSVGRegister width={170} height={161} />
       </View>
       {/* -------------------------------------- */}
       <View style={styles.welcomeView}>
-        <Text style={styles.h2} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={globalStyle.h1TitleBlackBold}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}>
           Welcome to Proptech Global
         </Text>
       </View>
       {/* -------------------------------------- */}
       <Pressable style={styles.signupView} onPress={CountryOption}>
-        <Text style={styles.h3} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={globalStyle.h2black}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}>
           Sign Up With Your Email
         </Text>
       </Pressable>
       {/* -------------------------------------- */}
       <View style={styles.orView}>
         <View style={styles.ORLines}></View>
-        <Text style={styles.h3} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={globalStyle.h2black}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}>
           OR
         </Text>
         <View style={styles.ORLines}></View>
@@ -86,7 +98,7 @@ const RegisterScreen = ({navigation}) => {
 
       <View style={styles.AlreadyText}>
         <Text
-          style={styles.GrayText}
+          style={globalStyle.h3Grey}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
           Already registered?
@@ -94,10 +106,11 @@ const RegisterScreen = ({navigation}) => {
 
         <TouchableOpacity>
           <Text
-            style={styles.BlueText}
+            style={globalStyle.h3Blue}
             onPress={RegisteryLoginOption}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
+            {'   '}
             Log In
           </Text>
         </TouchableOpacity>
@@ -105,7 +118,7 @@ const RegisterScreen = ({navigation}) => {
       {/* -------------------------------------- */}
       <View style={styles.BottomText}>
         <Text
-          style={styles.GrayText}
+          style={globalStyle.h3Grey}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
           By creating an account you agree to our
@@ -113,17 +126,17 @@ const RegisterScreen = ({navigation}) => {
 
         <View style={{flexDirection: 'row'}}>
           <Text
-            style={styles.GrayText}
+            style={globalStyle.h3Grey}
             adjustsFontSizeToFit={true}
             numberOfLines={1}>
             our{''}
           </Text>
           <TouchableOpacity onPress={onPressTermsCondition}>
             <Text
-              style={styles.BlueText}
+              style={globalStyle.h3Blue}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
-              {''}Terms & Conditions
+              {'  '}Terms & Conditions
             </Text>
           </TouchableOpacity>
         </View>
@@ -141,41 +154,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-  },
-
   RegisterScreenimageView: {
     marginTop: 30,
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 25,
+    width: dimensions.width / 1,
+    height: dimensions.height / 4,
     //backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   welcomeView: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 5,
+    width: dimensions.width / 1,
+    height: dimensions.height / 20,
     //backgroundColor: 'orange',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  h2: {
-    fontSize: 24,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#070707',
-  },
-
-  h3: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#2C3131',
   },
 
   signupView: {
@@ -223,21 +216,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-  },
-
-  GrayText: {
-    fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#bec0c4',
-  },
-
-  BlueText: {
-    fontSize: 17,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#6797f5',
-    paddingLeft: 7,
   },
 
   BottomText: {

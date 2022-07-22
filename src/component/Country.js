@@ -84,7 +84,11 @@ const CountryScreen = ({navigation}) => {
         label="Country/ Area of Residence"
         name="agentName"
         placeholder={'Pakistan'}
-        svg1={<svg.pakFlagSvgCountryScreen width={25} height={25} />}
+        svg1={
+          <TouchableOpacity onPress={SelectCity}>
+            <svg.pakFlagSvgCountryScreen width={25} height={25} />
+          </TouchableOpacity>
+        }
         svg2={
           <TouchableOpacity onPress={SelectCity}>
             <svg.downArrowSvgDarkGray width={13} height={13} />

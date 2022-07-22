@@ -12,7 +12,8 @@ import {
 
 // Constants
 import svg from '../../constants/svgs';
-import colors from '../../constants/colors';
+import color from '../../constants/colors';
+import dimensions from '../../constants/dimensions';
 
 // Custom Controls
 import CustomInput from '../../controles/CustomInput';
@@ -109,7 +110,7 @@ const SignUpScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'#4681F4'} barStyle="light-content" />
+      <StatusBar backgroundColor={color.blue} barStyle="light-content" />
       <Loader loading={isLoading} />
 
       <View style={styles.LoginHeader}>
@@ -117,7 +118,7 @@ const SignUpScreen = ({navigation}) => {
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={{paddingLeft: 10}}>
-            <svg.LeftArrowSvgWhite width={17} height={17} fill={'#FFFFFF'} />
+            <svg.LeftArrowSvgWhite width={17} height={17} fill={color.white} />
           </TouchableOpacity>
         </View>
 
@@ -138,7 +139,8 @@ const SignUpScreen = ({navigation}) => {
             underlayColor={'transparent'}
             onPress={resetAgencyState}
             style={{
-              borderBottomColor: activeButton === 'Agent' ? 'white' : '#4681F4',
+              borderBottomColor:
+                activeButton === 'Agent' ? color.white : color.blue,
               borderBottomWidth: 5,
 
               // backgroundColor: 'red',
@@ -160,7 +162,7 @@ const SignUpScreen = ({navigation}) => {
             onPress={resetAgentState}
             style={{
               borderBottomColor:
-                activeButton === 'Agency' ? 'white' : '#4681F4',
+                activeButton === 'Agency' ? color.white : color.blue,
               borderBottomWidth: 5,
               borderBottomRightRadius: 49,
               // backgroundColor: 'green',
@@ -197,7 +199,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agentError.name}
@@ -219,7 +221,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agentError.email}
@@ -242,7 +244,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agentError.phone}
@@ -252,7 +254,7 @@ const SignUpScreen = ({navigation}) => {
           {/* Agent Password */}
 
           <CustomInput
-            label="password"
+            label="Password"
             name="agentPassword"
             placeholder="Your password"
             value={agentPassword}
@@ -266,7 +268,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agentError.password}
@@ -290,7 +292,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agentError.confirm_password}
@@ -385,7 +387,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agencyError.name}
@@ -407,7 +409,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agencyError.email}
@@ -430,7 +432,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agencyError.phone}
@@ -446,6 +448,7 @@ const SignUpScreen = ({navigation}) => {
             value={agencyPassword}
             onChangeText={text => setAgencyPassword(text)}
             secureTextEntry
+            password
             svg1={<svg.loginLock width={24} height={24} />}
           />
 
@@ -453,7 +456,7 @@ const SignUpScreen = ({navigation}) => {
             <Text
               style={{
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agencyError.password}
@@ -469,6 +472,7 @@ const SignUpScreen = ({navigation}) => {
             value={agencyConfirmPassword}
             onChangeText={text => setAgencyConfirmPassword(text)}
             secureTextEntry
+            password
             svg1={<svg.loginLock width={24} height={24} />}
           />
 
@@ -477,7 +481,7 @@ const SignUpScreen = ({navigation}) => {
               style={{
                 paddingTop: 5,
                 paddingLeft: 20,
-                color: 'red',
+                color: color.red,
                 fontSize: 12,
               }}>
               {agencyError.confirm_password}
@@ -539,35 +543,29 @@ const styles = StyleSheet.create({
     width: windowWidth,
     height: windowHeight,
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: color.backgroundColor,
     //backgroundColor: 'yellow',
     flexDirection: 'column',
   },
 
   LoginHeader: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 26,
-    backgroundColor: '#4681F4',
+    width: dimensions.width / 1,
+    height: dimensions.height / 3.8,
+    backgroundColor: color.blue,
     borderBottomRightRadius: 50,
     justifyContent: 'space-between',
   },
 
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-  },
-
   headerNav: {
-    height: (windowHeight / 100) * 6,
-    width: (windowWidth / 100) * 10,
+    height: dimensions.height / 20,
+    width: dimensions.width / 12,
     flexDirection: 'row',
     //backgroundColor: 'yellow',
     justifyContent: 'center',
+    alignItems: 'center',
     paddingLeft: 4,
     marginTop: 8,
     marginRight: 8,
-    marginLeft: 4,
   },
 
   LoginScreenLoginText: {
@@ -579,41 +577,13 @@ const styles = StyleSheet.create({
   },
 
   EmailPhoneNumberSwitch: {
-    width: (windowWidth / 100) * 100,
+    width: dimensions.width / 1,
     height: (windowHeight / 100) * 7,
     //backgroundColor: 'yellow',
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomRightRadius: 50,
-  },
-
-  PhoneNumberSwitch: {
-    width: (windowWidth / 100) * 50,
-    height: (windowHeight / 100) * 6,
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomRightRadius: 40,
-  },
-
-  textfontsize1: {
-    fontSize: 16,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: 'black',
-  },
-
-  SignUpButton: {
-    width: (windowWidth / 100) * 85,
-    height: (windowHeight / 100) * 7,
-    flexDirection: 'row',
-    backgroundColor: '#4681F4',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginLeft: 30,
-    borderRadius: 40,
-    marginTop: 40,
   },
 
   orView: {

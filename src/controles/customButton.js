@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import colors from '../constants/colors';
 import globalStyle from '../constants/globalStyle';
 import dimensions from '../constants/dimensions';
 
-const CustomButton = ({label, svg}) => {
+const CustomButton = ({label, svg1}) => {
   return (
     <View style={styles.ButtonContainer}>
       <View style={styles.textBox}>
@@ -22,7 +16,7 @@ const CustomButton = ({label, svg}) => {
           {label}
         </Text>
       </View>
-      <View style={styles.logoBox}>{svg}</View>
+      <View style={styles.logoBox}>{svg1}</View>
     </View>
   );
 };
@@ -45,6 +39,8 @@ const styles = StyleSheet.create({
     height: dimensions.height / 14,
     flexDirection: 'row',
     //backgroundColor: colors.yellow,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   textBox: {
