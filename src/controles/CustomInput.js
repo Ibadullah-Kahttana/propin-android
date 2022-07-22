@@ -16,11 +16,10 @@ const CustomInput = ({
   value,
   label,
   onChangeText,
-  onFocus,
   password,
   placeholder,
   countryCode,
-  error,
+  keyboardType,
   svg1,
   svg2,
 }) => {
@@ -43,11 +42,7 @@ const CustomInput = ({
         style={[
           styles.conatiner,
           {
-            borderColor: error
-              ? 'red'
-              : isFocused
-              ? colors.lightGrayMedium
-              : '#DFE2E4',
+            borderColor: '#DFE2E4',
             alignItems: 'center',
           },
         ]}>
@@ -65,6 +60,7 @@ const CustomInput = ({
         {/** TextInput Filed */}
         <TextInput
           autoCorrect={false}
+          keyboardType={keyboardType}
           onFocus={() => {
             setIsFocused(true);
           }}

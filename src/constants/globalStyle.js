@@ -68,6 +68,13 @@ const globalStyle = StyleSheet.create({
     color: '#000000',
   },
 
+  h1TitleBlackBold: {
+    fontSize: 22,
+    fontWeight: '700',
+    fontFamily: 'Roboto-Regular',
+    color: '#000000',
+  },
+
   h1GrayBold: {
     fontSize: 19,
     fontWeight: '700',
@@ -80,13 +87,6 @@ const globalStyle = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'Roboto-Regular',
     color: '#70747D',
-  },
-
-  h1blackBold: {
-    fontSize: 19,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#000000',
   },
 
   h2black: {
@@ -110,6 +110,13 @@ const globalStyle = StyleSheet.create({
     color: '#FFFFFF',
   },
 
+  h2Blue: {
+    fontSize: 20,
+    fontWeight: '700',
+    fontFamily: 'Roboto-Regular',
+    color: color.blue,
+  },
+
   h3BlackBold: {
     fontSize: 16,
     fontWeight: '700',
@@ -122,6 +129,20 @@ const globalStyle = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'Roboto-Regular',
     color: '#949494',
+  },
+
+  h3DarkGrey: {
+    fontSize: 16,
+    fontWeight: '500',
+    fontFamily: 'Roboto-Regular',
+    color: color.darkGrayHigh,
+  },
+
+  h3Blue: {
+    fontSize: 16,
+    fontWeight: '700',
+    fontFamily: 'Roboto-Regular',
+    color: color.blue,
   },
 
   h4Grey: {

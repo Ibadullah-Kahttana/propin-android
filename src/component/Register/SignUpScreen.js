@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -7,17 +7,16 @@ import {
   StatusBar,
   TouchableOpacity,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 
-//Svgs Constant
+// Constants
 import svg from '../../constants/svgs';
+import colors from '../../constants/colors';
 
-// ------- Custom Input
+// Custom Controls
 import CustomInput from '../../controles/CustomInput';
-
-// ------- Email Regex
-const EMAIL_REGEX =
-  /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+import CustomButton from '../../controles/customButton';
 
 // ------ Auth Context
 import {AuthContext} from '../../context/AuthContext';
@@ -28,7 +27,6 @@ import Loader from '../../controles/Loader';
 //------  Netwrok logger
 import NetworkLogger from 'react-native-network-logger';
 
-import {ScrollView} from 'react-native-gesture-handler';
 import globalStyle from '../../constants/globalStyle';
 
 const windowWidth = Dimensions.get('window').width;
@@ -69,6 +67,11 @@ const SignUpScreen = ({navigation}) => {
     setActiveButton('Agent');
     setAgencyError({});
   };
+
+  useEffect(() => {
+    setAgentError({});
+    setAgencyError({});
+  }, []);
 
   const {
     isLoading,
@@ -305,23 +308,7 @@ const SignUpScreen = ({navigation}) => {
                 agentConfirmPassword,
               );
             }}>
-            <View style={styles.SignUpButton}>
-              <View
-                style={{
-                  width: (windowWidth / 100) * 60,
-                  height: (windowHeight / 100) * 8,
-                  // backgroundColor: 'yellow',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text
-                  style={globalStyle.h2White}
-                  adjustsFontSizeToFit={true}
-                  numberOfLines={1}>
-                  Sign Up
-                </Text>
-              </View>
-            </View>
+            <CustomButton label="Sign Up" />
           </TouchableOpacity>
 
           {/* OR */}
@@ -354,7 +341,7 @@ const SignUpScreen = ({navigation}) => {
 
           <View style={styles.BottomText}>
             <Text
-              style={styles.GrayText}
+              style={globalStyle.h4Grey}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               By creating an account you agree to our
@@ -362,17 +349,18 @@ const SignUpScreen = ({navigation}) => {
 
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={styles.GrayText}
+                style={globalStyle.h4Grey}
                 adjustsFontSizeToFit={true}
                 numberOfLines={1}>
                 our{''}
               </Text>
               <TouchableOpacity onPress={onPressTermsCondition}>
                 <Text
-                  style={styles.BlueText}
+                  style={globalStyle.h3Blue}
                   adjustsFontSizeToFit={true}
                   numberOfLines={1}>
-                  {''}Terms & Conditions
+                  {'  '}
+                  Terms & Conditions
                 </Text>
               </TouchableOpacity>
             </View>
@@ -429,6 +417,7 @@ const SignUpScreen = ({navigation}) => {
           {/** Agency Phone Number */}
 
           <CustomInput
+            keyboardType="numeric"
             label="Phone Number"
             name="agencyPhoneNumber"
             value={agencyPhoneNumber}
@@ -507,30 +496,14 @@ const SignUpScreen = ({navigation}) => {
                 agencyConfirmPassword,
               );
             }}>
-            <View style={styles.SignUpButton}>
-              <View
-                style={{
-                  width: (windowWidth / 100) * 60,
-                  height: (windowHeight / 100) * 8,
-                  // backgroundColor: 'yellow',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text
-                  style={globalStyle.h2White}
-                  adjustsFontSizeToFit={true}
-                  numberOfLines={1}>
-                  Sign Up
-                </Text>
-              </View>
-            </View>
+            <CustomButton label="Sign Up" />
           </TouchableOpacity>
 
           {/* -------------------------------------- */}
 
           <View style={styles.BottomText}>
             <Text
-              style={styles.GrayText}
+              style={globalStyle.h4Grey}
               adjustsFontSizeToFit={true}
               numberOfLines={1}>
               By creating an account you agree to our
@@ -538,17 +511,17 @@ const SignUpScreen = ({navigation}) => {
 
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={styles.GrayText}
+                style={globalStyle.h4Grey}
                 adjustsFontSizeToFit={true}
                 numberOfLines={1}>
                 our{''}
               </Text>
               <TouchableOpacity onPress={onPressTermsCondition}>
                 <Text
-                  style={styles.BlueText}
+                  style={globalStyle.h3Blue}
                   adjustsFontSizeToFit={true}
                   numberOfLines={1}>
-                  {''}Terms & Conditions
+                  {'  '}Terms & Conditions
                 </Text>
               </TouchableOpacity>
             </View>
@@ -682,29 +655,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-  },
-
-  GrayText: {
-    fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#bec0c4',
-  },
-
-  ForgetGrayText: {
-    fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#bec0c4',
-    textDecorationLine: 'underline',
-  },
-
-  BlueText: {
-    fontSize: 17,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#6797f5',
-    paddingLeft: 7,
   },
 });
 

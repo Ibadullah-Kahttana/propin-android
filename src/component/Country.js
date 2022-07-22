@@ -6,13 +6,18 @@ import {
   StatusBar,
   View,
   TouchableOpacity,
-  TouchableHighlight,
 } from 'react-native';
 
-import svg from '../constants/svgs';
-import color from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import globalStyle from '../constants/globalStyle';
+
+// Constants
+import svg from '../constants/svgs';
+import colors from '../constants/colors';
+
+// Custom Controls
+import CustomInput from '../controles/CustomInput';
+import CustomButton from '../controles/customButton';
 
 import {Icon} from 'react-native-elements';
 
@@ -41,92 +46,65 @@ const CountryScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      {/* -------------------------------------- */}
-
       <View style={styles.CountryScreenimageView}>
         <svg.PosterSvgCountryScreen width={200} height={200} />
       </View>
 
-      {/* -------------------------------------- */}
+      {/* Title Text */}
 
       <View style={styles.welcomeView}>
-        <Text style={styles.h2} adjustsFontSizeToFit={true} numberOfLines={1}>
+        <Text
+          style={globalStyle.h1TitleBlackBold}
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}>
           Welcome to Proptech Global
         </Text>
       </View>
 
-      {/* -------------------------------------- */}
+      {/* Text Highlighted */}
 
       <View style={styles.WelcomeDescriptiveText}>
         <Text
-          style={styles.text1}
+          style={globalStyle.h3DarkGrey}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
           Before we start, please enter your current
         </Text>
         <Text
-          style={styles.text1}
+          style={globalStyle.h3DarkGrey}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
           location of residence.
         </Text>
       </View>
 
-      {/* ---------------------------------------- */}
+      {/* Input */}
 
-      <View style={styles.CountryRegionView}>
-        <Text style={styles.h3} adjustsFontSizeToFit={true} numberOfLines={1}>
-          Country/ Area of Residence
-        </Text>
+      <CustomInput
+        label="Country/ Area of Residence"
+        name="agentName"
+        placeholder={'Pakistan'}
+        svg1={<svg.pakFlagSvgCountryScreen width={25} height={25} />}
+        svg2={
+          <TouchableOpacity onPress={SelectCity}>
+            <svg.downArrowSvgDarkGray width={13} height={13} />
+          </TouchableOpacity>
+        }
+      />
 
-        <TouchableHighlight underlayColor="#DDDDDD">
-          <View style={styles.CountryBox}>
-            <TouchableOpacity onPress={SelectCity}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  height: (windowHeight / 100) * 7,
-                  width: (windowWidth / 100) * 80,
-                  alignItems: 'center',
-                  paddingLeft: 10,
-                }}>
-                <svg.pakFlagSvgCountryScreen width={25} height={25} />
-
-                <TouchableOpacity></TouchableOpacity>
-                <Text
-                  style={styles.text1Bold}
-                  adjustsFontSizeToFit={true}
-                  numberOfLines={1}>
-                  Pakistan
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </TouchableHighlight>
-      </View>
-
-      {/* ---------------------------------------- */}
-
-      {/* ---------------------------------------- */}
+      {/* Text Description */}
 
       <View style={styles.RegionDescriptiveText}>
-        <Text style={styles.text1}>
+        <Text style={globalStyle.h4Grey}>
           The registration process is subject to change based on the information
           you provide.{' '}
         </Text>
       </View>
 
-      {/* ---------------------------------------- */}
+      {/* Confirm Button  */}
 
       <TouchableOpacity onPress={SignUpScreenLogin}>
-        <View style={styles.ConfirmButton}>
-          <Text
-            style={styles.BoldText}
-            adjustsFontSizeToFit={true}
-            numberOfLines={1}>
-            Confirm
-          </Text>
-        </View>
+        <CustomButton label="Confirm" />
       </TouchableOpacity>
     </View>
   );
@@ -142,16 +120,10 @@ const styles = StyleSheet.create({
     paddingBottom: 150,
   },
 
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'black',
-  },
-
   headerNav: {
-    height: (windowHeight / 100) * 5,
-    width: (windowWidth / 100) * 10,
-    // backgroundColor: 'yellow',
+    height: dimensions.height / 18,
+    width: dimensions.width / 10,
+    //backgroundColor: 'yellow',
     justifyContent: 'center',
     paddingLeft: 4,
     marginTop: 8,
@@ -160,110 +132,37 @@ const styles = StyleSheet.create({
   },
 
   CountryScreenimageView: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 25,
-    //backgroundColor: 'yellow',
+    height: dimensions.height / 4,
+    width: dimensions.width / 1,
+    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   welcomeView: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
+    height: dimensions.height / 20,
+    width: dimensions.width / 1,
     alignItems: 'center',
-    // backgroundColor: 'orange',
+    //  backgroundColor: 'orange',
     justifyContent: 'center',
-    marginLeft: 20,
-  },
-
-  h2: {
-    fontSize: 24,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#070707',
   },
 
   WelcomeDescriptiveText: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 5,
-    marginLeft: 20,
+    height: dimensions.height / 15,
+    width: dimensions.width / 1,
+    //backgroundColor: 'yellow',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  text1: {
-    fontSize: 16,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#70747D',
-  },
-
-  text1Bold: {
-    paddingLeft: 10,
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#2C3131',
-    paddingLeft: 18,
-  },
-
-  h3: {
-    fontSize: 18,
-    fontWeight: '400',
-    fontFamily: 'Roboto-Regular',
-    color: '#2C3131',
-  },
-
-  CountryRegionView: {
-    width: (windowWidth / 100) * 100,
-    height: (windowHeight / 100) * 11,
-    justifyContent: 'space-between',
-    //backgroundColor: 'yellow',
-    paddingLeft: 20,
-    marginTop: 30,
-  },
-
-  CountryBox: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    //backgroundColor: 'black',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: 8,
-    borderColor: '#DFE2E4',
-    borderWidth: 1,
-    paddingLeft: 10,
-  },
-
   RegionDescriptiveText: {
-    width: (windowWidth / 100) * 90,
-    height: (windowHeight / 100) * 7,
-    marginLeft: 20,
-    // backgroundColor: 'yellow',
-    flexDirection: 'row',
-  },
-
-  ConfirmButton: {
-    width: (windowWidth / 100) * 85,
-    height: (windowHeight / 100) * 7,
-    flexDirection: 'row',
-    backgroundColor: '#4681F4',
-    justifyContent: 'center',
+    height: dimensions.height / 16,
+    width: dimensions.width / 1,
     alignItems: 'center',
-    marginLeft: 30,
-    borderRadius: 40,
-    borderColor: '#E0E0E0',
-    borderWidth: 1,
-  },
-
-  BoldText: {
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: 'Roboto-Regular',
-    color: '#FFFFFF',
+    justifyContent: 'center',
+    //backgroundColor: 'yellow',
+    flexDirection: 'row',
   },
 });
 
