@@ -16,9 +16,14 @@ export const AuthProvider = ({children}) => {
   const [userEmail, setUserEmail] = useState(null);
   const [splashLoading, setSplashLoading] = useState(false);
 
+  const [agentError, setAgentError] = useState({});
+  const [agencyError, setAgencyError] = useState({});
+  const [loginError, setLoginError] = useState({});
+
   // Agent Register
   const agentRegister = (name, email, phone, password, confirm_password) => {
     setIsLoading(true);
+    setAgentError();
     axios
       .post(`${BASE_URL}/register`, {
         name,
@@ -27,15 +32,21 @@ export const AuthProvider = ({children}) => {
         password,
         confirm_password,
       })
-      .then(res => {
-        let agentInfo = res.data.data;
+      .then(response => {
+        let agentInfo = response.data.data;
         setAgentInfo(agentInfo);
+
         AsyncStorage.setItem('agentInfo', JSON.stringify(agentInfo));
         setIsLoading(false);
         console.log(agentInfo);
+        alert(agentInfo.data);
       })
       .catch(e => {
-        console.log(`register error ${e}`);
+        if (e) {
+          let er = e.response.data.errors;
+          setAgentError(er);
+          console.log('Agent Regisetr error =  ', JSON.stringify(er, null, 2));
+        }
         setIsLoading(false);
       });
   };
@@ -49,19 +60,25 @@ export const AuthProvider = ({children}) => {
       password: password,
       confirm_password: confirm_password,
     };
-
+    setAgencyError();
     setIsLoading(true);
     axios
       .post(`${BASE_URL}/register`, data)
       .then(res => {
         let agencyInfo = res.data;
         setAgencyInfo(agencyInfo);
+
         AsyncStorage.setItem('agencyInfo', JSON.stringify(agencyInfo));
         setIsLoading(false);
         console.log(agencyInfo);
+        alert(agencyInfo.data);
       })
       .catch(e => {
-        console.log(`register error ${e.response.data.errors}`);
+        if (e) {
+          let er = e.response.data.errors;
+          setAgencyError(er);
+          console.log('Agency Regisetr error =  ', JSON.stringify(er, null, 2));
+        }
         setIsLoading(false);
       });
   };
@@ -108,7 +125,12 @@ export const AuthProvider = ({children}) => {
         setIsLoading(false);
       })
       .catch(e => {
-        console.log(`Login error ${e}`);
+        if (e) {
+          setLoginError([]);
+          let er = e.response.data;
+          setLoginError(er);
+          console.log('Login error =  ', JSON.stringify(er, null, 2));
+        }
         setIsLoading(false);
       });
   };
@@ -171,11 +193,10 @@ export const AuthProvider = ({children}) => {
       setUserRole(Role);
       setUserEmail(email);
       setUserName(name);
-
       setSplashLoading(false);
     } catch (e) {
       setSplashLoading(false);
-      console.log(`is Logged in error ${e}`);
+      console.log(`is_Logged in error ${e.res.data.errors}`);
     }
   };
 
@@ -194,6 +215,10 @@ export const AuthProvider = ({children}) => {
         userRole,
         userEmail,
         userName,
+        agencyError,
+        agentError,
+        setAgencyError,
+        setAgentError,
         agentRegister,
         agencyRegister,
         login,

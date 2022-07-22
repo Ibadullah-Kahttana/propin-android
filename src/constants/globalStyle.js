@@ -307,11 +307,18 @@ const globalStyle = StyleSheet.create({
     width: dimensions.width / 1.5,
     height: dimensions.height / 25,
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 5,
     marginBottom: 5,
     marginLeft: 20,
     alignItems: 'center',
-    //backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
+  },
+
+  textfontsize1: {
+    fontSize: 16,
+    fontWeight: '400',
+    fontFamily: 'Roboto-Regular',
+    color: 'black',
   },
 });
 
