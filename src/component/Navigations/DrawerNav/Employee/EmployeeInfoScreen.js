@@ -65,6 +65,7 @@ const EmployeeInfoScreen = ({navigation}) => {
       });
   };
 
+  console.log('-----------------------------------', employeData);
   useEffect(() => {
     getAllEmployess();
   }, []);
@@ -223,7 +224,6 @@ const EmployeeInfoScreen = ({navigation}) => {
               <View elevation={8} style={styles.plotDescriptionBox}>
                 <View style={styles.plotDescriptionBoxInner}>
                   <View style={styles.profyleInfo}>
-                    {/** Profile Card */}
                     <View style={styles.profileImage}>
                       <svg.UserSvg width={40} height={40} />
                       <View style={styles.YellowCameraIcon}></View>
@@ -246,7 +246,6 @@ const EmployeeInfoScreen = ({navigation}) => {
 
                     <View style={styles.profyleSwitch}></View>
                   </View>
-                  {/** Phone Designation Box */}
                   <View style={styles.PhoneDesignation}>
                     <View style={styles.PhoneBox}>
                       <svg.phoneSvg width={17} height={17} />
@@ -264,12 +263,13 @@ const EmployeeInfoScreen = ({navigation}) => {
                         style={styles.h5Grey}
                         adjustsFontSizeToFit={true}
                         numberOfLines={1}>
-                        {item.designation}
+                        {item.designation === null
+                          ? ' '
+                          : item.designation.name}
                       </Text>
                     </View>
                   </View>
 
-                  {/** Date Button box Box */}
                   <View style={styles.DateButton}>
                     <View style={styles.DateBox}>
                       <svg.DateSvg width={17} height={17} fill={'#7D8088'} />
@@ -309,14 +309,14 @@ const EmployeeInfoScreen = ({navigation}) => {
                 </View>
               </View>
             )}
-            keyExtractor={(item, index) => index.toString()}
           />
+
           {/**  ---  LOOP --- */}
-          {/* {EmployeeData.map((item, index) => (
+
+          {/* {employeData.map((item, index) => (
             <View elevation={8} style={styles.plotDescriptionBox}>
               <View style={styles.plotDescriptionBoxInner}>
                 <View style={styles.profyleInfo}>
-                  {/** Profile Card 
                   <View style={styles.profileImage}>
                     <svg.UserSvg width={40} height={40} />
                     <View style={styles.YellowCameraIcon}></View>
@@ -327,19 +327,19 @@ const EmployeeInfoScreen = ({navigation}) => {
                       style={styles.h1blackBold}
                       adjustsFontSizeToFit={true}
                       numberOfLines={1}>
-                      {item.employeeName}
+                      {item.name}
                     </Text>
                     <Text
                       style={styles.h4Grey}
                       adjustsFontSizeToFit={true}
                       numberOfLines={1}>
-                      {item.employeeEmail}
+                      {item.email}
                     </Text>
                   </View>
 
                   <View style={styles.profyleSwitch}></View>
                 </View>
-                {/** Phone Designation Box 
+
                 <View style={styles.PhoneDesignation}>
                   <View style={styles.PhoneBox}>
                     <svg.phoneSvg width={17} height={17} />
@@ -348,8 +348,7 @@ const EmployeeInfoScreen = ({navigation}) => {
                       adjustsFontSizeToFit={true}
                       numberOfLines={1}>
                       {' '}
-                      {item.countryCode} {item.netwrokCode}{' '}
-                      {item.employeephoneNo}
+                      {item.phone}
                     </Text>
                   </View>
                   <View style={styles.DesignationBox}>
@@ -363,7 +362,6 @@ const EmployeeInfoScreen = ({navigation}) => {
                   </View>
                 </View>
 
-                {/** Date Button box Box 
                 <View style={styles.DateButton}>
                   <View style={styles.DateBox}>
                     <svg.DateSvg width={17} height={17} fill={'#7D8088'} />
