@@ -3,6 +3,7 @@ import LogoutSvg from '../assets/Svgs/DrawableSVG/LogoutIcon';
 import ProfileSvg from '../assets/Svgs/DrawableSVG/ProfileIcon';
 import UserSvg from '../assets/Svgs/ProfileScreenSvgs/User';
 import envelope from '../assets/Svgs/SignUpScreen/envelope';
+import LogInSvg from '../assets/Svgs/LogInScreenSVG/loginSvg';
 
 //LoginSVG
 import userLoginSVG from '../assets/Svgs/LogInScreenSVG/userLoginSvg';
@@ -107,6 +108,7 @@ const svg = {
   ProfileSvg,
   UserSvg,
   envelope,
+  LogInSvg,
 
   //LoginSVG
   userLoginSVG,

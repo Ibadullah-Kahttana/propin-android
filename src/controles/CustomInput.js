@@ -24,7 +24,6 @@ const CustomInput = ({
   svg2,
 }) => {
   const [hidePassword, setHidePassword] = React.useState(password);
-  const [isFocused, setIsFocused] = React.useState(false);
 
   return (
     <View>
@@ -61,10 +60,6 @@ const CustomInput = ({
         <TextInput
           autoCorrect={false}
           keyboardType={keyboardType}
-          onFocus={() => {
-            setIsFocused(true);
-          }}
-          onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           onChangeText={onChangeText}
           value={value}

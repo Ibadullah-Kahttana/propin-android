@@ -10,6 +10,8 @@ const colors = {
   yellow: 'yellow',
   red: 'red',
   green: 'green',
+  black: 'black',
+  backgroundColor: '#f8f9fa',
 };
 
 export default colors;
