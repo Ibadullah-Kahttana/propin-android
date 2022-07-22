@@ -19,6 +19,7 @@ export const AuthProvider = ({children}) => {
   const [agentError, setAgentError] = useState({});
   const [agencyError, setAgencyError] = useState({});
   const [loginError, setLoginError] = useState({});
+  const [logoutError, setLogoutError] = useState({});
 
   // Agent Register
   const agentRegister = (name, email, phone, password, confirm_password) => {
